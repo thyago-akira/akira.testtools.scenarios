@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29424.173
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Additional Files", "Additional Files", "{863033F2-F0C2-4A03-BB3B-93FD3954A92C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Git", "Git", "{F6CF86DA-B4B9-4972-B28E-D5D84FCAC593}"
+	ProjectSection(SolutionItems) = preProject
+		..\.gitattributes = ..\.gitattributes
+		..\.gitignore = ..\.gitignore
+		..\contributors.txt = ..\contributors.txt
+		..\README.md = ..\README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Style", "Style", "{E339120D-BD05-4C00-B590-EA5F4C92576E}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		CodeMaid.config = CodeMaid.config
+		Settings.StyleCop = Settings.StyleCop
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F6CF86DA-B4B9-4972-B28E-D5D84FCAC593} = {863033F2-F0C2-4A03-BB3B-93FD3954A92C}
+		{E339120D-BD05-4C00-B590-EA5F4C92576E} = {863033F2-F0C2-4A03-BB3B-93FD3954A92C}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {94E34649-E4C9-4862-8D73-664E29260F08}
+	EndGlobalSection
+EndGlobal
