@@ -20,7 +20,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Style", "Style", "{E339120D
 		Settings.StyleCop = Settings.StyleCop
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Akira.Contracts.TestTools.Scenarios", "Akira.Contracts.TestTools.Scenarios\Akira.Contracts.TestTools.Scenarios.csproj", "{793830E1-9540-419C-9AFB-3B67555C8693}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{793830E1-9540-419C-9AFB-3B67555C8693}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{793830E1-9540-419C-9AFB-3B67555C8693}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{793830E1-9540-419C-9AFB-3B67555C8693}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{793830E1-9540-419C-9AFB-3B67555C8693}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection

@@ -1,0 +1,9 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Thyago Akira</Authors>
+    <Description>Contracts definition for the TestTool Scenarios Builder</Description>
+  </PropertyGroup>
+
+</Project>
