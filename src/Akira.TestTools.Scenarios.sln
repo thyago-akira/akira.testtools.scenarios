@@ -24,6 +24,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Akira.Contracts.TestTools.S
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Akira.TestTools.Scenarios", "Akira.TestTools.Scenarios\Akira.TestTools.Scenarios.csproj", "{DA3B9380-145D-4967-8836-7C1B5D96E6DC}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Akira.TestTools.Scenarios.Tests", "Akira.TestTools.Scenarios.Tests\Akira.TestTools.Scenarios.Tests.csproj", "{123AF88A-8064-4999-BE1F-A3074AAAE56D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,6 +40,10 @@ Global
 		{DA3B9380-145D-4967-8836-7C1B5D96E6DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DA3B9380-145D-4967-8836-7C1B5D96E6DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DA3B9380-145D-4967-8836-7C1B5D96E6DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{123AF88A-8064-4999-BE1F-A3074AAAE56D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{123AF88A-8064-4999-BE1F-A3074AAAE56D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{123AF88A-8064-4999-BE1F-A3074AAAE56D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{123AF88A-8064-4999-BE1F-A3074AAAE56D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
