@@ -8,10 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Bogus" Version="28.4.1" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Akira.Contracts.TestTools.Scenarios\Akira.Contracts.TestTools.Scenarios.csproj" />
   </ItemGroup>
 

@@ -8,18 +8,18 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Akira.TestTools.Scenarios.Tests
 {
     [TestClass]
-    public class ScenariosFakerGetTestScenarioBuildersTests
+    public class ScenariosFakerGetMinimumTestingScenarioCombinationsTests
     {
         public static IEnumerable<object[]> GetValidData()
-            => GetTestScenarioBuildersTestData.GetTestData();
+            => GetMinimumTestingScenarioCombinationsTestData.GetTestData();
 
         [DataTestMethod]
         [DynamicData(nameof(GetValidData), DynamicDataSourceType.Method)]
-        public void ScenariosFaker_RuleSet_GetTestScenarioBuildersNull_ReturnsTestScenariosBuilders(
+        public void ScenariosFaker_GetMinimumKnownScenarioCombinationsForTestingNull_ReturnsTestScenariosBuilders(
             TestBuilderContext getTestBuildersTestContext)
         {
             // Act
-            var builders = getTestBuildersTestContext.GetFaker().GetMinimumKnownScenarioCombinationsForTesting();
+            var builders = getTestBuildersTestContext.GetFaker().GetMinimumTestingScenarioCombinations();
 
             // Assert
             Assert.IsNotNull(builders);
@@ -30,11 +30,11 @@ namespace Akira.TestTools.Scenarios.Tests
 
         [DataTestMethod]
         [DynamicData(nameof(GetValidData), DynamicDataSourceType.Method)]
-        public void ScenariosFaker_RuleSet_GetTestScenarioBuildersAll_ReturnsTestScenariosBuilders(
+        public void ScenariosFaker_GetMinimumKnownScenarioCombinationsForTestingAll_ReturnsTestScenariosBuilders(
             TestBuilderContext getTestBuildersTestContext)
         {
             // Act
-            var builders = getTestBuildersTestContext.GetFaker().GetMinimumKnownScenarioCombinationsForTesting(ScenarioBuilderType.All);
+            var builders = getTestBuildersTestContext.GetFaker().GetMinimumTestingScenarioCombinations(ScenarioBuilderType.All);
 
             // Assert
             Assert.IsNotNull(builders);
@@ -45,11 +45,11 @@ namespace Akira.TestTools.Scenarios.Tests
 
         [DataTestMethod]
         [DynamicData(nameof(GetValidData), DynamicDataSourceType.Method)]
-        public void ScenariosFaker_RuleSet_GetTestScenarioBuildersValidOnly_ReturnsTestScenariosBuilders(
+        public void ScenariosFaker_GetMinimumKnownScenarioCombinationsForTestingValidOnly_ReturnsTestScenariosBuilders(
             TestBuilderContext getTestBuildersTestContext)
         {
             // Act
-            var builders = getTestBuildersTestContext.GetFaker().GetMinimumKnownScenarioCombinationsForTesting(ScenarioBuilderType.ValidOnly);
+            var builders = getTestBuildersTestContext.GetFaker().GetMinimumTestingScenarioCombinations(ScenarioBuilderType.ValidOnly);
 
             // Assert
             Assert.IsNotNull(builders);
@@ -60,11 +60,11 @@ namespace Akira.TestTools.Scenarios.Tests
 
         [DataTestMethod]
         [DynamicData(nameof(GetValidData), DynamicDataSourceType.Method)]
-        public void ScenariosFaker_RuleSet_GetTestScenarioBuildersInvalidOnly_ReturnsTestScenariosBuilders(
+        public void ScenariosFaker_GetMinimumKnownScenarioCombinationsForTestingInvalidOnly_ReturnsTestScenariosBuilders(
             TestBuilderContext getTestBuildersTestContext)
         {
             // Act
-            var builders = getTestBuildersTestContext.GetFaker().GetMinimumKnownScenarioCombinationsForTesting(ScenarioBuilderType.InvalidOnly);
+            var builders = getTestBuildersTestContext.GetFaker().GetMinimumTestingScenarioCombinations(ScenarioBuilderType.InvalidOnly);
 
             // Assert
             Assert.IsNotNull(builders);

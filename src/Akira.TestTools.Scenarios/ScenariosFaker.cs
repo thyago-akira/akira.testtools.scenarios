@@ -99,10 +99,10 @@ namespace Akira.TestTools.Scenarios
                     scenarioBuilderContext));
         }
 
-        public IEnumerable<T> GenerateMinimumKnownScenariosForTesting(
+        public IEnumerable<T> GenerateMinimumTestingScenarios(
             ScenarioBuilderType scenarioType = ScenarioBuilderType.All)
         {
-            foreach (var scenarioCombinationConfiguration in this.GetMinimumKnownScenarioCombinationsForTesting(
+            foreach (var scenarioCombinationConfiguration in this.GetMinimumTestingScenarioCombinations(
                 scenarioType))
             {
                 yield return this.Generate(
@@ -240,7 +240,7 @@ namespace Akira.TestTools.Scenarios
 
         #endregion Public Methods
 
-        public IEnumerable<IDictionary<string, string>> GetMinimumKnownScenarioCombinationsForTesting(
+        public IEnumerable<IDictionary<string, string>> GetMinimumTestingScenarioCombinations(
             ScenarioBuilderType scenarioType = ScenarioBuilderType.All)
         {
             if (scenarioType == ScenarioBuilderType.All)
@@ -372,9 +372,9 @@ namespace Akira.TestTools.Scenarios
         }
 
         private (string, Dictionary<string, string>) ValidateAndCleanupKnownScenarioBuilder(
-            Dictionary<string, string> scenarioBuilderContext)
+            Dictionary<string, string> scenarioCombinationConfiguration)
         {
-            foreach (var builderScenarioContextName in scenarioBuilderContext.Keys)
+            foreach (var builderScenarioContextName in scenarioCombinationConfiguration.Keys)
             {
                 if (string.IsNullOrEmpty(builderScenarioContextName) ||
                     !this.scenarioContextsActions.ContainsKey(
@@ -382,7 +382,7 @@ namespace Akira.TestTools.Scenarios
                 {
                     throw new ArgumentException(
                         string.Format(
-                            Errors.KnownScenarioBuilderWithInvalidScenario,
+                            Errors.KnownScenarioBuilderWithInvalidScenarioContext,
                             builderScenarioContextName));
                 }
             }
@@ -392,7 +392,7 @@ namespace Akira.TestTools.Scenarios
 
             this.ForEachScenarioWithScenarioCompleteValidation((scenarioContextName, keyIndex, scenarioNames) =>
             {
-                if (scenarioBuilderContext.TryGetValue(scenarioContextName, out var builderScenarioName))
+                if (scenarioCombinationConfiguration.TryGetValue(scenarioContextName, out var builderScenarioName))
                 {
                     var cleanedBuilderScenarioName = builderScenarioName.NormalizeName();
 
@@ -400,7 +400,7 @@ namespace Akira.TestTools.Scenarios
                     {
                         throw new ArgumentException(
                             string.Format(
-                                Errors.KnownScenarioBuilderWithInvalidRuleSet,
+                                Errors.KnownScenarioBuilderWithInvalidScenario,
                                 scenarioContextName,
                                 builderScenarioName));
                     }

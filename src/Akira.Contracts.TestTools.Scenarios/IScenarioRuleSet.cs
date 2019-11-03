@@ -11,5 +11,9 @@ namespace Akira.Contracts.TestTools.Scenarios
         IScenarioRuleSet<T> RuleFor<TProperty>(Expression<Func<T, TProperty>> property, Func<TProperty> getValue);
 
         IScenarioRuleSet<T> RuleFor<TProperty>(Expression<Func<T, TProperty>> property, TProperty value);
+
+        IScenarioRuleSet<T> RuleFor<TProperty>(Expression<Func<T, TProperty>> property, Func<Bogus.Faker, T, TProperty> getValue);
+
+        IScenarioRuleSet<T> RuleFor<TProperty>(Expression<Func<T, TProperty>> property, Func<Bogus.Faker, TProperty> getValue);
     }
 }

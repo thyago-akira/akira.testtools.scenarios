@@ -57,15 +57,15 @@
         public const string KnownScenarioBuilderWithOnlyOneCondition =
             "KnownScenarioBuilderContext with only one builder condition. Please use the parameter 'scenarioType' in Scenario operations.";
 
-        public const string KnownScenarioBuilderWithInvalidScenario =
-            "KnownScenarioBuilderContext with invalid Scenario ({0})";
+        public const string KnownScenarioBuilderWithInvalidScenarioContext =
+            "KnownScenarioBuilderContext with invalid Scenario Context ({0})";
 
-        public const string KnownScenarioBuilderWithInvalidRuleSet =
-            "KnownScenarioBuilderContext for Scenario '{0}' has an invalid RuleSet ({1})";
+        public const string KnownScenarioBuilderWithInvalidScenario =
+            "KnownScenarioBuilderContext for Scenario Context '{0}' has an invalid Scenario ({1})";
 
         public const string KnownScenarioBuilderHasAnExistingKnownCondition =
-            "KnownScenarioBuilderContext (Scenario '{0}' and RuleSet '{1}') has an existing " +
-            "known condition (Key '{2}' and RuleSetType '{3}')";
+            "KnownScenarioBuilderContext (Scenario Context '{0}' and Scenario '{1}') has an existing " +
+            "known condition (Key '{2}' and ScenarioCombinationType '{3}')";
 
         private const string DefaultContextValidScenario = nameof(ScenariosFaker<object>.DefaultContextValidScenario);
 

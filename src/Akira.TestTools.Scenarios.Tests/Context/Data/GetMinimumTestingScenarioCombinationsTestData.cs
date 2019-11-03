@@ -4,7 +4,7 @@ using Akira.TestTools.Scenarios.Tests.Stubs;
 
 namespace Akira.TestTools.Scenarios.Tests.Context.Data
 {
-    internal static class GetTestScenarioBuildersTestData
+    internal static class GetMinimumTestingScenarioCombinationsTestData
     {
         private const string ScenarioContextTestName = nameof(ScenarioContextTestName);
 
@@ -41,7 +41,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             yield return new TestBuilderContext
             {
                 CaseNumber = 2,
-                CaseDescription = "Valid Default RuleSet Only",
+                CaseDescription = "Default Scenario Context - Valid Scenario Only",
                 GetFaker = () => new ScenariosFaker<SimpleModel>()
                     .DefaultContextValidScenario(scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id)),
                 ExpectedCountAll = 3,
@@ -52,7 +52,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             yield return new TestBuilderContext
             {
                 CaseNumber = 3,
-                CaseDescription = "Valid Default RuleSet Only - Always valid",
+                CaseDescription = "Default Scenario Context - Valid Scenario Only - Always valid",
                 GetFaker = () => new ScenariosFaker<SimpleModel>()
                     .DefaultContextValidScenario(
                         scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id),
@@ -65,7 +65,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             yield return new TestBuilderContext
             {
                 CaseNumber = 4,
-                CaseDescription = "Valid Default RuleSet Only - explicit undefined",
+                CaseDescription = "Default Scenario Context - Valid Scenario Only - explicit undefined",
                 GetFaker = () => new ScenariosFaker<SimpleModel>()
                     .DefaultContextValidScenario(
                         scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id),
@@ -78,7 +78,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             yield return new TestBuilderContext
             {
                 CaseNumber = 5,
-                CaseDescription = "Invalid Default RuleSet Only",
+                CaseDescription = "Default Scenario Context - Invalid Scenario Only",
                 GetFaker = () => new ScenariosFaker<SimpleModel>()
                     .DefaultContextInvalidScenario(scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id)),
                 ExpectedCountAll = 3,
@@ -89,7 +89,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             yield return new TestBuilderContext
             {
                 CaseNumber = 6,
-                CaseDescription = "Invalid Default RuleSet Only - explicit undefined",
+                CaseDescription = "Default Scenario Context - Invalid Scenario Only - explicit undefined",
                 GetFaker = () => new ScenariosFaker<SimpleModel>()
                     .DefaultContextInvalidScenario(
                         scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id),
@@ -102,7 +102,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             yield return new TestBuilderContext
             {
                 CaseNumber = 7,
-                CaseDescription = "Invalid Default RuleSet Only - Always invalid",
+                CaseDescription = "Default Scenario Context - Invalid Scenario Only - Always invalid",
                 GetFaker = () => new ScenariosFaker<SimpleModel>()
                     .DefaultContextInvalidScenario(
                         scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id),
@@ -115,7 +115,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             yield return new TestBuilderContext
             {
                 CaseNumber = 8,
-                CaseDescription = "Defaults RuleSet - First Valid",
+                CaseDescription = "Default Scenario Context - First Valid",
                 GetFaker = () => new ScenariosFaker<SimpleModel>()
                     .DefaultContextValidScenario(scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id))
                     .DefaultContextInvalidScenario(scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id)),
@@ -127,7 +127,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             yield return new TestBuilderContext
             {
                 CaseNumber = 9,
-                CaseDescription = "Defaults RuleSet - First Valid",
+                CaseDescription = "Default Scenario Context - First Valid",
                 GetFaker = () => new ScenariosFaker<SimpleModel>()
                     .DefaultContextValidScenario(
                         scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id),
@@ -143,7 +143,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             yield return new TestBuilderContext
             {
                 CaseNumber = 10,
-                CaseDescription = "Defaults RuleSet - First Invalid",
+                CaseDescription = "Default Scenario Context - First Invalid",
                 GetFaker = () => new ScenariosFaker<SimpleModel>()
                     .DefaultContextInvalidScenario(scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id))
                     .DefaultContextValidScenario(scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id)),
@@ -155,7 +155,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             yield return new TestBuilderContext
             {
                 CaseNumber = 11,
-                CaseDescription = "Custom Scenario RuleSet - One RuleSet Only",
+                CaseDescription = "Custom Scenario Context - One Scenario Only",
                 GetFaker = () => new ScenariosFaker<SimpleModel>()
                     .DefaultContextValidScenario(scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id))
                     .DefaultContextInvalidScenario(scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id))
@@ -171,7 +171,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             yield return new TestBuilderContext
             {
                 CaseNumber = 12,
-                CaseDescription = "Custom Scenario RuleSet - Two RuleSets",
+                CaseDescription = "Custom Scenario Context - Two Scenarios",
                 GetFaker = () => new ScenariosFaker<SimpleModel>()
                     .DefaultContextValidScenario(scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id))
                     .DefaultContextInvalidScenario(scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id))
@@ -190,7 +190,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             yield return new TestBuilderContext
             {
                 CaseNumber = 13,
-                CaseDescription = "Custom Scenario RuleSet with Alternate Scenario - One RuleSet Only",
+                CaseDescription = "Custom Scenario Contexts with One Scenario Only",
                 GetFaker = () => new ScenariosFaker<SimpleModel>()
                     .DefaultContextValidScenario(scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id))
                     .DefaultContextInvalidScenario(scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id))
@@ -213,7 +213,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             yield return new TestBuilderContext
             {
                 CaseNumber = 14,
-                CaseDescription = "Custom Scenario RuleSet with Alternate Scenario - Two RuleSets",
+                CaseDescription = "Custom Scenario Contexts - Two Scenarios",
                 GetFaker = () => new ScenariosFaker<SimpleModel>()
                     .DefaultContextValidScenario(scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id))
                     .DefaultContextInvalidScenario(scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id))

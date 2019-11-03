@@ -6,4 +6,8 @@
     <Description>Contracts definition for the TestTool Scenarios Builder</Description>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Bogus" Version="28.4.1" />
+  </ItemGroup>
+
 </Project>

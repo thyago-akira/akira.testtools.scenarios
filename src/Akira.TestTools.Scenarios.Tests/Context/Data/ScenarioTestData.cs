@@ -178,6 +178,38 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                         ScenarioTestNameAlternative,
                         scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id))
             };
+
+            yield return new TestContext
+            {
+                CaseNumber = 9,
+                CaseDescription = "Default Scenario Context - RuleFor - Func<TProperty>",
+                TestedAction = () => new ScenariosFaker<SimpleModel>()
+                    .DefaultContextValidScenario(scenarioRuleSet => scenarioRuleSet.RuleFor(f => f.Id, () => 1))
+            };
+
+            yield return new TestContext
+            {
+                CaseNumber = 10,
+                CaseDescription = "Default Scenario Context - RuleFor - TProperty",
+                TestedAction = () => new ScenariosFaker<SimpleModel>()
+                    .DefaultContextValidScenario(scenarioRuleSet => scenarioRuleSet.RuleFor(f => f.Id, 2))
+            };
+
+            yield return new TestContext
+            {
+                CaseNumber = 11,
+                CaseDescription = "Default Scenario Context - RuleFor - Func<Bogus.Faker, TProperty>",
+                TestedAction = () => new ScenariosFaker<SimpleModel>()
+                    .DefaultContextValidScenario(scenarioRuleSet => scenarioRuleSet.RuleFor(f => f.Id, (f) => f.Random.Int(1)))
+            };
+
+            yield return new TestContext
+            {
+                CaseNumber = 12,
+                CaseDescription = "Default Scenario Context - RuleFor - Func<Bogus.Faker, T, TProperty>",
+                TestedAction = () => new ScenariosFaker<SimpleModel>()
+                    .DefaultContextValidScenario(scenarioRuleSet => scenarioRuleSet.RuleFor(f => f.Id, (f, m) => m.Id ?? f.Random.Int(1)))
+            };
         }
 
         private static IEnumerable<TestContext> GetDefaultScenarioContextScenarioAfterCustomScenarioContext()

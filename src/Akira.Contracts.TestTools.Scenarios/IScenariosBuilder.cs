@@ -117,7 +117,7 @@ namespace Akira.Contracts.TestTools.Scenarios
         /// Indicates the kind of model you will create
         /// </param>
         /// <returns>A list of model objects based on the scenario builder configuration</returns>
-        IEnumerable<T> GenerateMinimumKnownScenariosForTesting(
+        IEnumerable<T> GenerateMinimumTestingScenarios(
             ScenarioBuilderType scenarioBuilderType = ScenarioBuilderType.All);
 
         /// <summary>
@@ -129,7 +129,7 @@ namespace Akira.Contracts.TestTools.Scenarios
         /// <returns>
         /// A list with Scenario Combination Combinations based on the Builder Filter
         /// </returns>
-        IEnumerable<IDictionary<string, string>> GetMinimumKnownScenarioCombinationsForTesting(
+        IEnumerable<IDictionary<string, string>> GetMinimumTestingScenarioCombinations(
             ScenarioBuilderType scenarioBuilderType = ScenarioBuilderType.All);
     }
 }

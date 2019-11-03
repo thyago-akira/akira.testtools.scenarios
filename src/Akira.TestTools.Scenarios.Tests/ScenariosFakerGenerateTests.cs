@@ -15,7 +15,7 @@ namespace Akira.TestTools.Scenarios.Tests
         private const string TestScenarioNameAlternative = nameof(TestScenarioNameAlternative);
 
         [TestMethod]
-        public void ScenariosFaker_GenerateDefault_WithoutRuleSets_ThrowsException()
+        public void ScenariosFaker_GenerateDefault_WithoutScenarios_ThrowsException()
         {
             // Action && Assert
             var exception = Assert.ThrowsException<InvalidOperationException>(() =>
@@ -73,7 +73,7 @@ namespace Akira.TestTools.Scenarios.Tests
         }
 
         [TestMethod]
-        public void ScenariosFaker_GenerateCustom_WithoutRuleSets_ThrowsException()
+        public void ScenariosFaker_GenerateCustom_WithoutScenarios_ThrowsException()
         {
             // Action && Assert
             var exception = Assert.ThrowsException<InvalidOperationException>(() =>
@@ -91,7 +91,7 @@ namespace Akira.TestTools.Scenarios.Tests
         }
 
         [TestMethod]
-        public void ScenariosFaker_GenerateCustom_WithOnlyOneRuleSet_ThrowsException()
+        public void ScenariosFaker_GenerateCustom_WithOnlyOneScenario_ThrowsException()
         {
             // Action && Assert
             var exception = Assert.ThrowsException<InvalidOperationException>(() =>
@@ -183,36 +183,41 @@ namespace Akira.TestTools.Scenarios.Tests
         [TestMethod]
         public void ScenariosFaker_GenerateCustomScenario_ReplacingRules_NoExceptionAndModelWithNulls()
         {
+            // Arrange
+            var id = 100;
+            var replacedName = "newName";
+            var replacedTotal = 202;
+
             // Action
             var model = new ScenariosFaker<SimpleModel>()
                 .DefaultContextValidScenario(
                     scenarioRuleSet => scenarioRuleSet
-                        .Ignore(f => f.Id)
-                        .Ignore(f => f.Name)
-                        .Ignore(f => f.Total))
+                        .RuleFor(f => f.Id, id)
+                        .RuleFor(f => f.Name, "a")
+                        .RuleFor(f => f.Total, 200))
                 .DefaultContextInvalidScenario(
                     scenarioRuleSet => scenarioRuleSet
-                        .Ignore(f => f.Id)
-                        .Ignore(f => f.Name)
-                        .Ignore(f => f.Total))
+                        .RuleFor(f => f.Id, id)
+                        .RuleFor(f => f.Name, "b")
+                        .RuleFor(f => f.Total, 201))
                 .ScenarioContext(TestScenarioContextName)
                 .Scenario(
                     TestScenarioName,
                     scenarioRuleSet => scenarioRuleSet
-                        .Ignore(f => f.Name)
-                        .Ignore(f => f.Total))
+                        .RuleFor(f => f.Name, replacedName)
+                        .RuleFor(f => f.Total, replacedTotal))
                 .Scenario(
                     TestScenarioNameAlternative,
                     scenarioRuleSet => scenarioRuleSet
-                        .Ignore(f => f.Name)
-                        .Ignore(f => f.Total))
+                        .RuleFor(f => f.Name, replacedName)
+                        .RuleFor(f => f.Total, replacedTotal))
                 .Generate();
 
             // Asserts
             Assert.IsNotNull(model);
-            Assert.IsNull(model.Id);
-            Assert.IsNull(model.Name);
-            Assert.IsNull(model.Total);
+            Assert.AreEqual(id, model.Id);
+            Assert.AreEqual(replacedName, model.Name);
+            Assert.AreEqual(replacedTotal, model.Total);
         }
     }
 }
