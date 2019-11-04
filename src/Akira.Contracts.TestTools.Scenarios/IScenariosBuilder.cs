@@ -60,21 +60,13 @@ namespace Akira.Contracts.TestTools.Scenarios
         /// Key: Scenario Context Name
         /// Value: Scenario Name
         /// </param>
-        /// <returns>Returns the current instance of the <see cref="IScenariosBuilder{T}" /> (fluent interface)</returns>
-        IScenariosBuilder<T> AddKnownValidScenarioCombination(
-            IDictionary<string, string> scenarioCombinationConfiguration);
-
-        /// <summary>
-        /// Add a Known Invalid Scenario Combination to the <see cref="IScenariosBuilder{T}" />
-        /// </summary>
-        /// <param name="scenarioCombinationConfiguration">
-        /// A dictionary with the builder parameters that can used to build an <see cref="ScenarioCombinationType.AlwaysInvalid"/> model.
-        /// Key: Scenario Context Name
-        /// Value: Scenario Name
+        /// <param name="scenarioCombinatioType">
+        /// Indicates if the Current Scenario will be <see cref="ScenarioCombinationType.Unknown"/>, <see cref="ScenarioCombinationType.AlwaysValid"/> or <see cref="ScenarioCombinationType.AlwaysInvalid"/>
         /// </param>
         /// <returns>Returns the current instance of the <see cref="IScenariosBuilder{T}" /> (fluent interface)</returns>
-        IScenariosBuilder<T> AddKnownInvalidScenarioCombination(
-            IDictionary<string, string> scenarioCombinationConfiguration);
+        IScenariosBuilder<T> AddKnownScenarioCombination(
+            IDictionary<string, string> scenarioCombinationConfiguration,
+            ScenarioCombinationType scenarioCombinatioType = ScenarioCombinationType.Unknown);
 
         /// <summary>
         /// Generate a new instance of model

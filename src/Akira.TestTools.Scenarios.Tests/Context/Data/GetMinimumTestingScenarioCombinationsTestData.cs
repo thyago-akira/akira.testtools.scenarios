@@ -57,7 +57,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .DefaultContextValidScenario(
                         scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id),
                         ScenarioCombinationType.AlwaysValid),
-                ExpectedCountAll = 4,
+                ExpectedCountAll = 3,
                 ExpectedCountValidOnly = 1,
                 ExpectedCountInvalidOnly = 0
             };
@@ -107,7 +107,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .DefaultContextInvalidScenario(
                         scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id),
                         ScenarioCombinationType.AlwaysInvalid),
-                ExpectedCountAll = 4,
+                ExpectedCountAll = 3,
                 ExpectedCountValidOnly = 0,
                 ExpectedCountInvalidOnly = 1
             };
@@ -135,7 +135,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .DefaultContextInvalidScenario(
                         scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id),
                         ScenarioCombinationType.AlwaysInvalid),
-                ExpectedCountAll = 6,
+                ExpectedCountAll = 4,
                 ExpectedCountValidOnly = 1,
                 ExpectedCountInvalidOnly = 1
             };

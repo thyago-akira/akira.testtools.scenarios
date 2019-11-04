@@ -48,24 +48,24 @@
         public const string ScenarioTypeInvalidForInvalidDefaultContextScenario =
             DefaultContextInvalidScenario + " couldn't be always valid. Please, use " + DefaultContextValidScenario;
 
-        public const string ScenarioFakerWithNoAdditionalScenariosForKnownScenarioBuilderContext =
+        public const string ScenarioFakerWithNoAdditionalScenariosForKnownScenarioCombinationConfig =
             "Scenario Faker has no additional scenarios. Please use the parameter 'scenarioType' in Scenario operations.";
 
-        public const string KnownScenarioBuilderContextNotSet =
-            "KnownScenarioBuilderContext is not set";
+        public const string KnownScenarioCombinationConfigNotSet =
+            "Known Scenario Combination Configuration is not set";
 
-        public const string KnownScenarioBuilderWithOnlyOneCondition =
-            "KnownScenarioBuilderContext with only one builder condition. Please use the parameter 'scenarioType' in Scenario operations.";
+        public const string KnownScenarioCombinationConfigWithOnlyOneCondition =
+            "Known Scenario Combination Configuration with only one builder condition. Please use the parameter 'scenarioType' in Scenario operations.";
 
-        public const string KnownScenarioBuilderWithInvalidScenarioContext =
+        public const string KnownScenarioCombinationConfigWithInvalidScenarioContext =
             "KnownScenarioBuilderContext with invalid Scenario Context ({0})";
 
-        public const string KnownScenarioBuilderWithInvalidScenario =
+        public const string KnownScenarioCombinationConfigWithInvalidScenario =
             "KnownScenarioBuilderContext for Scenario Context '{0}' has an invalid Scenario ({1})";
 
-        public const string KnownScenarioBuilderHasAnExistingKnownCondition =
-            "KnownScenarioBuilderContext (Scenario Context '{0}' and Scenario '{1}') has an existing " +
-            "known condition (Key '{2}' and ScenarioCombinationType '{3}')";
+        public const string KnownScenarioCombinationConfigHasAColisionWithAnExistingKnownCondition =
+            "Known Scenario Combination Configuration has a colision with an existing " +
+            "known condition (Key '{0}' and ScenarioCombinationType '{1}')";
 
         private const string DefaultContextValidScenario = nameof(ScenariosFaker<object>.DefaultContextValidScenario);
 
