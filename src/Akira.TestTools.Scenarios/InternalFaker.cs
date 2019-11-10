@@ -7,6 +7,7 @@ using Bogus;
 namespace Akira.TestTools.Scenarios
 {
     [SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1126:PrefixCallsCorrectly", Justification = "All underscores are discards.")]
+    [SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1100:DoNotPrefixCallsWithBaseUnlessLocalImplementationExists", Justification = "There are new methods.")]
     public class InternalFaker<T> : Faker<T>, IScenarioRuleSet<T>
         where T : class
     {

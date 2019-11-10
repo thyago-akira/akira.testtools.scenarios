@@ -63,9 +63,13 @@
         public const string KnownScenarioCombinationConfigWithInvalidScenario =
             "KnownScenarioBuilderContext for Scenario Context '{0}' has an invalid Scenario ({1})";
 
-        public const string KnownScenarioCombinationConfigHasAColisionWithAnExistingKnownCondition =
-            "Known Scenario Combination Configuration has a colision with an existing " +
-            "known condition (Key '{0}' and ScenarioCombinationType '{1}')";
+        public const string KnownScenarioCombinationConfigContainsParentConfigurationCollision =
+            "Known Scenario Combination Configuration contains a Parent Configuration Collision " +
+            "with Key '{0}' and ScenarioCombinationType '{1}'";
+
+        public const string KnownScenarioCombinationConfigContainsChildConfigurationCollision =
+            "Known Scenario Combination Configuration contains a Child Configuration Collision " +
+            "with Key '{0}' and ScenarioCombinationType '{1}'";
 
         private const string DefaultContextValidScenario = nameof(ScenariosFaker<object>.DefaultContextValidScenario);
 
