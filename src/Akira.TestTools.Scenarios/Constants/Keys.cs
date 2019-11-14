@@ -4,17 +4,41 @@ namespace Akira.TestTools.Scenarios.Constants
 {
     public static class Keys
     {
-        public const string ScenarioContextKeyValueFormat = "|{0}:{1}|";
+        public const char KeySeparator = '|';
+
+        public const char ValueSeparator = '@';
 
         public const string RegexBaseTemplate = @"^({0})$";
-
-        public const string RegexGroupTemplate = @"(\|({0}\:{1})\|){2}";
 
         public const string OptionalGroup = "?";
 
         public const string ExactGroup = "{1}";
 
         public const string AnyWord = @".+";
+
+        /// <summary>
+        /// The scenario context key looks like this format: |{0}:{1}|
+        /// </summary>
+        public static readonly string ScenarioContextKeyValueFormat =
+            string.Concat(
+                KeySeparator,
+                "{0}",
+                ValueSeparator,
+                "{1}",
+                KeySeparator);
+
+        /// <summary>
+        /// The regular expression template looks like this format: (\|({0}\:{1})\|){2}
+        /// </summary>
+        public static readonly string RegexGroupTemplate =
+            string.Concat(
+                @"(\",
+                KeySeparator,
+                @"({0}\",
+                ValueSeparator,
+                @"{1})\",
+                KeySeparator,
+                "){2}");
 
         public static string GetScenarioContextKeyValue(
             int scenarioContextIndex,
@@ -56,10 +80,10 @@ namespace Akira.TestTools.Scenarios.Constants
             int scenarioContextIndex)
         {
             return string.Format(
-                    RegexGroupTemplate,
-                    scenarioContextIndex,
-                    AnyWord,
-                    OptionalGroup);
+                RegexGroupTemplate,
+                scenarioContextIndex,
+                AnyWord,
+                OptionalGroup);
         }
     }
 }

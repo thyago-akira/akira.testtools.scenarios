@@ -92,7 +92,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .ScenarioContext(ScenarioContextTestName2),
                 OverrideMessage = string.Format(
                     Errors.ScenarioContextIncomplete,
-                    ScenarioContextTestName2.ToLower())
+                    ScenarioContextTestName2)
             };
 
             yield return new TestFakerContext
@@ -109,7 +109,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                         scenarioRuleSet => scenarioRuleSet.Ignore(m => m.Total)),
                 OverrideMessage = string.Format(
                     Errors.ScenarioContextIncomplete,
-                    ScenarioContextTestName2.ToLower())
+                    ScenarioContextTestName2)
             };
         }
 

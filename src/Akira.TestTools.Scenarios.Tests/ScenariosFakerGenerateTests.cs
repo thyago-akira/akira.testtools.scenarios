@@ -23,9 +23,7 @@ namespace Akira.TestTools.Scenarios.Tests
                     .Generate());
 
             Assert.AreEqual(
-                string.Format(
-                    Errors.ScenarioContextIncomplete,
-                    Defaults.ScenarioContextName),
+                Errors.DefaultScenarioContextWithoutValidScenario,
                 exception.Message);
         }
 
@@ -39,9 +37,7 @@ namespace Akira.TestTools.Scenarios.Tests
                     .Generate());
 
             Assert.AreEqual(
-                string.Format(
-                    Errors.ScenarioContextIncomplete,
-                    Defaults.ScenarioContextName),
+                Errors.DefaultScenarioContextWithoutInvalidScenario,
                 exception.Message);
         }
 
@@ -55,9 +51,7 @@ namespace Akira.TestTools.Scenarios.Tests
                     .Generate());
 
             Assert.AreEqual(
-                string.Format(
-                    Errors.ScenarioContextIncomplete,
-                    Defaults.ScenarioContextName),
+                Errors.DefaultScenarioContextWithoutValidScenario,
                 exception.Message);
         }
 
@@ -86,7 +80,7 @@ namespace Akira.TestTools.Scenarios.Tests
             Assert.AreEqual(
                 string.Format(
                     Errors.ScenarioContextIncomplete,
-                    TestScenarioContextName.ToLower()),
+                    TestScenarioContextName),
                 exception.Message);
         }
 
@@ -107,7 +101,7 @@ namespace Akira.TestTools.Scenarios.Tests
             Assert.AreEqual(
                 string.Format(
                     Errors.ScenarioContextIncomplete,
-                    TestScenarioContextName.ToLower()),
+                    TestScenarioContextName),
                 exception.Message);
         }
 

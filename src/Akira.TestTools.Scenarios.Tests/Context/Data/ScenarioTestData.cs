@@ -862,7 +862,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 ExpectedExceptionMessage = string.Format(
                     Errors.ScenarioNameAlreadyExists,
                     ScenarioTestName,
-                    ScenarioContextName.ToLower())
+                    ScenarioContextName)
             };
 
             yield return new TestContext
@@ -885,7 +885,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 ExpectedExceptionMessage = string.Format(
                     Errors.ScenarioNameAlreadyExists,
                     ScenarioTestName,
-                    ScenarioContextName.ToLower())
+                    ScenarioContextName)
             };
 
             yield return new TestContext
@@ -908,7 +908,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 ExpectedExceptionMessage = string.Format(
                     Errors.ScenarioNameAlreadyExists,
                     ScenarioTestName,
-                    ScenarioContextName.ToLower())
+                    ScenarioContextName)
             };
 
             yield return new TestContext
@@ -928,7 +928,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 ExpectedExceptionMessage = string.Format(
                     Errors.ScenarioNameAlreadyExists,
                     Scenariotestname,
-                    ScenarioContextName.ToLower())
+                    ScenarioContextName)
             };
 
             yield return new TestContext
@@ -951,7 +951,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 ExpectedExceptionMessage = string.Format(
                     Errors.ScenarioNameAlreadyExists,
                     Scenariotestname,
-                    ScenarioContextName.ToLower())
+                    ScenarioContextName)
             };
 
             yield return new TestContext
@@ -974,7 +974,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 ExpectedExceptionMessage = string.Format(
                     Errors.ScenarioNameAlreadyExists,
                     Scenariotestname,
-                    ScenarioContextName.ToLower())
+                    ScenarioContextName)
             };
         }
 

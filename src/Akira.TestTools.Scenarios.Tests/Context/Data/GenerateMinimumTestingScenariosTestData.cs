@@ -4,7 +4,7 @@ using Akira.TestTools.Scenarios.Tests.Stubs;
 
 namespace Akira.TestTools.Scenarios.Tests.Context.Data
 {
-    internal static class GetMinimumTestingScenarioCombinationsTestData
+    internal static class GenerateMinimumTestingScenariosTestData
     {
         private const string ScenarioContextTestName = nameof(ScenarioContextTestName);
 
@@ -43,7 +43,8 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 CaseNumber = 2,
                 CaseDescription = "Default Scenario Context - Valid Scenario Only",
                 GetFaker = () => new ScenariosFaker<SimpleModel>()
-                    .DefaultContextValidScenario(scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id)),
+                    .DefaultContextValidScenario(
+                        scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id)),
                 ExpectedCountAll = 3,
                 ExpectedCountValidOnly = 0,
                 ExpectedCountInvalidOnly = 0
@@ -80,7 +81,8 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 CaseNumber = 5,
                 CaseDescription = "Default Scenario Context - Invalid Scenario Only",
                 GetFaker = () => new ScenariosFaker<SimpleModel>()
-                    .DefaultContextInvalidScenario(scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id)),
+                    .DefaultContextInvalidScenario(
+                        scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id)),
                 ExpectedCountAll = 3,
                 ExpectedCountValidOnly = 0,
                 ExpectedCountInvalidOnly = 0
@@ -215,22 +217,24 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 CaseNumber = 14,
                 CaseDescription = "Custom Scenario Contexts - Two Scenarios",
                 GetFaker = () => new ScenariosFaker<SimpleModel>()
-                    .DefaultContextValidScenario(scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id))
-                    .DefaultContextInvalidScenario(scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id))
+                    .DefaultContextValidScenario(
+                        scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id))
+                    .DefaultContextInvalidScenario(
+                        scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id))
                     .ScenarioContext(ScenarioContextTestNameAlternative)
                     .Scenario(
                         ScenarioTestName,
-                        scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id))
+                        scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Name))
                     .Scenario(
                         ScenarioTestNameAlternative,
-                        scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id))
+                        scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Name))
                     .ScenarioContext(ScenarioContextTestName)
                     .Scenario(
                         ScenarioTestName,
-                        scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id))
+                        scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Total))
                     .Scenario(
                         ScenarioTestNameAlternative,
-                        scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id)),
+                        scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Total)),
                 ExpectedCountAll = 8,
                 ExpectedCountValidOnly = 0,
                 ExpectedCountInvalidOnly = 0

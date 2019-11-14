@@ -8,10 +8,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Akira.TestTools.Scenarios.Tests
 {
     [TestClass]
-    public class ScenariosFakerGetMinimumTestingScenarioCombinationsTests
+    public class ScenariosFakerGenerateMinimumTestingScenariosTests
     {
         public static IEnumerable<object[]> GetValidData()
-            => GetMinimumTestingScenarioCombinationsTestData.GetTestData();
+            => GenerateMinimumTestingScenariosTestData.GetTestData();
 
         [DataTestMethod]
         [DynamicData(nameof(GetValidData), DynamicDataSourceType.Method)]
@@ -19,13 +19,13 @@ namespace Akira.TestTools.Scenarios.Tests
             TestBuilderContext getTestBuildersTestContext)
         {
             // Act
-            var builders = getTestBuildersTestContext.GetFaker().GetMinimumTestingScenarioCombinations();
+            var models = getTestBuildersTestContext.GetFaker().GenerateMinimumTestingScenarios();
 
             // Assert
-            Assert.IsNotNull(builders);
+            Assert.IsNotNull(models);
             Assert.AreEqual(
                 getTestBuildersTestContext.ExpectedCountAll,
-                builders.Count());
+                models.Count());
         }
 
         [DataTestMethod]
@@ -34,13 +34,13 @@ namespace Akira.TestTools.Scenarios.Tests
             TestBuilderContext getTestBuildersTestContext)
         {
             // Act
-            var builders = getTestBuildersTestContext.GetFaker().GetMinimumTestingScenarioCombinations(ScenarioBuilderType.All);
+            var models = getTestBuildersTestContext.GetFaker().GenerateMinimumTestingScenarios(ScenarioBuilderType.All);
 
             // Assert
-            Assert.IsNotNull(builders);
+            Assert.IsNotNull(models);
             Assert.AreEqual(
                 getTestBuildersTestContext.ExpectedCountAll,
-                builders.Count());
+                models.Count());
         }
 
         [DataTestMethod]
@@ -49,13 +49,13 @@ namespace Akira.TestTools.Scenarios.Tests
             TestBuilderContext getTestBuildersTestContext)
         {
             // Act
-            var builders = getTestBuildersTestContext.GetFaker().GetMinimumTestingScenarioCombinations(ScenarioBuilderType.ValidOnly);
+            var models = getTestBuildersTestContext.GetFaker().GenerateMinimumTestingScenarios(ScenarioBuilderType.ValidOnly);
 
             // Assert
-            Assert.IsNotNull(builders);
+            Assert.IsNotNull(models);
             Assert.AreEqual(
                 getTestBuildersTestContext.ExpectedCountValidOnly,
-                builders.Count());
+                models.Count());
         }
 
         [DataTestMethod]
@@ -64,13 +64,13 @@ namespace Akira.TestTools.Scenarios.Tests
             TestBuilderContext getTestBuildersTestContext)
         {
             // Act
-            var builders = getTestBuildersTestContext.GetFaker().GetMinimumTestingScenarioCombinations(ScenarioBuilderType.InvalidOnly);
+            var models = getTestBuildersTestContext.GetFaker().GenerateMinimumTestingScenarios(ScenarioBuilderType.InvalidOnly);
 
             // Assert
-            Assert.IsNotNull(builders);
+            Assert.IsNotNull(models);
             Assert.AreEqual(
                 getTestBuildersTestContext.ExpectedCountInvalidOnly,
-                builders.Count());
+                models.Count());
         }
     }
 }
