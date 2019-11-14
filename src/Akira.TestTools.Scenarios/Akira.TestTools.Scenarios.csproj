@@ -5,6 +5,7 @@
     <Authors>Thyago Akira</Authors>
     <Company>Thyago Akira</Company>
     <Description>Implementation for TestTools Scenarios Builder</Description>
+    <Version>0.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
