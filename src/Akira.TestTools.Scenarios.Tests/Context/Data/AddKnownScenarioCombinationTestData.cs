@@ -491,7 +491,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                             { ScenarioContextTestName3, ScenarioContextTestUnknownScenarioName }
                         }),
                 ExpectedExceptionMessage = string.Format(
-                    Errors.KnownScenarioCombinationConfigWithInvalidScenarioContext,
+                    Errors.ScenarioCombinationConfigWithInvalidScenarioContext,
                     ScenarioContextTestName)
             };
 
@@ -515,7 +515,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                             { ScenarioContextTestName3, ScenarioContextTestUnknownScenarioName }
                         }),
                 ExpectedExceptionMessage = string.Format(
-                    Errors.KnownScenarioCombinationConfigWithInvalidScenarioContext,
+                    Errors.ScenarioCombinationConfigWithInvalidScenarioContext,
                     Scenariocontexttestname)
             };
 
@@ -542,7 +542,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                             { ScenarioContextTestName2, ScenarioContextTestUnknownScenarioName }
                         }),
                 ExpectedExceptionMessage = string.Format(
-                    Errors.KnownScenarioCombinationConfigWithInvalidScenario,
+                    Errors.ScenarioCombinationConfigWithInvalidScenario,
                     Defaults.ScenarioContextName,
                     ScenarioContextTestUnknownScenarioName)
             };
@@ -570,7 +570,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                             { ScenarioContextTestName2, Scenariocontexttestunknownscenarioname }
                         }),
                 ExpectedExceptionMessage = string.Format(
-                    Errors.KnownScenarioCombinationConfigWithInvalidScenario,
+                    Errors.ScenarioCombinationConfigWithInvalidScenario,
                     ScenarioContextTestName2,
                     Scenariocontexttestunknownscenarioname)
             };

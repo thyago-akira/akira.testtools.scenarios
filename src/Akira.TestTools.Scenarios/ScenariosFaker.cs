@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Akira.Contracts.TestTools.Scenarios;
 using Akira.TestTools.Scenarios.Constants;
+using Akira.TestTools.Scenarios.Extensions;
 
 namespace Akira.TestTools.Scenarios
 {
@@ -11,8 +12,6 @@ namespace Akira.TestTools.Scenarios
         where T : class
     {
         #region Fields
-
-        private static readonly HashSet<int> AllowedScenarioBuilderTypes = new HashSet<int>((int[])Enum.GetValues(typeof(ScenarioBuilderType)));
 
         private readonly ConcurrentDictionary<string, InternalFaker<T>> existingFakers =
             new ConcurrentDictionary<string, InternalFaker<T>>(StringComparer.OrdinalIgnoreCase);
@@ -37,26 +36,19 @@ namespace Akira.TestTools.Scenarios
         #region Generate
 
         public T Generate(
-            ScenarioBuilderType scenarioType = ScenarioBuilderType.All,
-            IDictionary<string, string> scenarioBuilderContext = null)
+            ScenarioBuilderType scenarioBuilderType = ScenarioBuilderType.All,
+            IDictionary<string, string> scenarioCombinationConfiguration = null)
         {
-            this.ValidateScenarioBuilderContext(
-                scenarioType,
-                scenarioBuilderContext);
-
-            var fullScenarioBuilderRules = this.scenarioContexts.GetFullScenarioBuilderRules(
-                scenarioBuilderContext);
-
-            var scenarioFaker = this.GetOrCreateFakerScenario(
-                fullScenarioBuilderRules);
-
-            return scenarioFaker.Generate();
+            return this.Generate(
+                scenarioBuilderType,
+                scenarioCombinationConfiguration,
+                true);
         }
 
         public IEnumerable<T> Generate(
             int count,
-            ScenarioBuilderType scenarioType = ScenarioBuilderType.All,
-            IDictionary<string, string> scenarioBuilderContext = null)
+            ScenarioBuilderType scenarioBuilderType = ScenarioBuilderType.All,
+            IDictionary<string, string> scenarioCombinationConfiguration = null)
         {
             if (count <= 0)
             {
@@ -66,19 +58,20 @@ namespace Akira.TestTools.Scenarios
             return Enumerable
                 .Range(1, count)
                 .Select(_ => this.Generate(
-                    scenarioType,
-                    scenarioBuilderContext));
+                    scenarioBuilderType,
+                    scenarioCombinationConfiguration));
         }
 
         public IEnumerable<T> GenerateMinimumTestingScenarios(
-            ScenarioBuilderType scenarioType = ScenarioBuilderType.All)
+            ScenarioBuilderType scenarioBuilderType = ScenarioBuilderType.All)
         {
             foreach (var scenarioCombinationConfiguration in this.GetMinimumTestingScenarioCombinations(
-                scenarioType))
+                scenarioBuilderType))
             {
                 yield return this.Generate(
-                    scenarioType,
-                    scenarioCombinationConfiguration);
+                    scenarioBuilderType,
+                    scenarioCombinationConfiguration,
+                    false);
             }
         }
 
@@ -190,13 +183,30 @@ namespace Akira.TestTools.Scenarios
 
         #endregion Add Known Scenario Builder
 
-        #region GetMinimumTestingScenarioCombinations
-
-        #endregion GetMinimumTestingScenarioCombinations
-
         #endregion Public Methods
 
         #region Private Methods
+
+        private T Generate(
+            ScenarioBuilderType scenarioBuilderType,
+            IDictionary<string, string> scenarioCombinationConfiguration,
+            bool validateBuilderConfiguration)
+        {
+            if (validateBuilderConfiguration)
+            {
+                this.ValidateScenarioBuilderConfiguration(
+                    scenarioBuilderType,
+                    scenarioCombinationConfiguration);
+            }
+
+            var fullScenarioBuilderRules = this.scenarioContexts.GetFullScenarioBuilderRules(
+                scenarioCombinationConfiguration);
+
+            var scenarioFaker = this.GetOrCreateFakerScenario(
+                fullScenarioBuilderRules);
+
+            return scenarioFaker.Generate();
+        }
 
         private InternalFaker<T> GetOrCreateFakerScenario(
             IEnumerable<ScenarioKey> fullScenarioBuilderRules)
@@ -222,22 +232,39 @@ namespace Akira.TestTools.Scenarios
             return scenarioFaker;
         }
 
-        #region Validate Methods
-
-        private void ValidateScenarioBuilderContext(
-            ScenarioBuilderType scenarioType,
-            IDictionary<string, string> scenarioBuilderContext)
+        private void ValidateScenarioBuilderConfiguration(
+            ScenarioBuilderType scenarioBuilderType,
+            IDictionary<string, string> scenarioCombinationConfiguration)
         {
-            if (!AllowedScenarioBuilderTypes.Contains((int)scenarioType))
+            if (!EnumExtensions.AllowedScenarioBuilderTypes.Contains((int)scenarioBuilderType))
             {
-                throw new ArgumentException(Errors.ScenarioBuilderTypeInvalid);
+                throw new ArgumentException(
+                    Errors.ScenarioBuilderTypeInvalid);
             }
 
-            if (scenarioType == ScenarioBuilderType.All ||
-                scenarioBuilderContext == null)
+            if (scenarioBuilderType == ScenarioBuilderType.ValidOnly &&
+                !this.scenarioContexts.HasAlwaysValidKnownScenario)
+            {
+                throw new ArgumentException(
+                    Errors.ScenarioBuilderDoesnotContainAlwaysValidKnownScenario);
+            }
+
+            if (scenarioBuilderType == ScenarioBuilderType.InvalidOnly &&
+                !this.scenarioContexts.HasAlwaysInvalidKnownScenario)
+            {
+                throw new ArgumentException(
+                    Errors.ScenarioBuilderDoesnotContainAlwaysInvalidKnownScenario);
+            }
+
+            if (scenarioBuilderType == ScenarioBuilderType.All ||
+                scenarioCombinationConfiguration == null)
             {
                 return;
             }
+
+            this.scenarioContexts.ValidateScenarioConfigurationBuilder(
+                scenarioBuilderType,
+                scenarioCombinationConfiguration);
         }
 
         /// <summary>
@@ -253,8 +280,6 @@ namespace Akira.TestTools.Scenarios
                 throw new ArgumentException(Errors.ScenarioActionIsnotSet);
             }
         }
-
-        #endregion Validate Methods
 
         /// <summary>
         /// Add a new Scenario to the current Scenario Context

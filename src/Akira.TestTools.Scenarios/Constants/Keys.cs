@@ -50,7 +50,7 @@ namespace Akira.TestTools.Scenarios.Constants
                 scenarioName);
         }
 
-        public static Regex GetRegex(
+        public static Regex GetKeyRegex(
             string valuesRegex)
         {
             return new Regex(
@@ -60,30 +60,22 @@ namespace Akira.TestTools.Scenarios.Constants
                 RegexOptions.Compiled | RegexOptions.IgnoreCase);
         }
 
-        public static (string, string) GetScenarioContextKeyValueRegexValue(
+        public static string GetScenarioContextKeyValueRegexValue(
             int scenarioContextIndex,
-            string scenarioName)
+            string scenarioName = null,
+            bool isOptional = true)
         {
-            return (string.Format(
-                    RegexGroupTemplate,
-                    scenarioContextIndex,
-                    scenarioName,
-                    OptionalGroup),
-                string.Format(
-                    RegexGroupTemplate,
-                    scenarioContextIndex,
-                    scenarioName,
-                    ExactGroup));
-        }
+            if (string.IsNullOrWhiteSpace(scenarioName))
+            {
+                scenarioName = AnyWord;
+                isOptional = true;
+            }
 
-        public static string GetMissingScenarioContextKeyValueRegexValue(
-            int scenarioContextIndex)
-        {
             return string.Format(
                 RegexGroupTemplate,
                 scenarioContextIndex,
-                AnyWord,
-                OptionalGroup);
+                scenarioName,
+                isOptional ? OptionalGroup : ExactGroup);
         }
     }
 }
