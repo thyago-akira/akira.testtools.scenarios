@@ -200,6 +200,7 @@ namespace Akira.TestTools.Scenarios
             }
 
             var fullScenarioBuilderRules = this.scenarioContexts.GetFullScenarioBuilderRules(
+                scenarioBuilderType,
                 scenarioCombinationConfiguration);
 
             var scenarioFaker = this.GetOrCreateFakerScenario(
@@ -256,8 +257,7 @@ namespace Akira.TestTools.Scenarios
                     Errors.ScenarioBuilderDoesnotContainAlwaysInvalidKnownScenario);
             }
 
-            if (scenarioBuilderType == ScenarioBuilderType.All ||
-                scenarioCombinationConfiguration == null)
+            if (scenarioCombinationConfiguration == null)
             {
                 return;
             }
@@ -333,7 +333,7 @@ namespace Akira.TestTools.Scenarios
                     knownCombination.CombinationType == ScenarioCombinationType.AlwaysInvalid))
                 {
                     yield return knownCombination.ScenariosKeys.ToDictionary(
-                        kv => kv.KeyValue,
+                        kv => kv.ContextName,
                         kv => kv.ScenarioName);
                 }
             }

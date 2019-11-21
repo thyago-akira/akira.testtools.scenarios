@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Akira.TestTools.Scenarios.Tests.Context.Data;
+using Akira.TestTools.Scenarios.Tests.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Akira.TestTools.Scenarios.Tests
@@ -9,28 +10,19 @@ namespace Akira.TestTools.Scenarios.Tests
     public class ScenariosFakerScenarioContextTests : BaseScenariosFakerTests
     {
         public static IEnumerable<object[]> GetScenarioValidDataForCompleteFaker()
-        {
-            foreach (var context in ScenarioContextTestData.GetValidData())
-            {
-                yield return new object[] { context };
-            }
-        }
+            => ScenarioContextTestData
+                .GetValidData()
+                .GetTestDynamicData();
 
         public static IEnumerable<object[]> GetScenarioInvalidDataForCompleteFaker()
-        {
-            foreach (var context in ScenarioContextTestData.GetInvalidDataWithCompletedFakers())
-            {
-                yield return new object[] { context };
-            }
-        }
+            => ScenarioContextTestData
+                .GetInvalidDataWithCompletedFakers()
+                .GetTestDynamicData();
 
         public static IEnumerable<object[]> GetScenarioInvalidDataForIncompleteFaker()
-        {
-            foreach (var context in ScenarioContextTestData.GetInvalidDataWithIncompletedFakers())
-            {
-                yield return new object[] { context };
-            }
-        }
+            => ScenarioContextTestData
+                .GetInvalidDataWithIncompletedFakers()
+                .GetTestDynamicData();
 
         [DataTestMethod]
         [DynamicData(nameof(GetScenarioValidDataForCompleteFaker), DynamicDataSourceType.Method)]

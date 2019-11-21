@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Akira.TestTools.Scenarios.Tests.Context.Data;
+using Akira.TestTools.Scenarios.Tests.Extensions;
 using Akira.TestTools.Scenarios.Tests.Stubs;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -10,25 +11,39 @@ namespace Akira.TestTools.Scenarios.Tests
     public class ScenariosFakerScenarioTests : BaseScenariosFakerTests
     {
         public static IEnumerable<object[]> GetDefaultScenarioContextScenarioAfterCustomScenarioContext()
-            => ScenarioTestData.GetTestData(ScenarioTestData.TestDataType.DefaultScenarioContextScenarioAfterCustomScenarioContext);
+            => ScenarioTestData
+                .GetTestDataByDataType(ScenarioTestData.TestDataType.DefaultScenarioContextScenarioAfterCustomScenarioContext)
+                .GetTestDynamicData();
 
         public static IEnumerable<object[]> GetDefaultScenarioContextScenarioUsingCustomScenarioContextScenario()
-            => ScenarioTestData.GetTestData(ScenarioTestData.TestDataType.DefaultScenarioContextScenarioUsingCustomScenarioContextScenario);
+            => ScenarioTestData
+                .GetTestDataByDataType(ScenarioTestData.TestDataType.DefaultScenarioContextScenarioUsingCustomScenarioContextScenario)
+                .GetTestDynamicData();
 
         public static IEnumerable<object[]> GetScenarioWithNullAction()
-            => ScenarioTestData.GetTestData(ScenarioTestData.TestDataType.ScenarioWithNullAction);
+            => ScenarioTestData
+                .GetTestDataByDataType(ScenarioTestData.TestDataType.ScenarioWithNullAction)
+                .GetTestDynamicData();
 
         public static IEnumerable<object[]> GetScenarioWithInvalidScenarioType()
-            => ScenarioTestData.GetTestData(ScenarioTestData.TestDataType.ScenarioWithInvalidScenarioType);
+            => ScenarioTestData
+                .GetTestDataByDataType(ScenarioTestData.TestDataType.ScenarioWithInvalidScenarioType)
+                .GetTestDynamicData();
 
         public static IEnumerable<object[]> GetScenarioWithEmptyScenarioName()
-            => ScenarioTestData.GetTestData(ScenarioTestData.TestDataType.ScenarioWithEmptyScenarioName);
+            => ScenarioTestData
+                .GetTestDataByDataType(ScenarioTestData.TestDataType.ScenarioWithEmptyScenarioName)
+                .GetTestDynamicData();
 
         public static IEnumerable<object[]> GetScenarioWithExistingScenarioName()
-            => ScenarioTestData.GetTestData(ScenarioTestData.TestDataType.ScenarioWithExistingScenarioName);
+            => ScenarioTestData
+                .GetTestDataByDataType(ScenarioTestData.TestDataType.ScenarioWithExistingScenarioName)
+                .GetTestDynamicData();
 
         public static IEnumerable<object[]> GetValidData()
-            => ScenarioTestData.GetTestData(ScenarioTestData.TestDataType.ValidData);
+            => ScenarioTestData
+                .GetTestDataByDataType(ScenarioTestData.TestDataType.ValidData)
+                .GetTestDynamicData();
 
         [DataTestMethod]
         [DynamicData(nameof(GetValidData), DynamicDataSourceType.Method)]

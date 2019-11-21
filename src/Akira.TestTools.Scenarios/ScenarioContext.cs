@@ -13,6 +13,8 @@ namespace Akira.TestTools.Scenarios
 
         private readonly HashSet<string> scenarios;
 
+        private Random random;
+
         internal ScenarioContext(
             string name,
             int index)
@@ -28,6 +30,19 @@ namespace Akira.TestTools.Scenarios
 
         internal int Index { get; private set; }
 
+        private Random Random
+        {
+            get
+            {
+                if (this.random == null)
+                {
+                    this.random = new Random();
+                }
+
+                return this.random;
+            }
+        }
+
         internal ScenarioKey GetScenarioKey(
             string scenarioName,
             bool findRandomScenario = false)
@@ -42,7 +57,7 @@ namespace Akira.TestTools.Scenarios
 
             if (findRandomScenario)
             {
-                var randomIndex = new Random().Next(this.scenarios.Count);
+                var randomIndex = this.Random.Next(this.scenarios.Count);
 
                 return new ScenarioKey(
                     this.Name,

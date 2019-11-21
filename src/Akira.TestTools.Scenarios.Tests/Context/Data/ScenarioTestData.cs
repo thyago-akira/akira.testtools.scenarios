@@ -61,14 +61,33 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             ScenarioWithExistingScenarioName
         }
 
-        internal static IEnumerable<object[]> GetTestData(TestDataType testDataType)
+        internal static IEnumerable<TestContext> GetTestDataByDataType(TestDataType testDataType)
         {
-            var testData = GetTestDataByDataType(testDataType);
-
-            foreach (var context in testData)
+            switch (testDataType)
             {
-                yield return new object[] { context };
+                case TestDataType.ValidData:
+                    return GetValidData();
+
+                case TestDataType.DefaultScenarioContextScenarioAfterCustomScenarioContext:
+                    return GetDefaultScenarioContextScenarioAfterCustomScenarioContext();
+
+                case TestDataType.DefaultScenarioContextScenarioUsingCustomScenarioContextScenario:
+                    return GetDefaultScenarioContextScenarioUsingCustomScenarioContextScenario();
+
+                case TestDataType.ScenarioWithNullAction:
+                    return GetScenarioWithNullAction();
+
+                case TestDataType.ScenarioWithInvalidScenarioType:
+                    return GetScenarioWithInvalidScenarioType();
+
+                case TestDataType.ScenarioWithEmptyScenarioName:
+                    return GetScenarioWithEmptyScenarioName();
+
+                case TestDataType.ScenarioWithExistingScenarioName:
+                    return GetScenarioWithExistingScenarioName();
             }
+
+            return default;
         }
 
         private static IEnumerable<TestContext> GetValidData()
@@ -976,35 +995,6 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     Scenariotestname,
                     ScenarioContextName)
             };
-        }
-
-        private static IEnumerable<TestContext> GetTestDataByDataType(TestDataType testDataType)
-        {
-            switch (testDataType)
-            {
-                case TestDataType.ValidData:
-                    return GetValidData();
-
-                case TestDataType.DefaultScenarioContextScenarioAfterCustomScenarioContext:
-                    return GetDefaultScenarioContextScenarioAfterCustomScenarioContext();
-
-                case TestDataType.DefaultScenarioContextScenarioUsingCustomScenarioContextScenario:
-                    return GetDefaultScenarioContextScenarioUsingCustomScenarioContextScenario();
-
-                case TestDataType.ScenarioWithNullAction:
-                    return GetScenarioWithNullAction();
-
-                case TestDataType.ScenarioWithInvalidScenarioType:
-                    return GetScenarioWithInvalidScenarioType();
-
-                case TestDataType.ScenarioWithEmptyScenarioName:
-                    return GetScenarioWithEmptyScenarioName();
-
-                case TestDataType.ScenarioWithExistingScenarioName:
-                    return GetScenarioWithExistingScenarioName();
-            }
-
-            return default;
         }
     }
 }

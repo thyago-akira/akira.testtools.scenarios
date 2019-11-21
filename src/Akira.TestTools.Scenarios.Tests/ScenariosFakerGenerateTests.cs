@@ -1,12 +1,13 @@
 ﻿using System;
-using Akira.TestTools.Scenarios.Constants;
-using Akira.TestTools.Scenarios.Tests.Stubs;
+using System.Collections.Generic;
+using Akira.TestTools.Scenarios.Tests.Context.Data;
+using Akira.TestTools.Scenarios.Tests.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Akira.TestTools.Scenarios.Tests
 {
     [TestClass]
-    public class ScenariosFakerGenerateTests
+    public class ScenariosFakerGenerateTests : BaseScenariosFakerTests
     {
         private const string TestScenarioContextName = nameof(TestScenarioContextName);
 
@@ -14,204 +15,79 @@ namespace Akira.TestTools.Scenarios.Tests
 
         private const string TestScenarioNameAlternative = nameof(TestScenarioNameAlternative);
 
-        [TestMethod]
-        public void ScenariosFaker_GenerateDefault_WithoutScenarios_ThrowsException()
-        {
-            // Action && Assert
-            var exception = Assert.ThrowsException<InvalidOperationException>(() =>
-                new ScenariosFaker<SimpleModel>()
-                    .Generate());
+        public static IEnumerable<object[]> GetValidData()
+            => GenerateTestData
+                .GetTestDataByDataType(GenerateTestData.TestDataType.ValidData)
+                .GetTestDynamicData();
 
-            Assert.AreEqual(
-                Errors.DefaultScenarioContextWithoutValidScenario,
-                exception.Message);
-        }
+        public static IEnumerable<object[]> GetInvalidArgumentExceptionData()
+            => GenerateTestData
+                .GetTestDataByDataType(GenerateTestData.TestDataType.InvalidArgumentExceptionData)
+                .GetTestDynamicData();
 
-        [TestMethod]
-        public void ScenariosFaker_GenerateDefault_WithOnlyValid_ThrowsException()
-        {
-            // Action && Assert
-            var exception = Assert.ThrowsException<InvalidOperationException>(() =>
-                new ScenariosFaker<SimpleModel>()
-                    .DefaultContextValidScenario(scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id))
-                    .Generate());
+        public static IEnumerable<object[]> GetInvalidOperationExceptionData()
+            => GenerateTestData
+                .GetTestDataByDataType(GenerateTestData.TestDataType.InvalidOperationExceptionData)
+                .GetTestDynamicData();
 
-            Assert.AreEqual(
-                Errors.DefaultScenarioContextWithoutInvalidScenario,
-                exception.Message);
-        }
+        public static IEnumerable<object[]> GetInvalidIncompleteModelData()
+            => GenerateTestData
+                .GetTestDataByDataType(GenerateTestData.TestDataType.InvalidIncompleteModelData)
+                .GetTestDynamicData();
 
-        [TestMethod]
-        public void ScenariosFaker_GenerateDefault_WithOnlyInvalid_ThrowsException()
-        {
-            // Action && Assert
-            var exception = Assert.ThrowsException<InvalidOperationException>(() =>
-                new ScenariosFaker<SimpleModel>()
-                    .DefaultContextInvalidScenario(scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id))
-                    .Generate());
+        public static IEnumerable<object[]> GetInvalidArgumentExceptionCollisionData()
+            => GenerateTestData
+                .GetTestDataByDataType(GenerateTestData.TestDataType.InvalidCollisionData)
+                .GetTestDynamicData();
 
-            Assert.AreEqual(
-                Errors.DefaultScenarioContextWithoutValidScenario,
-                exception.Message);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(Bogus.ValidationException))]
-        public void ScenariosFaker_GenerateDefault_IncompleteModel_ThrowsException()
+        [DataTestMethod]
+        [DynamicData(nameof(GetValidData), DynamicDataSourceType.Method)]
+        public void ScenariosFaker_Generate_ReturnsValidModel(
+            Context.GenerateTestContext testContext)
         {
             // Action
-            new ScenariosFaker<SimpleModel>()
-                .DefaultContextValidScenario(scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id))
-                .DefaultContextInvalidScenario(scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id))
-                .Generate();
-        }
-
-        [TestMethod]
-        public void ScenariosFaker_GenerateCustom_WithoutScenarios_ThrowsException()
-        {
-            // Action && Assert
-            var exception = Assert.ThrowsException<InvalidOperationException>(() =>
-                new ScenariosFaker<SimpleModel>()
-                    .DefaultContextValidScenario(scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id))
-                    .DefaultContextInvalidScenario(scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id))
-                    .ScenarioContext(TestScenarioContextName)
-                    .Generate());
-
-            Assert.AreEqual(
-                string.Format(
-                    Errors.ScenarioContextIncomplete,
-                    TestScenarioContextName),
-                exception.Message);
-        }
-
-        [TestMethod]
-        public void ScenariosFaker_GenerateCustom_WithOnlyOneScenario_ThrowsException()
-        {
-            // Action && Assert
-            var exception = Assert.ThrowsException<InvalidOperationException>(() =>
-                new ScenariosFaker<SimpleModel>()
-                    .DefaultContextValidScenario(scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id))
-                    .DefaultContextInvalidScenario(scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id))
-                    .ScenarioContext(TestScenarioContextName)
-                    .Scenario(
-                        TestScenarioName,
-                        scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id))
-                    .Generate());
-
-            Assert.AreEqual(
-                string.Format(
-                    Errors.ScenarioContextIncomplete,
-                    TestScenarioContextName),
-                exception.Message);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(Bogus.ValidationException))]
-        public void ScenariosFaker_GenerateCustom_IncompleteModel_ThrowsException()
-        {
-            // Action
-            new ScenariosFaker<SimpleModel>()
-                .DefaultContextValidScenario(scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id))
-                .DefaultContextInvalidScenario(scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id))
-                .ScenarioContext(TestScenarioContextName)
-                .Scenario(
-                    TestScenarioName,
-                    scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id))
-                .Scenario(
-                    TestScenarioNameAlternative,
-                    scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id))
-                .Generate();
-        }
-
-        [TestMethod]
-        public void ScenariosFaker_GenerateDefault_AllIgnored_ModelWithNulls()
-        {
-            // Action
-            var model = new ScenariosFaker<SimpleModel>()
-                .DefaultContextValidScenario(
-                    scenarioRuleSet => scenarioRuleSet
-                        .Ignore(f => f.Id)
-                        .Ignore(f => f.Name)
-                        .Ignore(f => f.Total))
-                .DefaultContextInvalidScenario(
-                    scenarioRuleSet => scenarioRuleSet
-                        .Ignore(f => f.Id)
-                        .Ignore(f => f.Name)
-                        .Ignore(f => f.Total))
-                .Generate();
+            var model = testContext.TestedAction();
 
             // Asserts
             Assert.IsNotNull(model);
-            Assert.IsNull(model.Id);
-            Assert.IsNull(model.Name);
-            Assert.IsNull(model.Total);
+
+            testContext.AdditionalAsserts?.Invoke(model);
         }
 
-        [TestMethod]
-        public void ScenariosFaker_GenerateCustomScenario_AllIgnored_ModelWithNulls()
+        [DataTestMethod]
+        [DynamicData(nameof(GetInvalidArgumentExceptionData), DynamicDataSourceType.Method)]
+        public void ScenariosFaker_Generate_ThrowsArgumentException(
+            Context.GenerateTestContext testContext)
         {
-            // Action
-            var model = new ScenariosFaker<SimpleModel>()
-                .DefaultContextValidScenario(scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id))
-                .DefaultContextInvalidScenario(scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id))
-                .ScenarioContext(TestScenarioContextName)
-                .Scenario(
-                    TestScenarioName,
-                    scenarioRuleSet => scenarioRuleSet
-                        .Ignore(f => f.Name)
-                        .Ignore(f => f.Total))
-                .Scenario(
-                    TestScenarioNameAlternative,
-                    scenarioRuleSet => scenarioRuleSet
-                        .Ignore(f => f.Name)
-                        .Ignore(f => f.Total))
-                .Generate();
-
-            // Asserts
-            Assert.IsNotNull(model);
-            Assert.IsNull(model.Id);
-            Assert.IsNull(model.Name);
-            Assert.IsNull(model.Total);
+            // Action && Assert
+            this.AssertThrowsException<ArgumentException>(testContext);
         }
 
-        [TestMethod]
-        public void ScenariosFaker_GenerateCustomScenario_ReplacingRules_NoExceptionAndModelWithNulls()
+        [DataTestMethod]
+        [DynamicData(nameof(GetInvalidOperationExceptionData), DynamicDataSourceType.Method)]
+        public void ScenariosFaker_Generate_ThrowsInvalidOperationException(
+            Context.GenerateTestContext testContext)
         {
-            // Arrange
-            var id = 100;
-            var replacedName = "newName";
-            var replacedTotal = 202;
+            // Action && Assert
+            this.AssertThrowsException<InvalidOperationException>(testContext);
+        }
 
-            // Action
-            var model = new ScenariosFaker<SimpleModel>()
-                .DefaultContextValidScenario(
-                    scenarioRuleSet => scenarioRuleSet
-                        .RuleFor(f => f.Id, id)
-                        .RuleFor(f => f.Name, "a")
-                        .RuleFor(f => f.Total, 200))
-                .DefaultContextInvalidScenario(
-                    scenarioRuleSet => scenarioRuleSet
-                        .RuleFor(f => f.Id, id)
-                        .RuleFor(f => f.Name, "b")
-                        .RuleFor(f => f.Total, 201))
-                .ScenarioContext(TestScenarioContextName)
-                .Scenario(
-                    TestScenarioName,
-                    scenarioRuleSet => scenarioRuleSet
-                        .RuleFor(f => f.Name, replacedName)
-                        .RuleFor(f => f.Total, replacedTotal))
-                .Scenario(
-                    TestScenarioNameAlternative,
-                    scenarioRuleSet => scenarioRuleSet
-                        .RuleFor(f => f.Name, replacedName)
-                        .RuleFor(f => f.Total, replacedTotal))
-                .Generate();
+        [DataTestMethod]
+        [DynamicData(nameof(GetInvalidIncompleteModelData), DynamicDataSourceType.Method)]
+        public void ScenariosFaker_Generate_ThrowsValidationException(
+            Context.GenerateTestContext testContext)
+        {
+            // Action && Assert
+            this.AssertThrowsException<Bogus.ValidationException>(testContext);
+        }
 
-            // Asserts
-            Assert.IsNotNull(model);
-            Assert.AreEqual(id, model.Id);
-            Assert.AreEqual(replacedName, model.Name);
-            Assert.AreEqual(replacedTotal, model.Total);
+        [DataTestMethod]
+        [DynamicData(nameof(GetInvalidArgumentExceptionCollisionData), DynamicDataSourceType.Method)]
+        public void ScenariosFaker_Generate_Collision_ThrowsArgumentException(
+            Context.GenerateTestContext testContext)
+        {
+            // Action && Assert
+            this.AssertThrowsException<ArgumentException>(testContext);
         }
     }
 }

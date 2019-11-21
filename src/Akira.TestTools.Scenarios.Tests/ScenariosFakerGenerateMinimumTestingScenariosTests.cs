@@ -3,6 +3,7 @@ using System.Linq;
 using Akira.Contracts.TestTools.Scenarios;
 using Akira.TestTools.Scenarios.Tests.Context;
 using Akira.TestTools.Scenarios.Tests.Context.Data;
+using Akira.TestTools.Scenarios.Tests.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Akira.TestTools.Scenarios.Tests
@@ -11,7 +12,9 @@ namespace Akira.TestTools.Scenarios.Tests
     public class ScenariosFakerGenerateMinimumTestingScenariosTests
     {
         public static IEnumerable<object[]> GetValidData()
-            => GenerateMinimumTestingScenariosTestData.GetTestData();
+            => GenerateMinimumTestingScenariosTestData
+                .GetTestDataByDataType(GenerateMinimumTestingScenariosTestData.TestDataType.ValidData)
+                .GetTestDynamicData();
 
         [DataTestMethod]
         [DynamicData(nameof(GetValidData), DynamicDataSourceType.Method)]

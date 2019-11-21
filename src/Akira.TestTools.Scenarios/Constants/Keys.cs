@@ -63,19 +63,19 @@ namespace Akira.TestTools.Scenarios.Constants
         public static string GetScenarioContextKeyValueRegexValue(
             int scenarioContextIndex,
             string scenarioName = null,
-            bool isOptional = true)
+            bool useOptionalGroup = true)
         {
             if (string.IsNullOrWhiteSpace(scenarioName))
             {
                 scenarioName = AnyWord;
-                isOptional = true;
+                useOptionalGroup = true;
             }
 
             return string.Format(
                 RegexGroupTemplate,
                 scenarioContextIndex,
                 scenarioName,
-                isOptional ? OptionalGroup : ExactGroup);
+                useOptionalGroup ? OptionalGroup : ExactGroup);
         }
     }
 }

@@ -6,19 +6,19 @@ namespace Akira.TestTools.Scenarios.Tests
     public abstract class BaseScenariosFakerTests
     {
         protected void AssertThrowsException<T>(
-            Context.TestContext addScenarioContext,
-            Action<T> additionalExceptionAsserts = null)
+            Context.BaseTestContext testContext)
             where T : Exception
         {
             // Action && Assert
             var exception = Assert.ThrowsException<T>(() =>
-                _ = addScenarioContext.TestedAction());
+                testContext.GenerateExceptionAction());
 
-            Assert.AreEqual(
-                addScenarioContext.ExpectedExceptionMessage,
-                exception.Message);
-
-            additionalExceptionAsserts?.Invoke(exception);
+            if (!string.IsNullOrWhiteSpace(testContext.ExpectedExceptionMessage))
+            {
+                Assert.AreEqual(
+                    testContext.ExpectedExceptionMessage,
+                    exception.Message);
+            }
         }
     }
 }

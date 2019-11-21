@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Akira.TestTools.Scenarios.Tests.Context.Data;
+using Akira.TestTools.Scenarios.Tests.Extensions;
 using Akira.TestTools.Scenarios.Tests.Stubs;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -10,13 +11,19 @@ namespace Akira.TestTools.Scenarios.Tests
     public class ScenariosFakerAddKnownScenarioCombinationTests : BaseScenariosFakerTests
     {
         public static IEnumerable<object[]> GetValidData()
-            => AddKnownScenarioCombinationTestData.GetTestData(AddKnownScenarioCombinationTestData.TestDataType.ValidData);
+            => AddKnownScenarioCombinationTestData
+                .GetTestDataByDataType(AddKnownScenarioCombinationTestData.TestDataType.ValidData)
+                .GetTestDynamicData();
 
         public static IEnumerable<object[]> GetInvalidData()
-            => AddKnownScenarioCombinationTestData.GetTestData(AddKnownScenarioCombinationTestData.TestDataType.InvalidData);
+            => AddKnownScenarioCombinationTestData
+                .GetTestDataByDataType(AddKnownScenarioCombinationTestData.TestDataType.InvalidData)
+                .GetTestDynamicData();
 
         public static IEnumerable<object[]> GetScenariosColisionInvalidData()
-            => AddKnownScenarioCombinationTestData.GetTestData(AddKnownScenarioCombinationTestData.TestDataType.ScenariosCollisionInvalidData);
+            => AddKnownScenarioCombinationTestData
+                .GetTestDataByDataType(AddKnownScenarioCombinationTestData.TestDataType.ScenariosCollisionInvalidData)
+                .GetTestDynamicData();
 
         [DataTestMethod]
         [DynamicData(nameof(GetValidData), DynamicDataSourceType.Method)]

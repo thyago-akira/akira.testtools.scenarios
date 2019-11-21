@@ -49,14 +49,21 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             ScenariosCollisionInvalidData
         }
 
-        internal static IEnumerable<object[]> GetTestData(TestDataType testDataType)
+        internal static IEnumerable<TestContext> GetTestDataByDataType(TestDataType testDataType)
         {
-            var testData = GetTestDataByDataType(testDataType);
-
-            foreach (var context in testData)
+            switch (testDataType)
             {
-                yield return new object[] { context };
+                case TestDataType.ValidData:
+                    return GetValidData();
+
+                case TestDataType.InvalidData:
+                    return GetInvalidData();
+
+                case TestDataType.ScenariosCollisionInvalidData:
+                    return GetScenariosColisionInvalidData();
             }
+
+            return default;
         }
 
         private static IEnumerable<TestContext> GetValidData()
@@ -1516,23 +1523,6 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 .Scenario(
                     ScenarioContextTestScenarioNameAlternative,
                     scenarioRuleSet => scenarioRuleSet.Ignore(m => m.Id));
-        }
-
-        private static IEnumerable<TestContext> GetTestDataByDataType(TestDataType testDataType)
-        {
-            switch (testDataType)
-            {
-                case TestDataType.ValidData:
-                    return GetValidData();
-
-                case TestDataType.InvalidData:
-                    return GetInvalidData();
-
-                case TestDataType.ScenariosCollisionInvalidData:
-                    return GetScenariosColisionInvalidData();
-            }
-
-            return default;
         }
     }
 }

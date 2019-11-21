@@ -13,5 +13,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context
         public int ExpectedCountInvalidOnly { get; set; }
 
         public int ExpectedCountAll { get; set; }
+
+        public override Action GenerateExceptionAction { get; }
     }
 }

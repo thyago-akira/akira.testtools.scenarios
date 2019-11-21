@@ -16,14 +16,23 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
 
         private const string ScenarioTestNameAlternative = nameof(ScenarioTestNameAlternative);
 
-        internal static IEnumerable<object[]> GetTestData()
+        internal enum TestDataType
         {
-            var testData = GetValidData();
+            /// <summary>
+            /// Valid Data Test Scenario
+            /// </summary>
+            ValidData
+        }
 
-            foreach (var context in testData)
+        internal static IEnumerable<TestBuilderContext> GetTestDataByDataType(TestDataType testDataType)
+        {
+            switch (testDataType)
             {
-                yield return new object[] { context };
+                case TestDataType.ValidData:
+                    return GetValidData();
             }
+
+            return default;
         }
 
         private static IEnumerable<TestBuilderContext> GetValidData()
