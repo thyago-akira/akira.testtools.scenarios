@@ -18,7 +18,7 @@ namespace Akira.TestTools.Scenarios.Tests
 
         [DataTestMethod]
         [DynamicData(nameof(GetValidData), DynamicDataSourceType.Method)]
-        public void ScenariosFaker_GetMinimumKnownScenarioCombinationsForTestingNull_ReturnsTestScenariosBuilders(
+        public void ScenariosFaker_GenerateMinimumTestingScenariosForTestingNull_ReturnsTestScenariosBuilders(
             TestBuilderContext getTestBuildersTestContext)
         {
             // Act
@@ -33,7 +33,7 @@ namespace Akira.TestTools.Scenarios.Tests
 
         [DataTestMethod]
         [DynamicData(nameof(GetValidData), DynamicDataSourceType.Method)]
-        public void ScenariosFaker_GetMinimumKnownScenarioCombinationsForTestingAll_ReturnsTestScenariosBuilders(
+        public void ScenariosFaker_GenerateMinimumTestingScenariosForTestingAll_ReturnsTestScenariosBuilders(
             TestBuilderContext getTestBuildersTestContext)
         {
             // Act
@@ -48,7 +48,7 @@ namespace Akira.TestTools.Scenarios.Tests
 
         [DataTestMethod]
         [DynamicData(nameof(GetValidData), DynamicDataSourceType.Method)]
-        public void ScenariosFaker_GetMinimumKnownScenarioCombinationsForTestingValidOnly_ReturnsTestScenariosBuilders(
+        public void ScenariosFaker_GenerateMinimumTestingScenariosForTestingValidOnly_ReturnsTestScenariosBuilders(
             TestBuilderContext getTestBuildersTestContext)
         {
             // Act
@@ -63,7 +63,7 @@ namespace Akira.TestTools.Scenarios.Tests
 
         [DataTestMethod]
         [DynamicData(nameof(GetValidData), DynamicDataSourceType.Method)]
-        public void ScenariosFaker_GetMinimumKnownScenarioCombinationsForTestingInvalidOnly_ReturnsTestScenariosBuilders(
+        public void ScenariosFaker_GenerateMinimumTestingScenariosForTestingInvalidOnly_ReturnsTestScenariosBuilders(
             TestBuilderContext getTestBuildersTestContext)
         {
             // Act

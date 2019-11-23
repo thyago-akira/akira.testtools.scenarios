@@ -193,6 +193,11 @@ namespace Akira.TestTools.Scenarios
             IDictionary<string, string> scenarioCombinationConfiguration,
             bool validateBuilderConfiguration)
         {
+            if (scenarioCombinationConfiguration == null)
+            {
+                scenarioCombinationConfiguration = new Dictionary<string, string>();
+            }
+
             if (validateBuilderConfiguration)
             {
                 scenarioCombinationConfiguration = this.ValidateScenarioBuilderConfiguration(
@@ -255,11 +260,6 @@ namespace Akira.TestTools.Scenarios
             {
                 throw new ArgumentException(
                     Errors.ScenarioBuilderDoesnotContainAlwaysInvalidKnownScenario);
-            }
-
-            if (scenarioCombinationConfiguration == null)
-            {
-                scenarioCombinationConfiguration = new Dictionary<string, string>();
             }
 
             return this.scenarioContexts.ValidateScenarioConfigurationBuilder(
