@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Akira.TestTools.Scenarios.Tests.Context.Data;
 using Akira.TestTools.Scenarios.Tests.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -18,6 +19,11 @@ namespace Akira.TestTools.Scenarios.Tests
         public static IEnumerable<object[]> GetValidData()
             => GenerateTestData
                 .GetTestDataByDataType(GenerateTestData.TestDataType.ValidData)
+                .GetTestDynamicData();
+
+        public static IEnumerable<object[]> GetMultipleValidData()
+            => GenerateMultipleTestData
+                .GetTestDataByDataType(GenerateMultipleTestData.TestDataType.ValidData)
                 .GetTestDynamicData();
 
         public static IEnumerable<object[]> GetInvalidArgumentExceptionData()
@@ -40,6 +46,11 @@ namespace Akira.TestTools.Scenarios.Tests
                 .GetTestDataByDataType(GenerateTestData.TestDataType.InvalidCollisionData)
                 .GetTestDynamicData();
 
+        public static IEnumerable<object[]> GetMultipleInvalidArgumentExceptionData()
+            => GenerateMultipleTestData
+                .GetTestDataByDataType(GenerateMultipleTestData.TestDataType.InvalidArgumentExceptionData)
+                .GetTestDynamicData();
+
         [DataTestMethod]
         [DynamicData(nameof(GetValidData), DynamicDataSourceType.Method)]
         public void ScenariosFaker_Generate_ReturnsValidModel(
@@ -52,6 +63,19 @@ namespace Akira.TestTools.Scenarios.Tests
             Assert.IsNotNull(model);
 
             testContext.AdditionalAsserts?.Invoke(model);
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(GetMultipleValidData), DynamicDataSourceType.Method)]
+        public void ScenariosFaker_Generate_ReturnsValidModel(
+            Context.GenerateMultipleTestContext testContext)
+        {
+            // Action
+            var list = testContext.TestedAction();
+
+            // Asserts
+            Assert.IsNotNull(list);
+            Assert.AreEqual(testContext.NumberOfRows, list.Count());
         }
 
         [DataTestMethod]
@@ -85,6 +109,15 @@ namespace Akira.TestTools.Scenarios.Tests
         [DynamicData(nameof(GetInvalidArgumentExceptionCollisionData), DynamicDataSourceType.Method)]
         public void ScenariosFaker_Generate_Collision_ThrowsArgumentException(
             Context.GenerateTestContext testContext)
+        {
+            // Action && Assert
+            this.AssertThrowsException<ArgumentException>(testContext);
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(GetMultipleInvalidArgumentExceptionData), DynamicDataSourceType.Method)]
+        public void ScenariosFaker_Generate_Multiple_ThrowsArgumentException(
+            Context.GenerateMultipleTestContext testContext)
         {
             // Action && Assert
             this.AssertThrowsException<ArgumentException>(testContext);

@@ -81,6 +81,13 @@
             "Scenario Combination Configuration of type '{0}' has conflict with an existing " +
             "Known Scenario Combination Configuration with Key '{1}' and ScenarioCombinationType '{2}'";
 
+        public const string ScenarioCombinationConfigHasNoCompatibleKnownScenarioCombinationConfig =
+            "Scenario Combination Configuration of type '{0}' has no compatible " +
+            "Known Scenario Combination Configuration";
+
+        public const string InvalidNumberOfRows =
+            "Invalid number of rows to generate";
+
         private const string DefaultContextValidScenario = nameof(ScenariosFaker<object>.DefaultContextValidScenario);
 
         private const string DefaultContextInvalidScenario = nameof(ScenariosFaker<object>.DefaultContextInvalidScenario);

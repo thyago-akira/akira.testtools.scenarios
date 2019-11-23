@@ -52,7 +52,8 @@ namespace Akira.TestTools.Scenarios
         {
             if (count <= 0)
             {
-                throw new ArgumentException("Invalid number of rows to generate");
+                throw new ArgumentException(
+                    Errors.InvalidNumberOfRows);
             }
 
             return Enumerable
@@ -170,7 +171,7 @@ namespace Akira.TestTools.Scenarios
         /// Indicates if the Current Scenario will be <see cref="ScenarioCombinationType.Unknown"/>, <see cref="ScenarioCombinationType.AlwaysValid"/> or <see cref="ScenarioCombinationType.AlwaysInvalid"/>
         /// </param>
         /// <returns>Returns the current instance of the <see cref="IScenariosBuilder{T}" /> (fluent interface)</returns>
-        public IScenariosBuilder<T> AddKnownScenarioCombination(
+        public IScenariosBuilder<T> KnownScenarioCombination(
             IDictionary<string, string> scenarioCombinationConfiguration,
             ScenarioCombinationType scenarioCombinationType = ScenarioCombinationType.Unknown)
         {
@@ -194,13 +195,12 @@ namespace Akira.TestTools.Scenarios
         {
             if (validateBuilderConfiguration)
             {
-                this.ValidateScenarioBuilderConfiguration(
+                scenarioCombinationConfiguration = this.ValidateScenarioBuilderConfiguration(
                     scenarioBuilderType,
                     scenarioCombinationConfiguration);
             }
 
             var fullScenarioBuilderRules = this.scenarioContexts.GetFullScenarioBuilderRules(
-                scenarioBuilderType,
                 scenarioCombinationConfiguration);
 
             var scenarioFaker = this.GetOrCreateFakerScenario(
@@ -233,7 +233,7 @@ namespace Akira.TestTools.Scenarios
             return scenarioFaker;
         }
 
-        private void ValidateScenarioBuilderConfiguration(
+        private IDictionary<string, string> ValidateScenarioBuilderConfiguration(
             ScenarioBuilderType scenarioBuilderType,
             IDictionary<string, string> scenarioCombinationConfiguration)
         {
@@ -259,10 +259,10 @@ namespace Akira.TestTools.Scenarios
 
             if (scenarioCombinationConfiguration == null)
             {
-                return;
+                scenarioCombinationConfiguration = new Dictionary<string, string>();
             }
 
-            this.scenarioContexts.ValidateScenarioConfigurationBuilder(
+            return this.scenarioContexts.ValidateScenarioConfigurationBuilder(
                 scenarioBuilderType,
                 scenarioCombinationConfiguration);
         }

@@ -20,10 +20,6 @@ namespace Akira.TestTools.Scenarios
 
         private Random random;
 
-        private List<KnownCombination> alwaysValidKnownScenarios;
-
-        private List<KnownCombination> alwaysInvalidKnownScenarios;
-
         #endregion Fields
 
         #region Constructors
@@ -78,38 +74,6 @@ namespace Akira.TestTools.Scenarios
             }
         }
 
-        private List<KnownCombination> AlwaysValidKnownScenarios
-        {
-            get
-            {
-                if (this.alwaysValidKnownScenarios == null)
-                {
-                    this.alwaysValidKnownScenarios = this.KnownCombinations
-                        .Where(knownCombination =>
-                            knownCombination.CombinationType == ScenarioCombinationType.AlwaysValid)
-                        .ToList();
-                }
-
-                return this.alwaysValidKnownScenarios;
-            }
-        }
-
-        private List<KnownCombination> AlwaysInvalidKnownScenarios
-        {
-            get
-            {
-                if (this.alwaysInvalidKnownScenarios == null)
-                {
-                    this.alwaysInvalidKnownScenarios = this.KnownCombinations
-                        .Where(knownCombination =>
-                            knownCombination.CombinationType == ScenarioCombinationType.AlwaysInvalid)
-                        .ToList();
-                }
-
-                return this.alwaysInvalidKnownScenarios;
-            }
-        }
-
         #endregion Properties
 
         #region Methods
@@ -126,20 +90,15 @@ namespace Akira.TestTools.Scenarios
         }
 
         internal IEnumerable<ScenarioKey> GetFullScenarioBuilderRules(
-            ScenarioBuilderType scenarioBuilderType,
             IDictionary<string, string> scenarioCombinationConfiguration)
         {
             this.CurrentScenarioContext.ValidateContextCompleted();
-
-            var combinationConfig = this.GetCombinationConfiguration(
-                scenarioBuilderType,
-                scenarioCombinationConfiguration);
 
             var buildRules = new List<ScenarioKey>();
 
             foreach (var scenarioContext in this.Contexts)
             {
-                if (combinationConfig.TryGetValue(
+                if (scenarioCombinationConfiguration.TryGetValue(
                     scenarioContext.Name,
                     out var scenarioBuilderName))
                 {
@@ -179,14 +138,14 @@ namespace Akira.TestTools.Scenarios
             this.AddKnownCombination(knownCombination);
         }
 
-        internal void ValidateScenarioConfigurationBuilder(
+        internal IDictionary<string, string> ValidateScenarioConfigurationBuilder(
             ScenarioBuilderType builderType,
             IDictionary<string, string> scenarioCombinationConfiguration)
         {
             this.ValidateScenarioCombinationConfigurationKeys(
                 scenarioCombinationConfiguration);
 
-            this.ValidateCombinationConfigurationBuilderValues(
+            return this.ValidateCombinationConfigurationBuilderValues(
                 builderType,
                 scenarioCombinationConfiguration);
         }
@@ -246,52 +205,6 @@ namespace Akira.TestTools.Scenarios
             {
                 this.HasAlwaysInvalidKnownScenario = true;
             }
-        }
-
-        private IDictionary<string, string> GetCombinationConfiguration(
-            ScenarioBuilderType scenarioBuilderType,
-            IDictionary<string, string> scenarioCombinationConfiguration)
-        {
-            if (scenarioBuilderType == ScenarioBuilderType.All)
-            {
-                if (scenarioCombinationConfiguration != null)
-                {
-                    return new Dictionary<string, string>(scenarioCombinationConfiguration);
-                }
-
-                return new Dictionary<string, string>();
-            }
-
-            var knownCombinationList = scenarioBuilderType == ScenarioBuilderType.ValidOnly
-                ? this.AlwaysValidKnownScenarios
-                : this.AlwaysInvalidKnownScenarios;
-
-            var randomIndex = 0;
-
-            if (knownCombinationList.Count > 1)
-            {
-                randomIndex = this.Random.Next(knownCombinationList.Count);
-            }
-
-            var combinationConfiguration = knownCombinationList[randomIndex].ScenariosKeys
-                .ToDictionary(
-                    kv => kv.ContextName,
-                    kv => kv.ScenarioName);
-
-            if (scenarioCombinationConfiguration != null)
-            {
-                foreach (var configuration in scenarioCombinationConfiguration)
-                {
-                    if (!combinationConfiguration.ContainsKey(configuration.Key))
-                    {
-                        combinationConfiguration.Add(
-                            configuration.Key,
-                            configuration.Value);
-                    }
-                }
-            }
-
-            return combinationConfiguration;
         }
 
         /// <summary>
@@ -415,7 +328,7 @@ namespace Akira.TestTools.Scenarios
             }
         }
 
-        private void ValidateCombinationConfigurationBuilderValues(
+        private IDictionary<string, string> ValidateCombinationConfigurationBuilderValues(
             ScenarioBuilderType scenarioCombinationType,
             IDictionary<string, string> scenarioCombinationConfiguration)
         {
@@ -433,12 +346,18 @@ namespace Akira.TestTools.Scenarios
                     }
                 });
 
-            if (scenarioCombinationType != ScenarioBuilderType.All)
+            if (scenarioCombinationType == ScenarioBuilderType.All)
             {
-                this.ValidateParentScenarioCombinationBuilderConfiguration(
-                    scenarioCombinationType,
-                    parentGroupsRegex);
+                return scenarioCombinationConfiguration;
             }
+
+            var compatiblesCombinations = this.ValidateParentScenarioCombinationBuilderConfiguration(
+                scenarioCombinationType,
+                parentGroupsRegex);
+
+            return this.GetCompatibleScenarioCombinationConfiguration(
+                compatiblesCombinations,
+                scenarioCombinationConfiguration);
         }
 
         private KnownCombination ValidateKnownCombinationConfigurationBuilderValues(
@@ -487,32 +406,52 @@ namespace Akira.TestTools.Scenarios
             return knownCombination;
         }
 
-        private void ValidateParentScenarioCombinationBuilderConfiguration(
+        private List<KnownCombination> ValidateParentScenarioCombinationBuilderConfiguration(
             ScenarioBuilderType scenarioCombinationType,
             string parentGroupsRegex)
         {
+            var compatiblesCombinations = new List<KnownCombination>();
+
             var parentsRegex = Keys.GetKeyRegex(parentGroupsRegex);
 
+            var allowedCombinationType = scenarioCombinationType == ScenarioBuilderType.ValidOnly
+                ? ScenarioCombinationType.AlwaysValid
+                : ScenarioCombinationType.AlwaysInvalid;
             var disallowedCombinationType = scenarioCombinationType == ScenarioBuilderType.ValidOnly
                 ? ScenarioCombinationType.AlwaysInvalid
                 : ScenarioCombinationType.AlwaysValid;
 
-            var collisionKnownScenarios = this.knownCombinations
-                .Where(kv => parentsRegex.IsMatch(kv.Key) &&
-                    kv.Value.CombinationType == disallowedCombinationType)
-                .ToList();
-
-            if (collisionKnownScenarios.Count > 0)
+            foreach (var knownCombination in this.knownCombinations
+                .Where(kv =>
+                    (string.IsNullOrWhiteSpace(parentGroupsRegex) &&
+                     kv.Value.CombinationType == allowedCombinationType) ||
+                    (parentsRegex.IsMatch(kv.Key) &&
+                     kv.Value.CombinationType != ScenarioCombinationType.Unknown)))
             {
-                var firstConfig = collisionKnownScenarios.FirstOrDefault();
+                if (knownCombination.Value.CombinationType == disallowedCombinationType)
+                {
+                    throw new ArgumentException(
+                        string.Format(
+                            Errors.ScenarioCombinationConfigHasConflictWithKnownScenarioCombinationConfig,
+                            scenarioCombinationType,
+                            knownCombination.Key,
+                            knownCombination.Value.CombinationType));
+                }
+                else
+                {
+                    compatiblesCombinations.Add(knownCombination.Value);
+                }
+            }
 
+            if (compatiblesCombinations.Count == 0)
+            {
                 throw new ArgumentException(
                     string.Format(
-                        Errors.ScenarioCombinationConfigHasConflictWithKnownScenarioCombinationConfig,
-                        scenarioCombinationType,
-                        firstConfig.Key,
-                        firstConfig.Value.CombinationType));
+                        Errors.ScenarioCombinationConfigHasNoCompatibleKnownScenarioCombinationConfig,
+                        scenarioCombinationType));
             }
+
+            return compatiblesCombinations;
         }
 
         private void ValidateParentKnownScenarioCombinationConfiguration(
@@ -558,6 +497,35 @@ namespace Akira.TestTools.Scenarios
                         firstConfig.Key,
                         firstConfig.Value.CombinationType));
             }
+        }
+
+        private IDictionary<string, string> GetCompatibleScenarioCombinationConfiguration(
+            List<KnownCombination> compatiblesCombinations,
+            IDictionary<string, string> originalScenarioConfiguration)
+        {
+            var randomIndex = 0;
+
+            if (compatiblesCombinations.Count > 1)
+            {
+                randomIndex = this.Random.Next(compatiblesCombinations.Count);
+            }
+
+            var combinationConfiguration = compatiblesCombinations[randomIndex].ScenariosKeys
+                .ToDictionary(
+                    kv => kv.ContextName,
+                    kv => kv.ScenarioName);
+
+            foreach (var configuration in originalScenarioConfiguration)
+            {
+                if (!combinationConfiguration.ContainsKey(configuration.Key))
+                {
+                    combinationConfiguration.Add(
+                        configuration.Key,
+                        configuration.Value);
+                }
+            }
+
+            return combinationConfiguration;
         }
 
         #endregion Private Methods

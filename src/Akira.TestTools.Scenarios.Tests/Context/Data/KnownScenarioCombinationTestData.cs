@@ -5,7 +5,7 @@ using Akira.TestTools.Scenarios.Tests.Stubs;
 
 namespace Akira.TestTools.Scenarios.Tests.Context.Data
 {
-    public class AddKnownScenarioCombinationTestData
+    public class KnownScenarioCombinationTestData
     {
         private const string ScenarioContextTestName = nameof(ScenarioContextTestName);
 
@@ -73,7 +73,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 CaseNumber = 1,
                 CaseDescription = "Add Known Scenario Combination with 2 Configurations - Unknown",
                 TestedAction = () => GetCompletedScenarioBuilderFaker()
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
@@ -86,7 +86,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 CaseNumber = 2,
                 CaseDescription = "Add Known Scenario Combination with 3 Configurations - Unknown",
                 TestedAction = () => GetCompletedScenarioBuilderFaker()
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
@@ -100,7 +100,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 CaseNumber = 3,
                 CaseDescription = "Add Known Scenario Combination with 4 Configurations - Unknown",
                 TestedAction = () => GetCompletedScenarioBuilderFaker()
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
@@ -115,7 +115,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 CaseNumber = 4,
                 CaseDescription = "Add Known Scenario Combination with 5 Configurations - Unknown",
                 TestedAction = () => GetCompletedScenarioBuilderFaker()
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
@@ -131,7 +131,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 CaseNumber = 5,
                 CaseDescription = "Add Known Scenario Combination with 6 Configurations - Unknown",
                 TestedAction = () => GetCompletedScenarioBuilderFaker()
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
@@ -148,20 +148,20 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 CaseNumber = 6,
                 CaseDescription = "Add Known Scenario Combination - Multiple Unknown",
                 TestedAction = () => GetCompletedScenarioBuilderFaker()
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameInvalid }
                         })
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameInvalid },
                             { ScenarioContextTestName2, ScenarioContextTestScenarioNameValid }
                         })
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
@@ -169,7 +169,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                             { ScenarioContextTestName2, ScenarioContextTestScenarioNameValid },
                             { ScenarioContextTestName3, ScenarioContextTestScenarioNameAlternative }
                         })
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
@@ -178,7 +178,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                             { ScenarioContextTestName3, ScenarioContextTestScenarioNameAlternative },
                             { ScenarioContextTestName4, ScenarioContextTestScenarioNameValid }
                         })
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
@@ -195,7 +195,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 CaseNumber = 7,
                 CaseDescription = "Add Known Scenario Combination - Multiple Unknown - Reverse order",
                 TestedAction = () => GetCompletedScenarioBuilderFaker()
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
@@ -205,7 +205,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                             { ScenarioContextTestName4, ScenarioContextTestScenarioNameValid },
                             { ScenarioContextTestName5, ScenarioContextTestScenarioNameInvalid }
                         })
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
@@ -214,7 +214,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                             { ScenarioContextTestName3, ScenarioContextTestScenarioNameAlternative },
                             { ScenarioContextTestName4, ScenarioContextTestScenarioNameValid }
                         })
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
@@ -222,14 +222,14 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                             { ScenarioContextTestName2, ScenarioContextTestScenarioNameValid },
                             { ScenarioContextTestName3, ScenarioContextTestScenarioNameAlternative }
                         })
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameInvalid },
                             { ScenarioContextTestName2, ScenarioContextTestScenarioNameValid }
                         })
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
@@ -242,7 +242,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 CaseNumber = 8,
                 CaseDescription = "Add Known Scenario Combination - Multiple Unknown - Without order",
                 TestedAction = () => GetCompletedScenarioBuilderFaker()
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
@@ -251,14 +251,14 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                             { ScenarioContextTestName3, ScenarioContextTestScenarioNameAlternative },
                             { ScenarioContextTestName4, ScenarioContextTestScenarioNameValid }
                         })
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameInvalid },
                             { ScenarioContextTestName2, ScenarioContextTestScenarioNameValid }
                         })
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
@@ -266,7 +266,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                             { ScenarioContextTestName2, ScenarioContextTestScenarioNameValid },
                             { ScenarioContextTestName3, ScenarioContextTestScenarioNameAlternative }
                         })
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
@@ -276,7 +276,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                             { ScenarioContextTestName4, ScenarioContextTestScenarioNameValid },
                             { ScenarioContextTestName5, ScenarioContextTestScenarioNameInvalid }
                         })
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
@@ -289,7 +289,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 CaseNumber = 9,
                 CaseDescription = "Add Known Scenario Combination - Multiple Unknown - With Always Valid Scenarios",
                 TestedAction = () => GetCompletedScenarioBuilderFaker(true)
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioInvalidName },
@@ -298,14 +298,14 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                             { ScenarioContextTestName3, ScenarioContextTestScenarioNameAlternative },
                             { ScenarioContextTestName4, ScenarioContextTestScenarioNameInvalid }
                         })
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioInvalidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameInvalid },
                             { ScenarioContextTestName2, ScenarioContextTestScenarioNameInvalid }
                         })
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioInvalidName },
@@ -313,7 +313,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                             { ScenarioContextTestName2, ScenarioContextTestScenarioNameInvalid },
                             { ScenarioContextTestName3, ScenarioContextTestScenarioNameAlternative }
                         })
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioInvalidName },
@@ -323,7 +323,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                             { ScenarioContextTestName4, ScenarioContextTestScenarioNameInvalid },
                             { ScenarioContextTestName5, ScenarioContextTestScenarioNameInvalid }
                         })
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioInvalidName },
@@ -336,7 +336,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 CaseNumber = 10,
                 CaseDescription = "Add Known Scenario Combination - Multiple Unknown - With Always Invalid Scenarios",
                 TestedAction = () => GetCompletedScenarioBuilderFaker(false, true)
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
@@ -345,14 +345,14 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                             { ScenarioContextTestName3, ScenarioContextTestScenarioNameAlternative },
                             { ScenarioContextTestName4, ScenarioContextTestScenarioNameValid }
                         })
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameValid },
                             { ScenarioContextTestName2, ScenarioContextTestScenarioNameValid }
                         })
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
@@ -360,7 +360,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                             { ScenarioContextTestName2, ScenarioContextTestScenarioNameValid },
                             { ScenarioContextTestName3, ScenarioContextTestScenarioNameAlternative }
                         })
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
@@ -370,7 +370,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                             { ScenarioContextTestName4, ScenarioContextTestScenarioNameValid },
                             { ScenarioContextTestName5, ScenarioContextTestScenarioNameValid }
                         })
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
@@ -383,25 +383,25 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 CaseNumber = 11,
                 CaseDescription = "Add Known Scenario Combination - Multiple Unknown - With Always Valid and Invalid Scenarios",
                 TestedAction = () => GetCompletedScenarioBuilderFaker(true, true)
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName3, ScenarioContextTestScenarioNameAlternative }
                         })
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioInvalidName },
                             { ScenarioContextTestName4, ScenarioContextTestScenarioNameAlternative }
                         })
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName5, ScenarioContextTestScenarioNameAlternative }
                         })
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { ScenarioContextTestName5, ScenarioContextTestScenarioNameAlternative },
@@ -419,7 +419,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 CaseNumber = 1,
                 CaseDescription = "Add Known Scenario Combination for a Faker with only Default Scenario Context",
                 TestedAction = () => new ScenariosFaker<SimpleModel>()
-                    .AddKnownScenarioCombination(null),
+                    .KnownScenarioCombination(null),
                 ExpectedExceptionMessage = Errors.ScenarioFakerWithNoAdditionalScenariosForKnownScenarioCombinationConfig
             };
 
@@ -436,7 +436,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .Scenario(
                         ScenarioContextTestScenarioNameValid,
                         scenarioRuleSet => scenarioRuleSet.Ignore(m => m.Total))
-                    .AddKnownScenarioCombination(null),
+                    .KnownScenarioCombination(null),
                 ExpectedExceptionMessage = Errors.KnownScenarioCombinationConfigNotSet
             };
 
@@ -453,7 +453,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .Scenario(
                         ScenarioContextTestScenarioNameValid,
                         scenarioRuleSet => scenarioRuleSet.Ignore(m => m.Total))
-                    .AddKnownScenarioCombination(new Dictionary<string, string>()),
+                    .KnownScenarioCombination(new Dictionary<string, string>()),
                 ExpectedExceptionMessage = Errors.KnownScenarioCombinationConfigNotSet
             };
 
@@ -470,7 +470,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .Scenario(
                         ScenarioContextTestScenarioNameValid,
                         scenarioRuleSet => scenarioRuleSet.Ignore(m => m.Total))
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { ScenarioContextTestName, ScenarioContextTestUnknownScenarioName }
@@ -491,7 +491,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .Scenario(
                         ScenarioContextTestScenarioNameValid,
                         scenarioRuleSet => scenarioRuleSet.Ignore(m => m.Total))
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { ScenarioContextTestName, ScenarioContextTestUnknownScenarioName },
@@ -515,7 +515,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .Scenario(
                         ScenarioContextTestScenarioNameValid,
                         scenarioRuleSet => scenarioRuleSet.Ignore(m => m.Total))
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Scenariocontexttestname, ScenarioContextTestUnknownScenarioName },
@@ -542,7 +542,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .Scenario(
                         ScenarioContextTestScenarioNameInvalid,
                         scenarioRuleSet => scenarioRuleSet.Ignore(m => m.Total))
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, ScenarioContextTestUnknownScenarioName },
@@ -570,7 +570,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .Scenario(
                         ScenarioContextTestScenarioNameInvalid,
                         scenarioRuleSet => scenarioRuleSet.Ignore(m => m.Total))
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
@@ -594,13 +594,13 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 CaseNumber = 1,
                 CaseDescription = "Add Known Scenario Combination - Scenario Collision - Unknown Scenarios - 2 Scenarios",
                 TestedAction = () => GetCompletedScenarioBuilderFaker()
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameInvalid }
                         })
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
@@ -621,13 +621,13 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 CaseNumber = 2,
                 CaseDescription = "Add Known Scenario Combination - Scenario Collision - Unknown Scenarios - 2 Scenarios - case insensitive",
                 TestedAction = () => GetCompletedScenarioBuilderFaker()
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameInvalid }
                         })
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
@@ -649,14 +649,14 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 CaseNumber = 3,
                 CaseDescription = "Add Known Scenario Combination - Scenario Collision - Unknown Scenarios - 3 Scenarios",
                 TestedAction = () => GetCompletedScenarioBuilderFaker()
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameInvalid },
                             { ScenarioContextTestName2, ScenarioContextTestScenarioNameValid }
                         })
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
@@ -680,7 +680,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 CaseNumber = 4,
                 CaseDescription = "Add Known Scenario Combination - Scenario Collision - Unknown Scenarios - 4 Scenarios",
                 TestedAction = () => GetCompletedScenarioBuilderFaker()
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
@@ -688,7 +688,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                             { ScenarioContextTestName2, ScenarioContextTestScenarioNameValid },
                             { ScenarioContextTestName3, ScenarioContextTestScenarioNameAlternative }
                         })
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
@@ -714,7 +714,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 CaseNumber = 5,
                 CaseDescription = "Add Known Scenario Combination - Scenario Collision - Unknown Scenarios - 5 Scenarios",
                 TestedAction = () => GetCompletedScenarioBuilderFaker()
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
@@ -723,7 +723,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                             { ScenarioContextTestName3, ScenarioContextTestScenarioNameAlternative },
                             { ScenarioContextTestName4, ScenarioContextTestScenarioNameValid }
                         })
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
@@ -751,7 +751,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 CaseNumber = 6,
                 CaseDescription = "Add Known Scenario Combination - Scenario Collision - Unknown Scenarios - 6 Scenarios",
                 TestedAction = () => GetCompletedScenarioBuilderFaker()
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
@@ -761,7 +761,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                             { ScenarioContextTestName4, ScenarioContextTestScenarioNameValid },
                             { ScenarioContextTestName5, ScenarioContextTestScenarioNameInvalid }
                         })
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
@@ -786,13 +786,13 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 CaseNumber = 7,
                 CaseDescription = "Add Known Scenario Combination - Scenario Collision - Same with Last as Always Valid Scenario",
                 TestedAction = () => GetCompletedScenarioBuilderFaker()
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameInvalid }
                         })
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
@@ -814,13 +814,13 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 CaseNumber = 8,
                 CaseDescription = "Add Known Scenario Combination - Scenario Collision - Same with Last as Always Invalid Scenario",
                 TestedAction = () => GetCompletedScenarioBuilderFaker()
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameValid }
                         })
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
@@ -842,14 +842,14 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 CaseNumber = 9,
                 CaseDescription = "Add Known Scenario Combination - Scenario Collision - Same Always Valid Scenario",
                 TestedAction = () => GetCompletedScenarioBuilderFaker()
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameInvalid }
                         },
                         ScenarioCombinationType.AlwaysValid)
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
@@ -871,14 +871,14 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 CaseNumber = 10,
                 CaseDescription = "Add Known Scenario Combination - Scenario Collision - Same Always Invalid Scenario",
                 TestedAction = () => GetCompletedScenarioBuilderFaker()
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameValid }
                         },
                         ScenarioCombinationType.AlwaysInvalid)
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
@@ -896,7 +896,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 CaseNumber = 11,
                 CaseDescription = "Add Known Scenario Combination - Scenario Collision - Scenarios Always Valid - Last of 2",
                 TestedAction = () => GetCompletedScenarioBuilderFaker(true)
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
@@ -913,7 +913,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 CaseNumber = 12,
                 CaseDescription = "Add Known Scenario Combination - Scenario Collision - Scenarios Always Valid - Last of 3",
                 TestedAction = () => GetCompletedScenarioBuilderFaker(true)
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
@@ -932,7 +932,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 CaseNumber = 13,
                 CaseDescription = "Add Known Scenario Combination - Scenario Collision - Scenarios Always Valid - Last of 4",
                 TestedAction = () => GetCompletedScenarioBuilderFaker(true)
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
@@ -951,7 +951,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 CaseNumber = 14,
                 CaseDescription = "Add Known Scenario Combination - Scenario Collision - Scenarios Always Valid - Last of 5",
                 TestedAction = () => GetCompletedScenarioBuilderFaker(true)
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
@@ -972,7 +972,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 CaseNumber = 15,
                 CaseDescription = "Add Known Scenario Combination - Scenario Collision - Scenarios Always Valid - Last of 6",
                 TestedAction = () => GetCompletedScenarioBuilderFaker(true)
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
@@ -994,7 +994,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 CaseNumber = 16,
                 CaseDescription = "Add Known Scenario Combination - Scenario Collision - Scenarios Always Invalid - Last of 2",
                 TestedAction = () => GetCompletedScenarioBuilderFaker(false, true)
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
@@ -1011,7 +1011,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 CaseNumber = 17,
                 CaseDescription = "Add Known Scenario Combination - Scenario Collision - Scenarios Always Invalid - Last of 3",
                 TestedAction = () => GetCompletedScenarioBuilderFaker(false, true)
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
@@ -1030,7 +1030,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 CaseNumber = 18,
                 CaseDescription = "Add Known Scenario Combination - Scenario Collision - Scenarios Always Invalid - Last of 4",
                 TestedAction = () => GetCompletedScenarioBuilderFaker(false, true)
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
@@ -1049,7 +1049,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 CaseNumber = 19,
                 CaseDescription = "Add Known Scenario Combination - Scenario Collision - Scenarios Always Invalid - Last of 5",
                 TestedAction = () => GetCompletedScenarioBuilderFaker(false, true)
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
@@ -1070,7 +1070,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 CaseNumber = 20,
                 CaseDescription = "Add Known Scenario Combination - Scenario Collision - Scenarios Always Invalid - Last of 6",
                 TestedAction = () => GetCompletedScenarioBuilderFaker(false, true)
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
@@ -1092,7 +1092,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 CaseNumber = 21,
                 CaseDescription = "Add Known Scenario Combination - Scenario Collision - Scenarios Always Valid and Invalid - Last of 2",
                 TestedAction = () => GetCompletedScenarioBuilderFaker(true, true)
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
@@ -1109,7 +1109,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 CaseNumber = 22,
                 CaseDescription = "Add Known Scenario Combination - Scenario Collision - Scenarios Always Valid and Invalid - Last of 3",
                 TestedAction = () => GetCompletedScenarioBuilderFaker(true, true)
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
@@ -1128,7 +1128,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 CaseNumber = 23,
                 CaseDescription = "Add Known Scenario Combination - Scenario Collision - Scenarios Always Valid and Invalid - Last of 4",
                 TestedAction = () => GetCompletedScenarioBuilderFaker(true, true)
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
@@ -1147,7 +1147,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 CaseNumber = 24,
                 CaseDescription = "Add Known Scenario Combination - Scenario Collision - Scenarios Always Valid and Invalid - Last of 5",
                 TestedAction = () => GetCompletedScenarioBuilderFaker(true, true)
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
@@ -1168,7 +1168,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 CaseNumber = 25,
                 CaseDescription = "Add Known Scenario Combination - Scenario Collision - Scenarios Always Valid and Invalid - Last of 6",
                 TestedAction = () => GetCompletedScenarioBuilderFaker(true, true)
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
@@ -1194,14 +1194,14 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 CaseNumber = 26,
                 CaseDescription = "Add Known Scenario Combination - Scenario Collision - Scenarios Unknown - Multiple combination",
                 TestedAction = () => GetCompletedScenarioBuilderFaker()
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { ScenarioContextTestName2, ScenarioContextTestScenarioNameAlternative },
                             { ScenarioContextTestName5, ScenarioContextTestScenarioNameAlternative }
                         },
                         ScenarioCombinationType.AlwaysValid)
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameAlternative },
@@ -1227,7 +1227,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 CaseNumber = 27,
                 CaseDescription = "Add Known Scenario Combination - Scenario Collision - Scenarios Unknown - Multiple combination",
                 TestedAction = () => GetCompletedScenarioBuilderFaker()
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameAlternative },
@@ -1236,7 +1236,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                             { ScenarioContextTestName5, ScenarioContextTestScenarioNameAlternative }
                         },
                         ScenarioCombinationType.AlwaysValid)
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { ScenarioContextTestName2, ScenarioContextTestScenarioNameAlternative },
@@ -1259,7 +1259,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 CaseNumber = 28,
                 CaseDescription = "Add Known Scenario Combination - Scenario Collision - Scenarios Unknown - Multiple combination",
                 TestedAction = () => GetCompletedScenarioBuilderFaker()
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameAlternative },
@@ -1267,7 +1267,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                             { ScenarioContextTestName5, ScenarioContextTestScenarioNameAlternative }
                         },
                         ScenarioCombinationType.AlwaysInvalid)
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameAlternative },
@@ -1295,7 +1295,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 CaseNumber = 29,
                 CaseDescription = "Add Known Scenario Combination - Scenario Collision - Scenarios Unknown - Multiple combination",
                 TestedAction = () => GetCompletedScenarioBuilderFaker()
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameAlternative },
@@ -1304,7 +1304,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                             { ScenarioContextTestName4, ScenarioContextTestScenarioNameAlternative },
                             { ScenarioContextTestName5, ScenarioContextTestScenarioNameAlternative }
                         })
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameAlternative },
@@ -1328,7 +1328,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 CaseNumber = 30,
                 CaseDescription = "Add Known Scenario Combination - Scenario Collision - Scenarios Unknown - Multiple combination",
                 TestedAction = () => GetCompletedScenarioBuilderFaker()
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameAlternative },
@@ -1336,7 +1336,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                             { ScenarioContextTestName5, ScenarioContextTestScenarioNameAlternative }
                         },
                         ScenarioCombinationType.AlwaysInvalid)
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameAlternative },
@@ -1361,7 +1361,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 CaseNumber = 31,
                 CaseDescription = "Add Known Scenario Combination - Scenario Collision - Scenarios Unknown - Multiple combination",
                 TestedAction = () => GetCompletedScenarioBuilderFaker()
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameAlternative },
@@ -1370,7 +1370,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                             { ScenarioContextTestName5, ScenarioContextTestScenarioNameAlternative }
                         },
                         ScenarioCombinationType.AlwaysInvalid)
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameAlternative },
@@ -1393,14 +1393,14 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 CaseNumber = 32,
                 CaseDescription = "Add Known Scenario Combination - Scenario Collision - Scenarios Unknown - Multiple combination",
                 TestedAction = () => GetCompletedScenarioBuilderFaker()
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName5, ScenarioContextTestScenarioNameAlternative }
                         },
                         ScenarioCombinationType.AlwaysValid)
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
@@ -1429,7 +1429,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 CaseNumber = 33,
                 CaseDescription = "Add Known Scenario Combination - Scenario Collision - Scenarios Unknown - Multiple combination",
                 TestedAction = () => GetCompletedScenarioBuilderFaker()
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
@@ -1440,7 +1440,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                             { ScenarioContextTestName5, ScenarioContextTestScenarioNameAlternative }
                         },
                         ScenarioCombinationType.Unknown)
-                    .AddKnownScenarioCombination(
+                    .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },

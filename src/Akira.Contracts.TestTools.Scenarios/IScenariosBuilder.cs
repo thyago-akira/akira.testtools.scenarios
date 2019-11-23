@@ -64,7 +64,7 @@ namespace Akira.Contracts.TestTools.Scenarios
         /// Indicates if the Current Scenario will be <see cref="ScenarioCombinationType.Unknown"/>, <see cref="ScenarioCombinationType.AlwaysValid"/> or <see cref="ScenarioCombinationType.AlwaysInvalid"/>
         /// </param>
         /// <returns>Returns the current instance of the <see cref="IScenariosBuilder{T}" /> (fluent interface)</returns>
-        IScenariosBuilder<T> AddKnownScenarioCombination(
+        IScenariosBuilder<T> KnownScenarioCombination(
             IDictionary<string, string> scenarioCombinationConfiguration,
             ScenarioCombinationType scenarioCombinatioType = ScenarioCombinationType.Unknown);
 
