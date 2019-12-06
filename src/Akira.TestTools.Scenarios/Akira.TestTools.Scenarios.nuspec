@@ -2,13 +2,13 @@
 <package>
   <metadata>
     <id>$id$</id>
+    <title>$id$</title>
     <version>$version$</version>
-    <title>$title$</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
-    <projectUrl>https://github.com/thyago-akira/akira.testtools.scenarios.git</projectUrl>
+    <projectUrl>$projecturl$</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <copyright>Copyright 2019</copyright>
+    <copyright>$copyright$</copyright>
   </metadata>
 </package>
