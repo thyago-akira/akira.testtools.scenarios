@@ -25,7 +25,7 @@ namespace Akira.TestTools.Scenarios
 
         #region Properties
 
-        private ScenarioContext CurrentContext => this.scenarioContexts.CurrentScenarioContext;
+        public ulong CountPossibleScenariosCombinations => this.scenarioContexts.CountPossibleScenariosCombinations;
 
         #endregion Properties
 
@@ -299,7 +299,7 @@ namespace Akira.TestTools.Scenarios
         {
             this.ValidateAction(action);
 
-            var scenarioKey = this.CurrentContext.AddScenario(
+            var scenarioKey = this.scenarioContexts.AddScenario(
                 hasDefaultScenarioContext,
                 scenarioName,
                 scenarioType);

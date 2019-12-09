@@ -7,6 +7,11 @@ namespace Akira.Contracts.TestTools.Scenarios
         where T : class
     {
         /// <summary>
+        /// Indicates the number of possible scenarios for the current scenarios builder
+        /// </summary>
+        ulong CountPossibleScenariosCombinations { get; }
+
+        /// <summary>
         /// Add a new Scenario Context to the <see cref="IScenariosBuilder{T}" />
         /// </summary>
         /// <param name="scenarioContextName">The name of new scenario context. Must be unique.</param>

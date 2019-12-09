@@ -33,6 +33,8 @@ namespace Akira.TestTools.Scenarios
 
         #region Properties
 
+        internal ulong CountPossibleScenariosCombinations { get; private set; } = 1;
+
         internal ScenarioContext CurrentScenarioContext { get; private set; }
 
         internal bool HasAlwaysValidKnownScenario { get; private set; }
@@ -87,6 +89,41 @@ namespace Akira.TestTools.Scenarios
         internal void Add(string scenarioContextName)
         {
             this.Add(scenarioContextName, true);
+        }
+
+        /// <summary>
+        /// Validate the Scenario and returns the Scenario Key
+        /// </summary>
+        /// <param name="hasDefaultScenarioContext">
+        /// Flag that indicates if the method was called by a Default Scenario Context method (true)
+        /// or a Custom Scenario Context method (false)
+        /// </param>
+        /// <param name="scenarioName">Indicates the name of the Scenario</param>
+        /// <param name="scenarioType">
+        /// Indicates if the Current Scenario will be <see cref="ScenarioCombinationType.Unknown"/>, <see cref="ScenarioCombinationType.AlwaysValid"/> or <see cref="ScenarioCombinationType.AlwaysInvalid"/>
+        /// </param>
+        /// <returns>The Scenario Key</returns>
+        internal ScenarioKey AddScenario(
+            bool hasDefaultScenarioContext,
+            string scenarioName,
+            ScenarioCombinationType scenarioType)
+        {
+            var scenarioKey = this.CurrentScenarioContext.AddScenario(
+                hasDefaultScenarioContext,
+                scenarioName,
+                scenarioType);
+
+            if (this.CurrentScenarioContext.ScenariosCount > 1)
+            {
+                if (this.CurrentScenarioContext.ScenariosCount > 2)
+                {
+                    this.CountPossibleScenariosCombinations /= (ulong)(this.CurrentScenarioContext.ScenariosCount - 1);
+                }
+
+                this.CountPossibleScenariosCombinations *= (ulong)this.CurrentScenarioContext.ScenariosCount;
+            }
+
+            return scenarioKey;
         }
 
         internal IEnumerable<ScenarioKey> GetFullScenarioBuilderRules(
