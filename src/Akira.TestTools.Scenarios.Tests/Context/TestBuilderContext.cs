@@ -8,6 +8,8 @@ namespace Akira.TestTools.Scenarios.Tests.Context
     {
         public Func<IScenariosBuilder<SimpleModel>> GetFaker { get; set; }
 
+        public ulong ExpectedCountPossibleScenariosCombinations { get; set; }
+
         public int ExpectedCountValidOnly { get; set; }
 
         public int ExpectedCountInvalidOnly { get; set; }
