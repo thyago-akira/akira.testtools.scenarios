@@ -7,7 +7,7 @@ namespace Akira.Contracts.TestTools.Scenarios
         where T : class
     {
         /// <summary>
-        /// Indicates the number of possible scenarios for the current scenarios builder
+        /// Gets the number of possible scenarios for the current scenarios builder
         /// </summary>
         ulong CountPossibleScenariosCombinations { get; }
 
