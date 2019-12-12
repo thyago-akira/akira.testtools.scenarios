@@ -24,6 +24,8 @@ namespace Akira.TestTools.Scenarios
             this.scenarios = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
         }
 
+        internal int ScenariosCount => this.scenarios.Count;
+
         internal bool IsCurrentScenarioContextDefaultContext => this.Index == 1;
 
         internal string Name { get; private set; }

@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <Authors>Thyago Akira</Authors>
     <Description>Contracts definition for the TestTool Scenarios Builder</Description>
-    <Version>0.1.0</Version>
+    <Version>0.1.1</Version>
     <PackageLicenseFile></PackageLicenseFile>
     <PackageProjectUrl>https://github.com/thyago-akira/akira.testtools.scenarios.git</PackageProjectUrl>
     <Copyright>Copyright 2019</Copyright>
@@ -20,7 +20,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Bogus" Version="28.4.1" />
+    <PackageReference Include="Bogus" Version="28.4.4" />
   </ItemGroup>
 
 </Project>

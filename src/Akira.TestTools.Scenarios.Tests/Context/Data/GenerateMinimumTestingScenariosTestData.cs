@@ -17,6 +17,12 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
 
         private const string ScenarioTestNameAlternative2 = nameof(ScenarioTestNameAlternative2);
 
+        private const string ScenarioTestNameAlternative3 = nameof(ScenarioTestNameAlternative3);
+
+        private const string ScenarioTestNameAlternative4 = nameof(ScenarioTestNameAlternative4);
+
+        private const string ScenarioTestNameAlternative5 = nameof(ScenarioTestNameAlternative5);
+
         internal enum TestDataType
         {
             /// <summary>
@@ -53,6 +59,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                             .Ignore(f => f.Id)
                             .Ignore(f => f.Name)
                             .Ignore(f => f.Total)),
+                ExpectedCountPossibleScenariosCombinations = 2,
                 ExpectedCountAll = 4,
                 ExpectedCountValidOnly = 0,
                 ExpectedCountInvalidOnly = 0
@@ -74,6 +81,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                             .Ignore(f => f.Id)
                             .Ignore(f => f.Name)
                             .Ignore(f => f.Total)),
+                ExpectedCountPossibleScenariosCombinations = 2,
                 ExpectedCountAll = 4,
                 ExpectedCountValidOnly = 1,
                 ExpectedCountInvalidOnly = 0
@@ -95,6 +103,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                             .Ignore(f => f.Name)
                             .Ignore(f => f.Total),
                         ScenarioCombinationType.AlwaysInvalid),
+                ExpectedCountPossibleScenariosCombinations = 2,
                 ExpectedCountAll = 4,
                 ExpectedCountValidOnly = 0,
                 ExpectedCountInvalidOnly = 1
@@ -117,6 +126,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                             .Ignore(f => f.Name)
                             .Ignore(f => f.Total),
                         ScenarioCombinationType.AlwaysInvalid),
+                ExpectedCountPossibleScenariosCombinations = 2,
                 ExpectedCountAll = 4,
                 ExpectedCountValidOnly = 1,
                 ExpectedCountInvalidOnly = 1
@@ -144,6 +154,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .Scenario(
                         ScenarioTestNameAlternative,
                         scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id)),
+                ExpectedCountPossibleScenariosCombinations = 4,
                 ExpectedCountAll = 6,
                 ExpectedCountValidOnly = 0,
                 ExpectedCountInvalidOnly = 0
@@ -173,6 +184,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .Scenario(
                         ScenarioTestNameAlternative,
                         scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id)),
+                ExpectedCountPossibleScenariosCombinations = 4,
                 ExpectedCountAll = 6,
                 ExpectedCountValidOnly = 0,
                 ExpectedCountInvalidOnly = 2
@@ -202,6 +214,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .Scenario(
                         ScenarioTestNameAlternative,
                         scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id)),
+                ExpectedCountPossibleScenariosCombinations = 4,
                 ExpectedCountAll = 6,
                 ExpectedCountValidOnly = 2,
                 ExpectedCountInvalidOnly = 0
@@ -232,6 +245,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                         ScenarioTestNameAlternative,
                         scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id),
                         ScenarioCombinationType.AlwaysInvalid),
+                ExpectedCountPossibleScenariosCombinations = 4,
                 ExpectedCountAll = 6,
                 ExpectedCountValidOnly = 2,
                 ExpectedCountInvalidOnly = 1
@@ -269,6 +283,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .Scenario(
                         ScenarioTestNameAlternative2,
                         scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Total)),
+                ExpectedCountPossibleScenariosCombinations = 12,
                 ExpectedCountAll = 9,
                 ExpectedCountValidOnly = 0,
                 ExpectedCountInvalidOnly = 0
@@ -309,6 +324,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                         ScenarioTestNameAlternative2,
                         scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Total),
                         ScenarioCombinationType.AlwaysInvalid),
+                ExpectedCountPossibleScenariosCombinations = 12,
                 ExpectedCountAll = 9,
                 ExpectedCountValidOnly = 0,
                 ExpectedCountInvalidOnly = 3
@@ -350,6 +366,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                         ScenarioTestNameAlternative2,
                         scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Total),
                         ScenarioCombinationType.AlwaysValid),
+                ExpectedCountPossibleScenariosCombinations = 12,
                 ExpectedCountAll = 9,
                 ExpectedCountValidOnly = 4,
                 ExpectedCountInvalidOnly = 0
@@ -393,6 +410,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                         ScenarioTestNameAlternative2,
                         scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Total),
                         ScenarioCombinationType.AlwaysValid),
+                ExpectedCountPossibleScenariosCombinations = 12,
                 ExpectedCountAll = 9,
                 ExpectedCountValidOnly = 4,
                 ExpectedCountInvalidOnly = 2
@@ -436,6 +454,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                             { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestNameAlternative, ScenarioTestName }
                         }),
+                ExpectedCountPossibleScenariosCombinations = 12,
                 ExpectedCountAll = 10,
                 ExpectedCountValidOnly = 0,
                 ExpectedCountInvalidOnly = 0
@@ -480,6 +499,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                             { ScenarioContextTestNameAlternative, ScenarioTestNameAlternative }
                         },
                         ScenarioCombinationType.AlwaysValid),
+                ExpectedCountPossibleScenariosCombinations = 12,
                 ExpectedCountAll = 10,
                 ExpectedCountValidOnly = 1,
                 ExpectedCountInvalidOnly = 0
@@ -524,6 +544,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                             { ScenarioContextTestNameAlternative, ScenarioTestNameAlternative }
                         },
                         ScenarioCombinationType.AlwaysInvalid),
+                ExpectedCountPossibleScenariosCombinations = 12,
                 ExpectedCountAll = 10,
                 ExpectedCountValidOnly = 0,
                 ExpectedCountInvalidOnly = 1
@@ -575,6 +596,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                             { ScenarioContextTestNameAlternative, ScenarioTestName }
                         },
                         ScenarioCombinationType.AlwaysValid),
+                ExpectedCountPossibleScenariosCombinations = 12,
                 ExpectedCountAll = 11,
                 ExpectedCountValidOnly = 1,
                 ExpectedCountInvalidOnly = 1
@@ -628,7 +650,83 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                             { ScenarioContextTestNameAlternative, ScenarioTestName }
                         },
                         ScenarioCombinationType.AlwaysValid),
+                ExpectedCountPossibleScenariosCombinations = 12,
                 ExpectedCountAll = 11,
+                ExpectedCountValidOnly = 2,
+                ExpectedCountInvalidOnly = 2
+            };
+
+            yield return new TestBuilderContext
+            {
+                CaseNumber = 18,
+                CaseDescription = "Custom Scenario Contexts",
+                GetFaker = () => new ScenariosFaker<SimpleModel>()
+                    .DefaultContextValidScenario(
+                        scenarioRuleSet => scenarioRuleSet
+                            .Ignore(f => f.Id)
+                            .Ignore(f => f.Name)
+                            .Ignore(f => f.Total),
+                        ScenarioCombinationType.AlwaysValid)
+                    .DefaultContextInvalidScenario(
+                        scenarioRuleSet => scenarioRuleSet
+                            .Ignore(f => f.Id)
+                            .Ignore(f => f.Name)
+                            .Ignore(f => f.Total),
+                        ScenarioCombinationType.AlwaysInvalid)
+                    .ScenarioContext(ScenarioContextTestNameAlternative)
+                    .Scenario(
+                        ScenarioTestName,
+                        scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Name))
+                    .Scenario(
+                        ScenarioTestNameAlternative,
+                        scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Name))
+                    .Scenario(
+                        ScenarioTestNameAlternative2,
+                        scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Name))
+                    .Scenario(
+                        ScenarioTestNameAlternative3,
+                        scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Name))
+                    .Scenario(
+                        ScenarioTestNameAlternative4,
+                        scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Name))
+                    .Scenario(
+                        ScenarioTestNameAlternative5,
+                        scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Name))
+                    .ScenarioContext(ScenarioContextTestName)
+                    .Scenario(
+                        ScenarioTestName,
+                        scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Total))
+                    .Scenario(
+                        ScenarioTestNameAlternative,
+                        scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Total))
+                    .Scenario(
+                        ScenarioTestNameAlternative2,
+                        scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Total))
+                    .Scenario(
+                        ScenarioTestNameAlternative3,
+                        scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Total))
+                    .Scenario(
+                        ScenarioTestNameAlternative4,
+                        scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Total))
+                    .Scenario(
+                        ScenarioTestNameAlternative5,
+                        scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Total))
+                    .KnownScenarioCombination(
+                        new Dictionary<string, string>
+                        {
+                            { ScenarioContextTestName, ScenarioTestName },
+                            { ScenarioContextTestNameAlternative, ScenarioTestNameAlternative }
+                        },
+                        ScenarioCombinationType.AlwaysInvalid)
+                    .KnownScenarioCombination(
+                        new Dictionary<string, string>
+                        {
+                            { ScenarioContextTestName, ScenarioTestName },
+                            { ScenarioContextTestNameAlternative, ScenarioTestName }
+                        },
+                        ScenarioCombinationType.AlwaysValid),
+                ExpectedCountPossibleScenariosCombinations = 72,
+                ExpectedCountAll = 18,
                 ExpectedCountValidOnly = 2,
                 ExpectedCountInvalidOnly = 2
             };
