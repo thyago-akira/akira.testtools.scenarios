@@ -24,6 +24,17 @@ namespace Akira.TestTools.Scenarios
             return this;
         }
 
+        public IScenarioRuleSet<T> RuleFor<TProperty>(
+            Expression<Func<T, TProperty>> property,
+            Func<T, TProperty> getValue)
+        {
+            _ = base.RuleFor(
+                property,
+                (f, t) => getValue(t));
+
+            return this;
+        }
+
         public new IScenarioRuleSet<T> RuleFor<TProperty>(
             Expression<Func<T, TProperty>> property,
             Func<TProperty> getValue)
@@ -42,28 +53,6 @@ namespace Akira.TestTools.Scenarios
             _ = base.RuleFor(
                 property,
                 value);
-
-            return this;
-        }
-
-        public new IScenarioRuleSet<T> RuleFor<TProperty>(
-            Expression<Func<T, TProperty>> property,
-            Func<Faker, T, TProperty> getValue)
-        {
-            _ = base.RuleFor(
-                property,
-                getValue);
-
-            return this;
-        }
-
-        public new IScenarioRuleSet<T> RuleFor<TProperty>(
-            Expression<Func<T, TProperty>> property,
-            Func<Faker, TProperty> getValue)
-        {
-            _ = base.RuleFor(
-                property,
-                getValue);
 
             return this;
         }
