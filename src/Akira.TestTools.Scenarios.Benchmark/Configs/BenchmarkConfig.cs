@@ -1,6 +1,7 @@
 ﻿using System;
 using Akira.Contracts.TestTools.Scenarios;
 using Akira.TestTools.Scenarios.Benchmark.Stubs;
+using Akira.TestTools.Scenarios.Extensions;
 using BenchmarkDotNet.Attributes;
 
 namespace Akira.TestTools.Scenarios.Benchmark.Configs

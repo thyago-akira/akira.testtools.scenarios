@@ -5,7 +5,7 @@
     <Authors>Thyago Akira</Authors>
     <Company>Thyago Akira</Company>
     <Description>Implementation for TestTools Scenarios Builder</Description>
-    <Version>0.1.1</Version>
+    <Version>0.2.0</Version>
     <Copyright>Copyright 2019</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/thyago-akira/akira.testtools.scenarios.git</PackageProjectUrl>
@@ -17,6 +17,10 @@
     <DebugType>none</DebugType>
     <DebugSymbols>false</DebugSymbols>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Bogus" Version="28.4.4" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Akira.Contracts.TestTools.Scenarios\Akira.Contracts.TestTools.Scenarios.csproj" />
