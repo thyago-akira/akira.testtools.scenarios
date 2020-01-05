@@ -3,6 +3,7 @@ using Akira.Contracts.TestTools.Scenarios;
 using Akira.TestTools.Scenarios.Benchmark.Stubs;
 using Akira.TestTools.Scenarios.Extensions;
 using BenchmarkDotNet.Attributes;
+using Bogus;
 
 namespace Akira.TestTools.Scenarios.Benchmark.Configs
 {
@@ -19,6 +20,16 @@ namespace Akira.TestTools.Scenarios.Benchmark.Configs
             Email = "test@test.com",
             CreditLimit = 0,
         };
+
+        private readonly Faker<Customer> originalFaker = new Faker<Customer>()
+            .RuleFor(x => x.Id, (f) => f.Random.Int(1))
+            .RuleFor(x => x.FirstName, (f) => f.Name.FirstName())
+            .RuleFor(x => x.MiddleName, (f) => f.Name.FirstName())
+            .RuleFor(x => x.LastName, (f) => f.Name.LastName())
+            .RuleFor(x => x.DateOfBirth, (f) => f.Date.Past(18, new DateTime(1900, 1, 1)))
+            .RuleFor(x => x.Gender, (f) => f.Random.Enum<Gender>())
+            .RuleFor(x => x.Email, (f) => f.Internet.Email())
+            .RuleFor(x => x.CreditLimit, (f) => f.Random.Int(0, 200000));
 
         private readonly IScenariosBuilder<Customer> simpleFaker = new ScenariosFaker<Customer>()
             .DefaultContextValidScenario(scenarioRuleset => scenarioRuleset
@@ -171,6 +182,9 @@ namespace Akira.TestTools.Scenarios.Benchmark.Configs
 
         [Benchmark]
         public void InstanceBuilderForLoop() => this.CreateInstancesInForLoop(this.Input, this.instanceBuilder);
+
+        [Benchmark]
+        public void OriginalFakerForLoop() => this.CreateInstancesInForLoop(this.Input, () => this.originalFaker.Generate());
 
         [Benchmark]
         public void SimpleFakerForLoop() => this.CreateInstancesInForLoop(this.Input, () => this.simpleFaker.Generate());

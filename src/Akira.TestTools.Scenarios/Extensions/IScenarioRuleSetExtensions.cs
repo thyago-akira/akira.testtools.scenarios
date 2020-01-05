@@ -7,7 +7,7 @@ namespace Akira.TestTools.Scenarios.Extensions
 {
     public static class IScenarioRuleSetExtensions
     {
-        private static readonly Faker faker = new Faker();
+        private static readonly Faker Faker = new Faker();
 
         public static IScenarioRuleSet<T> RuleFor<T, TProperty>(
             this IScenarioRuleSet<T> scenarioRuleSet,
@@ -25,7 +25,7 @@ namespace Akira.TestTools.Scenarios.Extensions
             {
                 _ = scenarioRuleSet.RuleFor(
                     property,
-                    t => getValue(IScenarioRuleSetExtensions.faker, t));
+                    t => getValue(Faker, t));
             }
 
             return scenarioRuleSet;
@@ -47,7 +47,7 @@ namespace Akira.TestTools.Scenarios.Extensions
             {
                 _ = scenarioRuleSet.RuleFor(
                     property,
-                    () => getValue(IScenarioRuleSetExtensions.faker));
+                    () => getValue(Faker));
             }
 
             return scenarioRuleSet;
