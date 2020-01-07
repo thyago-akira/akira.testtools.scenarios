@@ -5,7 +5,7 @@ using Bogus;
 
 namespace Akira.TestTools.Scenarios.Extensions
 {
-    public static class IScenarioRuleSetExtensions
+    public static class IScenarioRuleSetFakerExtensions
     {
         private static readonly Faker Faker = new Faker();
 

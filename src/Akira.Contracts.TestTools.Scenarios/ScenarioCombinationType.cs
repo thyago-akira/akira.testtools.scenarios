@@ -3,7 +3,8 @@
     public enum ScenarioCombinationType
     {
         /// <summary>
-        /// Default <see cref="ScenarioCombinationType"/>, indicates a Scenario that could Valid or Invalid
+        /// Default <see cref="ScenarioCombinationType"/>, indicates a Scenario that depends on the other scenarios configuration.
+        /// It could be Valid or Invalid
         /// </summary>
         Unknown = 0,
 

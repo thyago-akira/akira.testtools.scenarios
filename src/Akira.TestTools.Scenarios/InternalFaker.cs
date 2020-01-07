@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using Akira.Contracts.TestTools.Scenarios;
@@ -6,20 +7,19 @@ using Bogus;
 
 namespace Akira.TestTools.Scenarios
 {
-    [SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1126:PrefixCallsCorrectly", Justification = "All underscores are discards.")]
-    [SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1100:DoNotPrefixCallsWithBaseUnlessLocalImplementationExists", Justification = "There are new methods.")]
-    public class InternalFaker<T> : Faker<T>, IScenarioRuleSet<T>
+    public class InternalFaker<T> : IScenarioRuleSet<T>, ICompletedModelBuilder<T>
         where T : class
     {
-        public InternalFaker()
-        {
-            _ = this.StrictMode(true);
-        }
+        private readonly Faker<T> faker = new Faker<T>().StrictMode(true);
 
-        public new IScenarioRuleSet<T> Ignore<TProperty>(
+        public ScenarioCombinationType ModelBuilderType { get; }
+
+        public IDictionary<string, string> ModelBuilderScenariosConfiguration { get; }
+
+        public IScenarioRuleSet<T> Ignore<TProperty>(
             Expression<Func<T, TProperty>> propertyOrField)
         {
-            _ = base.Ignore(propertyOrField);
+            _ = this.faker.Ignore(propertyOrField);
 
             return this;
         }
@@ -28,33 +28,38 @@ namespace Akira.TestTools.Scenarios
             Expression<Func<T, TProperty>> property,
             Func<T, TProperty> getValue)
         {
-            _ = base.RuleFor(
+            _ = this.faker.RuleFor(
                 property,
                 (f, t) => getValue(t));
 
             return this;
         }
 
-        public new IScenarioRuleSet<T> RuleFor<TProperty>(
+        public IScenarioRuleSet<T> RuleFor<TProperty>(
             Expression<Func<T, TProperty>> property,
             Func<TProperty> getValue)
         {
-            _ = base.RuleFor(
+            _ = this.faker.RuleFor(
                 property,
                 getValue);
 
             return this;
         }
 
-        public new IScenarioRuleSet<T> RuleFor<TProperty>(
+        public IScenarioRuleSet<T> RuleFor<TProperty>(
             Expression<Func<T, TProperty>> property,
             TProperty value)
         {
-            _ = base.RuleFor(
+            _ = this.faker.RuleFor(
                 property,
                 value);
 
             return this;
+        }
+
+        public T Generate()
+        {
+            return this.faker.Generate();
         }
     }
 }

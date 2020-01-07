@@ -3,12 +3,12 @@
     public enum ScenarioBuilderType
     {
         /// <summary>
-        /// Valid Only Scenario: Those scenarios with only valid data
+        /// Valid Only Scenario: The builder will create models that contain <see cref="ScenarioCombinationType.AlwaysValid"/> scenarios
         /// </summary>
         ValidOnly = 2,
 
         /// <summary>
-        /// Invalid Only Scenario: Those scenarios with only invalid data
+        /// Invalid Only Scenario: The builder will create models that contain <see cref="ScenarioCombinationType.AlwaysInvalid"/> scenarios
         /// </summary>
         InvalidOnly = 4,
 
