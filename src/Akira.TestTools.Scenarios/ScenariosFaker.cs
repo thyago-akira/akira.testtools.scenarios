@@ -5,6 +5,7 @@ using System.Linq;
 using Akira.Contracts.TestTools.Scenarios;
 using Akira.TestTools.Scenarios.Constants;
 using Akira.TestTools.Scenarios.Extensions;
+using Akira.TestTools.Scenarios.InternalModels;
 
 namespace Akira.TestTools.Scenarios
 {

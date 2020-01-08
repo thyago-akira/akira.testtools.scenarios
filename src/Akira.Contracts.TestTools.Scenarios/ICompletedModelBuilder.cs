@@ -1,13 +1,13 @@
-﻿using System.Collections.Generic;
-
-namespace Akira.Contracts.TestTools.Scenarios
+﻿namespace Akira.Contracts.TestTools.Scenarios
 {
     public interface ICompletedModelBuilder<T>
         where T : class
     {
-        ScenarioCombinationType ModelBuilderType { get; }
+        // TODO:
+        //ScenarioCombinationType ModelBuilderType { get; }
 
-        IDictionary<string, string> ModelBuilderScenariosConfiguration { get; }
+        // TODO:
+        //IDictionary<string, string> ModelBuilderScenariosConfiguration { get; }
 
         T Generate();
     }

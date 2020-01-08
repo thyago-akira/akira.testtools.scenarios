@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Akira.Contracts.TestTools.Scenarios;
 using Akira.TestTools.Scenarios.Constants;
+using Akira.TestTools.Scenarios.InternalModels;
 
 namespace Akira.TestTools.Scenarios
 {
@@ -13,8 +14,7 @@ namespace Akira.TestTools.Scenarios
         private readonly Dictionary<string, ScenarioContext> contexts =
             new Dictionary<string, ScenarioContext>(StringComparer.OrdinalIgnoreCase);
 
-        private readonly Dictionary<string, KnownCombination> knownCombinations =
-            new Dictionary<string, KnownCombination>(StringComparer.OrdinalIgnoreCase);
+        private readonly KnownCombinationDictionary knownCombinations = new KnownCombinationDictionary();
 
         private int currentScenarioContextIndex;
 
@@ -227,9 +227,7 @@ namespace Akira.TestTools.Scenarios
         private void AddKnownCombination(
             KnownCombination knownCombination)
         {
-            this.knownCombinations.Add(
-                knownCombination.CombinationKey,
-                knownCombination);
+            this.knownCombinations.Add(knownCombination);
 
             if (knownCombination.CombinationType == ScenarioCombinationType.AlwaysValid &&
                 !this.HasAlwaysValidKnownScenario)
@@ -324,7 +322,7 @@ namespace Akira.TestTools.Scenarios
                 {
                     throw new ArgumentException(
                         string.Format(
-                            Errors.ScenarioCombinationConfigWithInvalidScenarioContext,
+                            Errors.KnownScenarioCombinationConfigWithInvalidScenarioContext,
                             builderContextName));
                 }
             }

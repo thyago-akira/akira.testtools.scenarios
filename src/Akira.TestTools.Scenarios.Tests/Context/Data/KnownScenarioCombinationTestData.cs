@@ -498,7 +498,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                             { ScenarioContextTestName3, ScenarioContextTestUnknownScenarioName }
                         }),
                 ExpectedExceptionMessage = string.Format(
-                    Errors.ScenarioCombinationConfigWithInvalidScenarioContext,
+                    Errors.KnownScenarioCombinationConfigWithInvalidScenarioContext,
                     ScenarioContextTestName)
             };
 
@@ -522,7 +522,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                             { ScenarioContextTestName3, ScenarioContextTestUnknownScenarioName }
                         }),
                 ExpectedExceptionMessage = string.Format(
-                    Errors.ScenarioCombinationConfigWithInvalidScenarioContext,
+                    Errors.KnownScenarioCombinationConfigWithInvalidScenarioContext,
                     Scenariocontexttestname)
             };
 

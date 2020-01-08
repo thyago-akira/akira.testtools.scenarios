@@ -2,17 +2,17 @@
 using System.Linq;
 using Akira.Contracts.TestTools.Scenarios;
 
-namespace Akira.TestTools.Scenarios
+namespace Akira.TestTools.Scenarios.InternalModels
 {
-    internal class KnownCombination
+    internal struct KnownCombination
     {
         internal KnownCombination(
             ScenarioCombinationType combinationType,
             params ScenarioKey[] scenariosKeys)
         {
             this.CombinationType = combinationType;
-            this.CombinationKey = string.Concat(scenariosKeys.Select(kv => kv.KeyValue));
-            this.ScenariosKeys = new List<ScenarioKey>(scenariosKeys);
+            this.ScenariosKeys = scenariosKeys;
+            this.CombinationKey = string.Concat(this.ScenariosKeys.Select(kv => kv.KeyValue));
         }
 
         internal ScenarioCombinationType CombinationType { get; private set; }

@@ -1,6 +1,6 @@
 ﻿using Akira.TestTools.Scenarios.Constants;
 
-namespace Akira.TestTools.Scenarios
+namespace Akira.TestTools.Scenarios.InternalModels
 {
     internal struct ScenarioKey
     {

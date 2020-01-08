@@ -63,8 +63,8 @@
         public const string KnownScenarioCombinationConfigWithOnlyOneCondition =
             "Known Scenario Combination Configuration with only one builder condition. Please use the parameter 'scenarioType' in Scenario operations.";
 
-        public const string ScenarioCombinationConfigWithInvalidScenarioContext =
-            "Scenario Combination Configuration with invalid Scenario Context ({0})";
+        public const string KnownScenarioCombinationConfigWithInvalidScenarioContext =
+            "Known Scenario Combination Configuration with invalid Scenario Context ({0})";
 
         public const string ScenarioCombinationConfigWithInvalidScenario =
             "Scenario Combination Configuration for Scenario Context '{0}' has an invalid Scenario ({1})";
