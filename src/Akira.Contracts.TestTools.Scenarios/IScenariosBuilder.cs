@@ -10,7 +10,10 @@ namespace Akira.Contracts.TestTools.Scenarios
     public interface IScenariosBuilder<T>
         where T : class
     {
-        IScenariosBuilderConfiguration<T> BuilderConfiguration { get; }
+        /// <summary>
+        /// Gets the reference to the current <see cref="IScenariosRepository{T}"/>
+        /// </summary>
+        IScenariosRepository<T> BuilderRepository { get; }
 
         /// <summary>
         /// Generate a new instance of Model (<see cref="{T}" />)

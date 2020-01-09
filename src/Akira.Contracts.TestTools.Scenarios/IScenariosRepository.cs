@@ -3,16 +3,16 @@ using System.Collections.Generic;
 
 namespace Akira.Contracts.TestTools.Scenarios
 {
-    public interface IScenariosBuilderConfiguration<T>
+    public interface IScenariosRepository<T>
         where T : class
     {
         /// <summary>
-        /// Gets the number of distinct possible <see cref="ICompletedModelBuilder<T>"/> for the current <see cref="IScenariosBuilderConfiguration{T}" />
+        /// Gets the number of distinct possible <see cref="ICompletedModelBuilder<T>"/> for the current <see cref="IScenariosRepository{T}" />
         /// </summary>
         ulong CountCompletedModelBuilders { get; }
 
         /// <summary>
-        /// Add a new Scenario Context to the <see cref="IScenariosBuilderConfiguration{T}" />
+        /// Add a new Scenario Context to the <see cref="IScenariosRepository{T}" />
         /// </summary>
         /// <param name="scenarioContextName">The name of new scenario context. Must be unique.</param>
         void AddScenarioContext(
@@ -33,7 +33,7 @@ namespace Akira.Contracts.TestTools.Scenarios
             ScenarioCombinationType scenarioType = ScenarioCombinationType.Unknown);
 
         /// <summary>
-        /// Add a Known Valid Scenario Combination to the <see cref="IScenariosBuilderConfiguration{T}" />
+        /// Add a Known Valid Scenario Combination to the <see cref="IScenariosRepository{T}" />
         /// </summary>
         /// <param name="knownScenarioCombinationConfiguration">
         /// A dictionary with the Known Scenario Combination Configuration that can used to build a model.
@@ -49,13 +49,10 @@ namespace Akira.Contracts.TestTools.Scenarios
             IDictionary<string, string> knownScenarioCombinationConfiguration,
             ScenarioCombinationType scenarioCombinatioType = ScenarioCombinationType.Unknown);
 
-        void ValidateBuilderConfiguration(
-            ScenarioBuilderType scenarioBuilderType,
-            ref IDictionary<string, string> scenarioBuilderConfiguration);
-
         ICompletedModelBuilder<T> GetModelBuilder(
             ScenarioBuilderType scenarioBuilderType,
-            IDictionary<string, string> scenarioBuilderConfiguration);
+            IDictionary<string, string> scenarioBuilderConfiguration,
+            Func<bool> validateBuilderConfiguration);
 
         IEnumerable<IDictionary<string, string>> GetMinimumTestingScenarioCombinations(
             ScenarioBuilderType scenarioBuilderType);

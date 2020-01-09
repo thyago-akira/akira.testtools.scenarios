@@ -8,7 +8,7 @@ namespace Akira.TestTools.Scenarios.Extensions
     public static class IScenarioBuilderExtensions
     {
         /// <summary>
-        /// Add a new Scenario Context to the <see cref="IScenariosBuilder{T}.BuilderConfiguration" />
+        /// Add a new Scenario Context to the <see cref="IScenariosBuilder{T}.BuilderRepository" />
         /// </summary>
         /// <param name="scenariosBuilder">Builder that will store a new Scenario Context</param>
         /// <param name="scenarioContextName">The name of new scenario context. Must be unique.</param>
@@ -18,7 +18,7 @@ namespace Akira.TestTools.Scenarios.Extensions
             string scenarioContextName)
             where T : class
         {
-            scenariosBuilder.BuilderConfiguration.AddScenarioContext(scenarioContextName);
+            scenariosBuilder.BuilderRepository.AddScenarioContext(scenarioContextName);
 
             return scenariosBuilder;
         }
@@ -37,7 +37,7 @@ namespace Akira.TestTools.Scenarios.Extensions
             ScenarioCombinationType scenarioType = ScenarioCombinationType.Unknown)
             where T : class
         {
-            scenariosBuilder.BuilderConfiguration.AddScenario(
+            scenariosBuilder.BuilderRepository.AddScenario(
                 true,
                 Defaults.ScenarioValidName,
                 action,
@@ -60,7 +60,7 @@ namespace Akira.TestTools.Scenarios.Extensions
             ScenarioCombinationType scenarioType = ScenarioCombinationType.Unknown)
             where T : class
         {
-            scenariosBuilder.BuilderConfiguration.AddScenario(
+            scenariosBuilder.BuilderRepository.AddScenario(
                 true,
                 Defaults.ScenarioInvalidName,
                 action,
@@ -85,7 +85,7 @@ namespace Akira.TestTools.Scenarios.Extensions
             ScenarioCombinationType scenarioType = ScenarioCombinationType.Unknown)
             where T : class
         {
-            scenariosBuilder.BuilderConfiguration.AddScenario(
+            scenariosBuilder.BuilderRepository.AddScenario(
                 false,
                 scenarioName,
                 action,
@@ -95,7 +95,7 @@ namespace Akira.TestTools.Scenarios.Extensions
         }
 
         /// <summary>
-        /// Add a Known Valid Scenario Combination to the <see cref="IScenariosBuilder{T}.BuilderConfiguration" />
+        /// Add a Known Valid Scenario Combination to the <see cref="IScenariosBuilder{T}.BuilderRepository" />
         /// </summary>
         /// <param name="knownScenarioCombinationConfiguration">
         /// A dictionary with the Known Scenario Combination Configuration that can used to build a model.
@@ -114,7 +114,7 @@ namespace Akira.TestTools.Scenarios.Extensions
             ScenarioCombinationType scenarioCombinationType = ScenarioCombinationType.Unknown)
             where T : class
         {
-            scenariosBuilder.BuilderConfiguration.AddKnownScenarioCombination(
+            scenariosBuilder.BuilderRepository.AddKnownScenarioCombination(
                 knownScenarioCombinationConfiguration,
                 scenarioCombinationType);
 

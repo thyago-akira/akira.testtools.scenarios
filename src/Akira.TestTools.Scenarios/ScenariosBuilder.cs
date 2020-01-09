@@ -6,21 +6,29 @@ using Akira.TestTools.Scenarios.Constants;
 
 namespace Akira.TestTools.Scenarios
 {
-    public abstract class ScenariosBuilder<T> : IScenariosBuilder<T>
+    /// <summary>
+    /// This is an implementation of <see cref="IScenariosBuilder{T}"/>, that follows the
+    /// Scenarios Pattern (<see cref="!:https://medium.com/@thyakira/what-is-your-testing-universe-1dce22d82eb">Article Link</see>)
+    /// </summary>
+    /// <typeparam name="T">Model that will be built by this class</typeparam>
+    public class ScenariosBuilder<T> : IScenariosBuilder<T>
         where T : class
     {
         #region Constructors
 
-        public ScenariosBuilder(IScenariosBuilderConfiguration<T> builderConfiguration)
+        public ScenariosBuilder(IScenariosRepository<T> builderConfiguration)
         {
-            this.BuilderConfiguration = builderConfiguration;
+            this.BuilderRepository = builderConfiguration;
         }
 
         #endregion Constructors
 
         #region Properties
 
-        public IScenariosBuilderConfiguration<T> BuilderConfiguration { get; }
+        /// <summary>
+        /// Gets the reference to the current <see cref="IScenariosRepository{T}"/>
+        /// </summary>
+        public IScenariosRepository<T> BuilderRepository { get; }
 
         #endregion Properties
 
@@ -44,18 +52,33 @@ namespace Akira.TestTools.Scenarios
         /// <returns>A Model (<see cref="{T}" />) object based on the scenario builder configuration</returns>
         public T Generate(
             ScenarioBuilderType scenarioBuilderType = ScenarioBuilderType.All,
-            IDictionary<string, string> scenarioCombinationConfiguration = null)
+            IDictionary<string, string> scenarioBuilderCombinationConfiguration = null)
         {
             return this.Generate(
                 scenarioBuilderType,
-                scenarioCombinationConfiguration,
+                scenarioBuilderCombinationConfiguration,
                 true);
         }
 
+        /// <summary>
+        /// Generate multiple instances of Model (<see cref="{T}" />)
+        /// </summary>
+        /// <param name="count">Number of instances to be generated</param>
+        /// <param name="scenarioBuilderType">
+        /// Indicates the kind of Model (<see cref="{T}" />) that will be created. Could be
+        /// <see cref="ScenarioBuilderType.All"/>, <see cref="ScenarioBuilderType.ValidOnly"/> or
+        /// <see cref="ScenarioBuilderType.InvalidOnly"/>
+        /// </param>
+        /// <param name="scenarioBuilderCombinationConfiguration">
+        /// A dictionary with the builder combination configuration that will be used to build the new model.
+        /// Key: Scenario Context Name
+        /// Value: Scenario Name
+        /// </param>
+        /// <returns>A list of Model (<see cref="{T}" />) objects based on the scenario builder configuration</returns>
         public IEnumerable<T> Generate(
             int count,
             ScenarioBuilderType scenarioBuilderType = ScenarioBuilderType.All,
-            IDictionary<string, string> scenarioCombinationConfiguration = null)
+            IDictionary<string, string> scenarioBuilderCombinationConfiguration = null)
         {
             if (count <= 0)
             {
@@ -67,14 +90,23 @@ namespace Akira.TestTools.Scenarios
                 .Range(1, count)
                 .Select(_ => this.Generate(
                     scenarioBuilderType,
-                    scenarioCombinationConfiguration));
+                    scenarioBuilderCombinationConfiguration));
         }
 
+        /// <summary>
+        /// Generate a list of Model (<see cref="{T}" />), containing the Minimum Testing Scenarios
+        /// </summary>
+        /// <param name="scenarioBuilderType">
+        /// Indicates the kind of Model (<see cref="{T}" />) that will be returned. Could be
+        /// <see cref="ScenarioBuilderType.All"/>, <see cref="ScenarioBuilderType.ValidOnly"/> or
+        /// <see cref="ScenarioBuilderType.InvalidOnly"/>
+        /// </param>
+        /// <returns>A list of Model (<see cref="{T}" />) objects based on the scenario builder type filter</returns>
         public IEnumerable<T> GenerateMinimumTestingScenarios(
             ScenarioBuilderType scenarioBuilderType = ScenarioBuilderType.All)
         {
             foreach (var scenarioCombinationConfiguration in
-                this.BuilderConfiguration.GetMinimumTestingScenarioCombinations(
+                this.BuilderRepository.GetMinimumTestingScenarioCombinations(
                     scenarioBuilderType))
             {
                 yield return this.Generate(
@@ -93,21 +125,10 @@ namespace Akira.TestTools.Scenarios
             IDictionary<string, string> scenarioCombinationConfiguration,
             bool validateBuilderConfiguration)
         {
-            if (scenarioCombinationConfiguration == null)
-            {
-                scenarioCombinationConfiguration = new Dictionary<string, string>();
-            }
-
-            if (validateBuilderConfiguration)
-            {
-                this.BuilderConfiguration.ValidateBuilderConfiguration(
-                    scenarioBuilderType,
-                    ref scenarioCombinationConfiguration);
-            }
-
-            var scenarioFaker = this.BuilderConfiguration.GetModelBuilder(
+            var scenarioFaker = this.BuilderRepository.GetModelBuilder(
                 scenarioBuilderType,
-                scenarioCombinationConfiguration);
+                scenarioCombinationConfiguration,
+                () => validateBuilderConfiguration);
 
             return scenarioFaker.Generate();
         }

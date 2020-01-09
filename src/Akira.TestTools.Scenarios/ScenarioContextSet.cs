@@ -9,7 +9,7 @@ using Akira.TestTools.Scenarios.InternalModels;
 
 namespace Akira.TestTools.Scenarios
 {
-    public class ScenarioContextSet<T> : IScenariosBuilderConfiguration<T>
+    public class ScenarioContextSet<T> : IScenariosRepository<T>
         where T : class
     {
         #region Fields
@@ -201,10 +201,23 @@ namespace Akira.TestTools.Scenarios
 
         public ICompletedModelBuilder<T> GetModelBuilder(
             ScenarioBuilderType scenarioBuilderType,
-            IDictionary<string, string> scenarioBuilderConfiguration)
+            IDictionary<string, string> scenarioCombinationConfiguration,
+            Func<bool> validateBuilderConfiguration)
         {
+            if (scenarioCombinationConfiguration == null)
+            {
+                scenarioCombinationConfiguration = new Dictionary<string, string>();
+            }
+
+            if (validateBuilderConfiguration())
+            {
+                this.ValidateBuilderConfiguration(
+                    scenarioBuilderType,
+                    ref scenarioCombinationConfiguration);
+            }
+
             var fullScenarioBuilderRules = this.GetFullScenarioBuilderRules(
-                scenarioBuilderConfiguration);
+                scenarioCombinationConfiguration);
 
             var scenarioFaker = this.GetOrCreateFakerScenario(
                 fullScenarioBuilderRules);
