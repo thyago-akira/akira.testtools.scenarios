@@ -1,4 +1,6 @@
-﻿namespace Akira.TestTools.Scenarios.Constants
+﻿using Akira.TestTools.Scenarios.Extensions;
+
+namespace Akira.TestTools.Scenarios.Constants
 {
     public static class Errors
     {
@@ -88,8 +90,8 @@
         public const string InvalidNumberOfRows =
             "Invalid number of rows to generate";
 
-        private const string DefaultContextValidScenario = nameof(ScenariosFaker<object>.DefaultContextValidScenario);
+        private const string DefaultContextValidScenario = nameof(IScenarioBuilderExtensions.DefaultContextValidScenario);
 
-        private const string DefaultContextInvalidScenario = nameof(ScenariosFaker<object>.DefaultContextInvalidScenario);
+        private const string DefaultContextInvalidScenario = nameof(IScenarioBuilderExtensions.DefaultContextInvalidScenario);
     }
 }

@@ -1,119 +1,64 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Akira.Contracts.TestTools.Scenarios
 {
+    /// <summary>
+    /// This contract defines the properties/methods used to create instance(s) of <see cref="{T}"/> using the
+    /// Scenarios Pattern (<see cref="!:https://medium.com/@thyakira/what-is-your-testing-universe-1dce22d82eb">Article Link</see>)
+    /// </summary>
+    /// <typeparam name="T">Model that will be built by this interface</typeparam>
     public interface IScenariosBuilder<T>
         where T : class
     {
-        /// <summary>
-        /// Gets the number of possible scenarios for the current scenarios builder
-        /// </summary>
-        ulong CountPossibleScenariosCombinations { get; }
+        IScenariosBuilderConfiguration<T> BuilderConfiguration { get; }
 
         /// <summary>
-        /// Add a new Scenario Context to the <see cref="IScenariosBuilder{T}" />
-        /// </summary>
-        /// <param name="scenarioContextName">The name of new scenario context. Must be unique.</param>
-        /// <returns>Returns the current instance of the <see cref="IScenariosBuilder{T}" /> (fluent interface)</returns>
-        IScenariosBuilder<T> ScenarioContext(
-            string scenarioContextName);
-
-        /// <summary>
-        /// Add a new Valid Scenario to the current Default Scenario Context
-        /// </summary>
-        /// <param name="action">The actions that will be executed to the Valid Scenario</param>
-        /// <param name="scenarioType">
-        /// Indicates if the Current Scenario will be <see cref="ScenarioCombinationType.Unknown"/>, <see cref="ScenarioCombinationType.AlwaysValid"/> or <see cref="ScenarioCombinationType.AlwaysInvalid"/>
-        /// </param>
-        /// <returns>Returns the current instance of the <see cref="IScenariosBuilder{T}" /> (fluent interface)</returns>
-        IScenariosBuilder<T> DefaultContextValidScenario(
-            Action<IScenarioRuleSet<T>> action,
-            ScenarioCombinationType scenarioType = ScenarioCombinationType.Unknown);
-
-        /// <summary>
-        /// Add a new Invalid Scenario to the current Default Scenario Context
-        /// </summary>
-        /// <param name="action">The actions that will be executed to the Invalid Scenario</param>
-        /// <param name="scenarioType">
-        /// Indicates if the Current Scenario will be <see cref="ScenarioCombinationType.Unknown"/>, <see cref="ScenarioCombinationType.AlwaysValid"/> or <see cref="ScenarioCombinationType.AlwaysInvalid"/>
-        /// </param>
-        /// <returns>Returns the current instance of the <see cref="IScenariosBuilder{T}" /> (fluent interface)</returns>
-        IScenariosBuilder<T> DefaultContextInvalidScenario(
-            Action<IScenarioRuleSet<T>> action,
-            ScenarioCombinationType scenarioType = ScenarioCombinationType.Unknown);
-
-        /// <summary>
-        /// Add a new Scenario to the current Scenario Context
-        /// </summary>
-        /// <param name="scenarioName">Indicates the name of the Scenario</param>
-        /// <param name="action">The actions that will be executed to the current Scenario</param>
-        /// <param name="scenarioType">
-        /// Indicates if the Current Scenario will be <see cref="ScenarioCombinationType.Unknown"/>, <see cref="ScenarioCombinationType.AlwaysValid"/> or <see cref="ScenarioCombinationType.AlwaysInvalid"/>
-        /// </param>
-        /// <returns>Returns the current instance of the <see cref="IScenariosBuilder{T}" /> (fluent interface)</returns>
-        IScenariosBuilder<T> Scenario(
-            string scenarioName,
-            Action<IScenarioRuleSet<T>> action,
-            ScenarioCombinationType scenarioType = ScenarioCombinationType.Unknown);
-
-        /// <summary>
-        /// Add a Known Valid Scenario Combination to the <see cref="IScenariosBuilder{T}" />
-        /// </summary>
-        /// <param name="scenarioCombinationConfiguration">
-        /// A dictionary with the builder parameters that can used to build an <see cref="ScenarioCombinationType.AlwaysValid"/> model.
-        /// Key: Scenario Context Name
-        /// Value: Scenario Name
-        /// </param>
-        /// <param name="scenarioCombinatioType">
-        /// Indicates if the Current Scenario will be <see cref="ScenarioCombinationType.Unknown"/>, <see cref="ScenarioCombinationType.AlwaysValid"/> or <see cref="ScenarioCombinationType.AlwaysInvalid"/>
-        /// </param>
-        /// <returns>Returns the current instance of the <see cref="IScenariosBuilder{T}" /> (fluent interface)</returns>
-        IScenariosBuilder<T> KnownScenarioCombination(
-            IDictionary<string, string> scenarioCombinationConfiguration,
-            ScenarioCombinationType scenarioCombinatioType = ScenarioCombinationType.Unknown);
-
-        /// <summary>
-        /// Generate a new instance of model
+        /// Generate a new instance of Model (<see cref="{T}" />)
         /// </summary>
         /// <param name="scenarioBuilderType">
-        /// Indicates the kind of model you will create
+        /// Indicates the kind of Model (<see cref="{T}" />) that will be created. Could be
+        /// <see cref="ScenarioBuilderType.All"/>, <see cref="ScenarioBuilderType.ValidOnly"/> or
+        /// <see cref="ScenarioBuilderType.InvalidOnly"/>
         /// </param>
-        /// <param name="scenarioCombinationConfiguration">
-        /// Dictionary with the builder parameters that will be used to build the new model.
+        /// <param name="scenarioBuilderCombinationConfiguration">
+        /// A dictionary with the builder combination configuration that will be used to build the new model.
         /// Key: Scenario Context Name
         /// Value: Scenario Name
         /// </param>
-        /// <returns>A model object based on the scenario builder configuration</returns>
+        /// <returns>A Model (<see cref="{T}" />) object based on the scenario builder configuration</returns>
         T Generate(
             ScenarioBuilderType scenarioBuilderType = ScenarioBuilderType.All,
-            IDictionary<string, string> scenarioCombinationConfiguration = null);
+            IDictionary<string, string> scenarioBuilderCombinationConfiguration = null);
 
         /// <summary>
-        /// Generate multiples instances of model
+        /// Generate multiple instances of Model (<see cref="{T}" />)
         /// </summary>
-        /// <param name="count">Number of model's instances to be generated</param>
+        /// <param name="count">Number of instances to be generated</param>
         /// <param name="scenarioBuilderType">
-        /// Indicates the kind of model you will create
+        /// Indicates the kind of Model (<see cref="{T}" />) that will be created. Could be
+        /// <see cref="ScenarioBuilderType.All"/>, <see cref="ScenarioBuilderType.ValidOnly"/> or
+        /// <see cref="ScenarioBuilderType.InvalidOnly"/>
         /// </param>
-        /// <param name="scenarioCombinationConfiguration">
-        /// Dictionary with the builder parameters that will be used to build the new model.
+        /// <param name="scenarioBuilderCombinationConfiguration">
+        /// A dictionary with the builder combination configuration that will be used to build the new model.
         /// Key: Scenario Context Name
         /// Value: Scenario Name
         /// </param>
-        /// <returns>A list of model objects based on the scenario builder configuration</returns>
+        /// <returns>A list of Model (<see cref="{T}" />) objects based on the scenario builder configuration</returns>
         IEnumerable<T> Generate(
             int count,
             ScenarioBuilderType scenarioBuilderType = ScenarioBuilderType.All,
-            IDictionary<string, string> scenarioCombinationConfiguration = null);
+            IDictionary<string, string> scenarioBuilderCombinationConfiguration = null);
 
         /// <summary>
-        /// Generate multiples instances of model based on kind of model you need to create
+        /// Generate a list of Model (<see cref="{T}" />), containing the Minimum Testing Scenarios
         /// </summary>
         /// <param name="scenarioBuilderType">
-        /// Indicates the kind of model you will create
+        /// Indicates the kind of Model (<see cref="{T}" />) that will be returned. Could be
+        /// <see cref="ScenarioBuilderType.All"/>, <see cref="ScenarioBuilderType.ValidOnly"/> or
+        /// <see cref="ScenarioBuilderType.InvalidOnly"/>
         /// </param>
-        /// <returns>A list of model objects based on the scenario builder configuration</returns>
+        /// <returns>A list of Model (<see cref="{T}" />) objects based on the scenario builder type filter</returns>
         IEnumerable<T> GenerateMinimumTestingScenarios(
             ScenarioBuilderType scenarioBuilderType = ScenarioBuilderType.All);
     }

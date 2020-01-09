@@ -26,7 +26,7 @@ namespace Akira.TestTools.Scenarios.Tests
             Assert.IsNotNull(faker);
             Assert.AreEqual(
                 getTestBuildersTestContext.ExpectedCountPossibleScenariosCombinations,
-                faker.CountPossibleScenariosCombinations);
+                faker.BuilderConfiguration.CountCompletedModelBuilders);
         }
     }
 }

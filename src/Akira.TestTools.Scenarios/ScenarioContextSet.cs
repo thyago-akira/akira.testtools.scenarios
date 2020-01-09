@@ -1,20 +1,30 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using Akira.Contracts.TestTools.Scenarios;
 using Akira.TestTools.Scenarios.Constants;
+using Akira.TestTools.Scenarios.Extensions;
 using Akira.TestTools.Scenarios.InternalModels;
 
 namespace Akira.TestTools.Scenarios
 {
-    internal class ScenarioContextSet
+    public class ScenarioContextSet<T> : IScenariosBuilderConfiguration<T>
+        where T : class
     {
         #region Fields
+
+        private readonly ConcurrentDictionary<string, InternalFaker<T>> existingFakers =
+            new ConcurrentDictionary<string, InternalFaker<T>>(StringComparer.OrdinalIgnoreCase);
 
         private readonly Dictionary<string, ScenarioContext> contexts =
             new Dictionary<string, ScenarioContext>(StringComparer.OrdinalIgnoreCase);
 
-        private readonly KnownCombinationDictionary knownCombinations = new KnownCombinationDictionary();
+        private readonly KnownCombinationDictionary knownCombinations =
+            new KnownCombinationDictionary();
+
+        private readonly Dictionary<string, Action<IScenarioRuleSet<T>>> scenariosActions =
+            new Dictionary<string, Action<IScenarioRuleSet<T>>>(StringComparer.OrdinalIgnoreCase);
 
         private int currentScenarioContextIndex;
 
@@ -33,7 +43,10 @@ namespace Akira.TestTools.Scenarios
 
         #region Properties
 
-        internal ulong CountPossibleScenariosCombinations { get; private set; } = 1;
+        /// <summary>
+        /// Gets the number of distinct possible <see cref="ICompletedModelBuilder<T>"/> for the current <see cref="ScenarioContextSet{T}" />
+        /// </summary>
+        public ulong CountCompletedModelBuilders { get; private set; } = 1;
 
         internal ScenarioContext CurrentScenarioContext { get; private set; }
 
@@ -48,17 +61,6 @@ namespace Akira.TestTools.Scenarios
                 foreach (var context in this.contexts.Values)
                 {
                     yield return context;
-                }
-            }
-        }
-
-        internal IEnumerable<KnownCombination> KnownCombinations
-        {
-            get
-            {
-                foreach (var knownCombination in this.knownCombinations.Values)
-                {
-                    yield return knownCombination;
                 }
             }
         }
@@ -80,15 +82,145 @@ namespace Akira.TestTools.Scenarios
 
         #region Methods
 
-        #region Internal Methods
+        #region Public Methods
 
         /// <summary>
         /// Add a new Scenario Context, initializing all the information related to it
         /// </summary>
         /// <param name="scenarioContextName">The name of new scenario context</param>
-        internal void Add(string scenarioContextName)
+        public void AddScenarioContext(string scenarioContextName)
         {
             this.Add(scenarioContextName, true);
+        }
+
+        /// <summary>
+        /// Add a new Scenario to the current Scenario Context
+        /// </summary>
+        /// <param name="hasDefaultScenarioContext">Indicates if the method was called by a Default Scenario Context (true) or a Custom Scenario Context (false)</param>
+        /// <param name="scenarioName">Indicates the name of the Scenario</param>
+        /// <param name="scenarioType">
+        /// Indicates if the Current Scenario will be <see cref="ScenarioCombinationType.Unknown"/>, <see cref="ScenarioCombinationType.AlwaysValid"/> or <see cref="ScenarioCombinationType.AlwaysInvalid"/>
+        /// </param>
+        /// <param name="action">The actions that will be executed to the current Scenario</param>
+        public void AddScenario(
+            bool hasDefaultScenarioContext,
+            string scenarioName,
+            Action<IScenarioRuleSet<T>> action,
+            ScenarioCombinationType scenarioType = ScenarioCombinationType.Unknown)
+        {
+            this.ValidateAction(action);
+
+            var scenarioKey = this.AddScenario(
+                hasDefaultScenarioContext,
+                scenarioName,
+                scenarioType);
+
+            this.AddAction(scenarioKey.KeyValue, action);
+
+            this.AddKnownCombination(
+                scenarioType,
+                scenarioKey);
+        }
+
+        /// <summary>
+        /// Add a Known Valid Scenario Combination to the <see cref="ScenarioContextSet{T}" />
+        /// </summary>
+        /// <param name="knownScenarioCombinationConfiguration">
+        /// A dictionary with the Known Scenario Combination Configuration that can used to build a model.
+        /// Key: Scenario Context Name
+        /// Value: Scenario Name
+        /// </param>
+        /// <param name="scenarioCombinationType">
+        /// Indicates if the current Known Scenario Combination Configuration will be
+        /// <see cref="ScenarioCombinationType.Unknown"/>, <see cref="ScenarioCombinationType.AlwaysValid"/> or
+        /// <see cref="ScenarioCombinationType.AlwaysInvalid"/>
+        /// </param>
+        public void AddKnownScenarioCombination(
+            IDictionary<string, string> knownScenarioCombinationConfiguration,
+            ScenarioCombinationType scenarioCombinationType = ScenarioCombinationType.Unknown)
+        {
+            this.AddKnownCombination(
+                scenarioCombinationType,
+                knownScenarioCombinationConfiguration);
+        }
+
+        public IEnumerable<IDictionary<string, string>> GetMinimumTestingScenarioCombinations(
+            ScenarioBuilderType scenarioType = ScenarioBuilderType.All)
+        {
+            if (scenarioType == ScenarioBuilderType.All)
+            {
+                yield return null;
+
+                yield return new Dictionary<string, string>();
+            }
+
+            // You should test all known scenarios
+            foreach (var knownCombination in this.knownCombinations.Values)
+            {
+                if (scenarioType == ScenarioBuilderType.All ||
+                   (scenarioType == ScenarioBuilderType.ValidOnly &&
+                    knownCombination.CombinationType == ScenarioCombinationType.AlwaysValid) ||
+                   (scenarioType == ScenarioBuilderType.InvalidOnly &&
+                    knownCombination.CombinationType == ScenarioCombinationType.AlwaysInvalid))
+                {
+                    yield return knownCombination.ScenariosKeys.ToDictionary(
+                        kv => kv.ContextName,
+                        kv => kv.ScenarioName);
+                }
+            }
+        }
+
+        public void ValidateBuilderConfiguration(
+            ScenarioBuilderType scenarioBuilderType,
+            ref IDictionary<string, string> scenarioBuilderConfiguration)
+        {
+            if (!EnumExtensions.AllowedScenarioBuilderTypes.Contains((int)scenarioBuilderType))
+            {
+                throw new ArgumentException(
+                    Errors.ScenarioBuilderTypeInvalid);
+            }
+
+            if (scenarioBuilderType == ScenarioBuilderType.ValidOnly &&
+                !this.HasAlwaysValidKnownScenario)
+            {
+                throw new ArgumentException(
+                    Errors.ScenarioBuilderDoesnotContainAlwaysValidKnownScenario);
+            }
+
+            if (scenarioBuilderType == ScenarioBuilderType.InvalidOnly &&
+                !this.HasAlwaysInvalidKnownScenario)
+            {
+                throw new ArgumentException(
+                    Errors.ScenarioBuilderDoesnotContainAlwaysInvalidKnownScenario);
+            }
+
+            scenarioBuilderConfiguration = this.ValidateScenarioConfigurationBuilder(
+                scenarioBuilderType,
+                scenarioBuilderConfiguration);
+        }
+
+        public ICompletedModelBuilder<T> GetModelBuilder(
+            ScenarioBuilderType scenarioBuilderType,
+            IDictionary<string, string> scenarioBuilderConfiguration)
+        {
+            var fullScenarioBuilderRules = this.GetFullScenarioBuilderRules(
+                scenarioBuilderConfiguration);
+
+            var scenarioFaker = this.GetOrCreateFakerScenario(
+                fullScenarioBuilderRules);
+
+            return scenarioFaker;
+        }
+
+        #endregion Public Methods
+
+        #region Internal Methods
+
+        private void AddAction(
+            string key,
+            Action<IScenarioRuleSet<T>> action)
+        {
+            this.scenariosActions.Add(key, action);
         }
 
         /// <summary>
@@ -103,7 +235,7 @@ namespace Akira.TestTools.Scenarios
         /// Indicates if the Current Scenario will be <see cref="ScenarioCombinationType.Unknown"/>, <see cref="ScenarioCombinationType.AlwaysValid"/> or <see cref="ScenarioCombinationType.AlwaysInvalid"/>
         /// </param>
         /// <returns>The Scenario Key</returns>
-        internal ScenarioKey AddScenario(
+        private ScenarioKey AddScenario(
             bool hasDefaultScenarioContext,
             string scenarioName,
             ScenarioCombinationType scenarioType)
@@ -117,10 +249,10 @@ namespace Akira.TestTools.Scenarios
             {
                 if (this.CurrentScenarioContext.ScenariosCount > 2)
                 {
-                    this.CountPossibleScenariosCombinations /= (ulong)(this.CurrentScenarioContext.ScenariosCount - 1);
+                    this.CountCompletedModelBuilders /= (ulong)(this.CurrentScenarioContext.ScenariosCount - 1);
                 }
 
-                this.CountPossibleScenariosCombinations *= (ulong)this.CurrentScenarioContext.ScenariosCount;
+                this.CountCompletedModelBuilders *= (ulong)this.CurrentScenarioContext.ScenariosCount;
             }
 
             return scenarioKey;
@@ -190,6 +322,44 @@ namespace Akira.TestTools.Scenarios
         #endregion Internal Methods
 
         #region Private Methods
+
+        /// <summary>
+        /// Validate the Action that will be executed for the given Scenario
+        /// </summary>
+        /// <param name="action">
+        /// Action that will be executed for the given Scenario
+        /// </param>
+        private void ValidateAction(Action<IScenarioRuleSet<T>> action)
+        {
+            if (action == null)
+            {
+                throw new ArgumentException(Errors.ScenarioActionIsnotSet);
+            }
+        }
+
+        private InternalFaker<T> GetOrCreateFakerScenario(
+            IEnumerable<ScenarioKey> fullScenarioBuilderRules)
+        {
+            var fullScenarioKey = string.Concat(fullScenarioBuilderRules.Select(k => k.KeyValue));
+
+            if (!this.existingFakers.TryGetValue(
+                fullScenarioKey,
+                out var scenarioFaker))
+            {
+                scenarioFaker = new InternalFaker<T>();
+
+                foreach (var builderRule in fullScenarioBuilderRules)
+                {
+                    var action = this.scenariosActions[builderRule.KeyValue];
+
+                    action(scenarioFaker);
+                }
+
+                _ = this.existingFakers.TryAdd(fullScenarioKey, scenarioFaker);
+            }
+
+            return scenarioFaker;
+        }
 
         /// <summary>
         /// Check if the current set has the given scenario context name

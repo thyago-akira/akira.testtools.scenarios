@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Akira.TestTools.Scenarios.Constants;
+using Akira.TestTools.Scenarios.Extensions;
 using Akira.TestTools.Scenarios.Tests.Stubs;
 
 namespace Akira.TestTools.Scenarios.Tests.Context.Data
