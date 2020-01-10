@@ -2,9 +2,9 @@
 
 namespace Akira.TestTools.Scenarios.InternalModels
 {
-    internal struct ScenarioKey
+    public struct ScenarioKey
     {
-        internal ScenarioKey(
+        public ScenarioKey(
             string contextName,
             int contextIndex,
             string scenarioName)

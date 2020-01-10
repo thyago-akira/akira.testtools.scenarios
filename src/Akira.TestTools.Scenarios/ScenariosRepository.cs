@@ -14,14 +14,14 @@ namespace Akira.TestTools.Scenarios
     {
         #region Fields
 
+        private readonly IKnownCombinationCollection knownCombinationCollection =
+            new KnownCombinationCollection();
+
         private readonly IScenarioActionsCollection<T> scenariosActionsCollection =
             new CachedScenarioActionsCollection<T>();
 
         private readonly Dictionary<string, ScenarioContext> contexts =
             new Dictionary<string, ScenarioContext>(StringComparer.OrdinalIgnoreCase);
-
-        private readonly KnownCombinationDictionary knownCombinations =
-            new KnownCombinationDictionary();
 
         private int currentScenarioContextIndex;
 
@@ -112,10 +112,12 @@ namespace Akira.TestTools.Scenarios
                 scenarioKey.KeyValue,
                 action);
 
-            this.knownCombinations.Add(
+            this.knownCombinationCollection.Add(
                 new KnownCombination(
-                    scenarioType,
-                    scenarioKey));
+                    scenarioKey.KeyValue,
+                    scenarioKey.ContextName,
+                    scenarioKey.ScenarioName,
+                    scenarioType));
         }
 
         /// <summary>
@@ -135,9 +137,12 @@ namespace Akira.TestTools.Scenarios
             IDictionary<string, string> knownScenarioCombinationConfiguration,
             ScenarioCombinationType scenarioCombinationType = ScenarioCombinationType.Unknown)
         {
-            this.AddKnownCombination(
+            var knownCombination = this.ValidateKnownCombinationConfiguration(
                 scenarioCombinationType,
                 knownScenarioCombinationConfiguration);
+
+            this.knownCombinationCollection.Add(
+                knownCombination);
         }
 
         public IEnumerable<IDictionary<string, string>> GetMinimumTestingScenarioCombinations(
@@ -151,7 +156,7 @@ namespace Akira.TestTools.Scenarios
             }
 
             // You should test all known scenarios
-            foreach (var knownCombination in this.knownCombinations.Values)
+            foreach (var knownCombination in this.knownCombinationCollection)
             {
                 if (scenarioType == ScenarioBuilderType.All ||
                    (scenarioType == ScenarioBuilderType.ValidOnly &&
@@ -159,9 +164,7 @@ namespace Akira.TestTools.Scenarios
                    (scenarioType == ScenarioBuilderType.InvalidOnly &&
                     knownCombination.CombinationType == ScenarioCombinationType.AlwaysInvalid))
                 {
-                    yield return knownCombination.ScenariosKeys.ToDictionary(
-                        kv => kv.ContextName,
-                        kv => kv.ScenarioName);
+                    yield return knownCombination.CombinationConfiguration;
                 }
             }
         }
@@ -177,14 +180,14 @@ namespace Akira.TestTools.Scenarios
             }
 
             if (scenarioBuilderType == ScenarioBuilderType.ValidOnly &&
-                !this.knownCombinations.HasAlwaysValidKnownScenario)
+                !this.knownCombinationCollection.HasAlwaysValidKnownScenario)
             {
                 throw new ArgumentException(
                     Errors.ScenarioBuilderDoesnotContainAlwaysValidKnownScenario);
             }
 
             if (scenarioBuilderType == ScenarioBuilderType.InvalidOnly &&
-                !this.knownCombinations.HasAlwaysInvalidKnownScenario)
+                !this.knownCombinationCollection.HasAlwaysInvalidKnownScenario)
             {
                 throw new ArgumentException(
                     Errors.ScenarioBuilderDoesnotContainAlwaysInvalidKnownScenario);
@@ -287,17 +290,6 @@ namespace Akira.TestTools.Scenarios
             }
 
             return buildRules;
-        }
-
-        internal void AddKnownCombination(
-            ScenarioCombinationType combinationType,
-            IDictionary<string, string> scenarioCombinationConfiguration)
-        {
-            var knownCombination = this.ValidateKnownCombinationConfiguration(
-                combinationType,
-                scenarioCombinationConfiguration);
-
-            this.knownCombinations.Add(knownCombination);
         }
 
         internal IDictionary<string, string> ValidateScenarioConfigurationBuilder(
@@ -534,11 +526,12 @@ namespace Akira.TestTools.Scenarios
                 });
 
             var knownCombination = new KnownCombination(
-                scenarioCombinationType,
-                scenariosKeys.ToArray());
+                string.Concat(scenariosKeys.Select(k => k.KeyValue)),
+                scenariosKeys.ToDictionary(k => k.ContextName, k => k.ScenarioName),
+                scenarioCombinationType);
 
             this.ValidateParentKnownScenarioCombinationConfiguration(
-                knownCombination.CombinationKey,
+                knownCombination.Key,
                 parentGroupsRegex);
 
             if (scenarioCombinationType != ScenarioCombinationType.Unknown)
@@ -550,11 +543,11 @@ namespace Akira.TestTools.Scenarios
             return knownCombination;
         }
 
-        private List<KnownCombination> ValidateParentScenarioCombinationBuilderConfiguration(
+        private List<IKnownCombination> ValidateParentScenarioCombinationBuilderConfiguration(
             ScenarioBuilderType scenarioCombinationType,
             string parentGroupsRegex)
         {
-            var compatiblesCombinations = new List<KnownCombination>();
+            var compatiblesCombinations = new List<IKnownCombination>();
 
             var parentsRegex = Keys.GetKeyRegex(parentGroupsRegex);
 
@@ -565,25 +558,25 @@ namespace Akira.TestTools.Scenarios
                 ? ScenarioCombinationType.AlwaysInvalid
                 : ScenarioCombinationType.AlwaysValid;
 
-            foreach (var knownCombination in this.knownCombinations
+            foreach (var knownCombination in this.knownCombinationCollection
                 .Where(kv =>
                     (string.IsNullOrWhiteSpace(parentGroupsRegex) &&
-                     kv.Value.CombinationType == allowedCombinationType) ||
+                     kv.CombinationType == allowedCombinationType) ||
                     (parentsRegex.IsMatch(kv.Key) &&
-                     kv.Value.CombinationType != ScenarioCombinationType.Unknown)))
+                     kv.CombinationType != ScenarioCombinationType.Unknown)))
             {
-                if (knownCombination.Value.CombinationType == disallowedCombinationType)
+                if (knownCombination.CombinationType == disallowedCombinationType)
                 {
                     throw new ArgumentException(
                         string.Format(
                             Errors.ScenarioCombinationConfigHasConflictWithKnownScenarioCombinationConfig,
                             scenarioCombinationType,
                             knownCombination.Key,
-                            knownCombination.Value.CombinationType));
+                            knownCombination.CombinationType));
                 }
                 else
                 {
-                    compatiblesCombinations.Add(knownCombination.Value);
+                    compatiblesCombinations.Add(knownCombination);
                 }
             }
 
@@ -604,10 +597,10 @@ namespace Akira.TestTools.Scenarios
         {
             var parentsRegex = Keys.GetKeyRegex(parentGroupsRegex);
 
-            var collisionKnownScenarios = this.knownCombinations
+            var collisionKnownScenarios = this.knownCombinationCollection
                 .Where(kv => parentsRegex.IsMatch(kv.Key) &&
                     (kv.Key.Equals(currentKey, StringComparison.OrdinalIgnoreCase) ||
-                     kv.Value.CombinationType != ScenarioCombinationType.Unknown))
+                     kv.CombinationType != ScenarioCombinationType.Unknown))
                 .ToList();
 
             if (collisionKnownScenarios.Count > 0)
@@ -618,7 +611,7 @@ namespace Akira.TestTools.Scenarios
                     string.Format(
                         Errors.KnownScenarioCombinationConfigContainsParentConfigurationCollision,
                         firstConfig.Key,
-                        firstConfig.Value.CombinationType));
+                        firstConfig.CombinationType));
             }
         }
 
@@ -627,7 +620,7 @@ namespace Akira.TestTools.Scenarios
         {
             var childrenRegex = Keys.GetKeyRegex(childrenGroupsRegex);
 
-            var collisionKnownScenarios = this.knownCombinations
+            var collisionKnownScenarios = this.knownCombinationCollection
                 .Where(kv => childrenRegex.IsMatch(kv.Key))
                 .ToList();
 
@@ -639,12 +632,12 @@ namespace Akira.TestTools.Scenarios
                     string.Format(
                         Errors.KnownScenarioCombinationConfigContainsChildConfigurationCollision,
                         firstConfig.Key,
-                        firstConfig.Value.CombinationType));
+                        firstConfig.CombinationType));
             }
         }
 
         private IDictionary<string, string> GetCompatibleScenarioCombinationConfiguration(
-            List<KnownCombination> compatiblesCombinations,
+            List<IKnownCombination> compatiblesCombinations,
             IDictionary<string, string> originalScenarioConfiguration)
         {
             var randomIndex = 0;
@@ -654,10 +647,7 @@ namespace Akira.TestTools.Scenarios
                 randomIndex = this.Random.Next(compatiblesCombinations.Count);
             }
 
-            var combinationConfiguration = compatiblesCombinations[randomIndex].ScenariosKeys
-                .ToDictionary(
-                    kv => kv.ContextName,
-                    kv => kv.ScenarioName);
+            var combinationConfiguration = compatiblesCombinations[randomIndex].CombinationConfiguration;
 
             foreach (var configuration in originalScenarioConfiguration)
             {
