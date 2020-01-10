@@ -3,11 +3,7 @@
     public interface ICompletedModelBuilder<T>
         where T : class
     {
-        /// TODO:
-        /// ScenarioCombinationType ModelBuilderType { get; }
-
-        /// TODO:
-        /// IDictionary<string, string> ModelBuilderScenariosConfiguration { get; }
+        string Key { get; }
 
         T Generate();
     }

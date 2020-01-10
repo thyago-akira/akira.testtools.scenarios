@@ -14,7 +14,7 @@ namespace Akira.TestTools.Scenarios.Constants
             "Scenario Context name is not set";
 
         public const string ScenarioContextNameAsDefaultIsnotAllowed =
-            "Scenario Context name as 'default' isn't allowed";
+            "Scenario Context name as '{0}' is only allowed as first Scenario Context";
 
         public const string ScenarioContextNameAlreadyExists =
             "Scenario Context '{0}' already exists";

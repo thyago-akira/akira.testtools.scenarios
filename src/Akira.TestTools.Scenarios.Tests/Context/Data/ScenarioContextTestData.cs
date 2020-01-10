@@ -165,7 +165,9 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             {
                 CaseDescription = "Scenario Context Name as default",
                 TestedAction = () => getScenarioFaker().ScenarioContext(Defaults.ScenarioContextName),
-                ExpectedExceptionMessage = Errors.ScenarioContextNameAsDefaultIsnotAllowed
+                ExpectedExceptionMessage = string.Format(
+                    Errors.ScenarioContextNameAsDefaultIsnotAllowed,
+                    Defaults.ScenarioContextName)
             };
 
             yield return new TestContext
