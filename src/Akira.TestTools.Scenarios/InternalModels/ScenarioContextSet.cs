@@ -156,7 +156,7 @@ namespace Akira.TestTools.Scenarios.InternalModels
         {
             if (action == null)
             {
-                throw new ArgumentException(Errors.ScenarioActionIsnotSet);
+                throw new ArgumentException(Errors.ScenarioRuleSetActionIsnotSet);
             }
         }
 

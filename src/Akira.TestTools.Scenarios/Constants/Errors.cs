@@ -44,8 +44,8 @@ namespace Akira.TestTools.Scenarios.Constants
         public const string ScenarioNameAlreadyExists =
             "Scenario '{0}' is already set to the Scenario Context '{1}'";
 
-        public const string ScenarioActionIsnotSet =
-            "Action is not set";
+        public const string ScenarioRuleSetActionIsnotSet =
+            "Scenario Rule Set Action is not set";
 
         public const string ScenarioTypeInvalid =
             "Scenario Type is not Valid";

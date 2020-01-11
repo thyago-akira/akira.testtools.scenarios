@@ -26,21 +26,21 @@ namespace Akira.TestTools.Scenarios.Extensions
         /// <summary>
         /// Add a new Valid Scenario to the current Default Scenario Context
         /// </summary>
-        /// <param name="action">The actions that will be executed to the Valid Scenario</param>
+        /// <param name="scenarioRuleSetAction">The actions that will be executed to the Valid Scenario</param>
         /// <param name="scenarioType">
         /// Indicates if the Current Scenario will be <see cref="ScenarioCombinationType.Unknown"/>, <see cref="ScenarioCombinationType.AlwaysValid"/> or <see cref="ScenarioCombinationType.AlwaysInvalid"/>
         /// </param>
         /// <returns>Returns the current instance of the <see cref="IScenariosBuilder{T}" /> (fluent interface)</returns>
         public static IScenariosBuilder<T> DefaultContextValidScenario<T>(
             this IScenariosBuilder<T> scenariosBuilder,
-            Action<IScenarioRuleSet<T>> action,
+            Action<IScenarioRuleSet<T>> scenarioRuleSetAction,
             ScenarioCombinationType scenarioType = ScenarioCombinationType.Unknown)
             where T : class
         {
             scenariosBuilder.BuilderRepository.AddScenario(
                 true,
                 Defaults.ScenarioValidName,
-                action,
+                scenarioRuleSetAction,
                 scenarioType);
 
             return scenariosBuilder;
@@ -49,21 +49,21 @@ namespace Akira.TestTools.Scenarios.Extensions
         /// <summary>
         /// Add a new Invalid Scenario to the current Default Scenario Context
         /// </summary>
-        /// <param name="action">The actions that will be executed to the Invalid Scenario</param>
+        /// <param name="scenarioRuleSetAction">The actions that will be executed to the Invalid Scenario</param>
         /// <param name="scenarioType">
         /// Indicates if the Current Scenario will be <see cref="ScenarioCombinationType.Unknown"/>, <see cref="ScenarioCombinationType.AlwaysValid"/> or <see cref="ScenarioCombinationType.AlwaysInvalid"/>
         /// </param>
         /// <returns>Returns the current instance of the <see cref="IScenariosBuilder{T}" /> (fluent interface)</returns>
         public static IScenariosBuilder<T> DefaultContextInvalidScenario<T>(
             this IScenariosBuilder<T> scenariosBuilder,
-            Action<IScenarioRuleSet<T>> action,
+            Action<IScenarioRuleSet<T>> scenarioRuleSetAction,
             ScenarioCombinationType scenarioType = ScenarioCombinationType.Unknown)
             where T : class
         {
             scenariosBuilder.BuilderRepository.AddScenario(
                 true,
                 Defaults.ScenarioInvalidName,
-                action,
+                scenarioRuleSetAction,
                 scenarioType);
 
             return scenariosBuilder;
@@ -73,7 +73,7 @@ namespace Akira.TestTools.Scenarios.Extensions
         /// Add a new Scenario to the current Scenario Context
         /// </summary>
         /// <param name="scenarioName">Indicates the name of the Scenario</param>
-        /// <param name="action">The actions that will be executed to the current Scenario</param>
+        /// <param name="scenarioRuleSetAction">The actions that will be executed to the current Scenario</param>
         /// <param name="scenarioType">
         /// Indicates if the Current Scenario will be <see cref="ScenarioCombinationType.Unknown"/>, <see cref="ScenarioCombinationType.AlwaysValid"/> or <see cref="ScenarioCombinationType.AlwaysInvalid"/>
         /// </param>
@@ -81,14 +81,14 @@ namespace Akira.TestTools.Scenarios.Extensions
         public static IScenariosBuilder<T> Scenario<T>(
             this IScenariosBuilder<T> scenariosBuilder,
             string scenarioName,
-            Action<IScenarioRuleSet<T>> action,
+            Action<IScenarioRuleSet<T>> scenarioRuleSetAction,
             ScenarioCombinationType scenarioType = ScenarioCombinationType.Unknown)
             where T : class
         {
             scenariosBuilder.BuilderRepository.AddScenario(
                 false,
                 scenarioName,
-                action,
+                scenarioRuleSetAction,
                 scenarioType);
 
             return scenariosBuilder;

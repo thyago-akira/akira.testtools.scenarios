@@ -17,8 +17,8 @@ namespace Akira.TestTools.Scenarios
         private readonly IKnownCombinationCollection knownCombinationCollection =
             new KnownCombinationCollection();
 
-        private readonly IScenarioActionsCollection<T> scenariosActionsCollection =
-            new CachedScenarioActionsCollection<T>();
+        private readonly IScenarioRuleSetActionCollection<T> scenarioRuleSetActionCollection =
+            new CachedScenarioRuleSetActionCollection<T>();
 
         private readonly Dictionary<string, ScenarioContext> contexts =
             new Dictionary<string, ScenarioContext>(StringComparer.OrdinalIgnoreCase);
@@ -94,23 +94,23 @@ namespace Akira.TestTools.Scenarios
         /// <param name="scenarioType">
         /// Indicates if the Current Scenario will be <see cref="ScenarioCombinationType.Unknown"/>, <see cref="ScenarioCombinationType.AlwaysValid"/> or <see cref="ScenarioCombinationType.AlwaysInvalid"/>
         /// </param>
-        /// <param name="action">The actions that will be executed to the current Scenario</param>
+        /// <param name="scenarioRuleSetAction">The actions that will be executed to the current Scenario</param>
         public void AddScenario(
             bool hasDefaultScenarioContext,
             string scenarioName,
-            Action<IScenarioRuleSet<T>> action,
+            Action<IScenarioRuleSet<T>> scenarioRuleSetAction,
             ScenarioCombinationType scenarioType = ScenarioCombinationType.Unknown)
         {
-            this.scenariosActionsCollection.ValidateAction(action);
+            this.scenarioRuleSetActionCollection.ValidateScenarioRuleSetAction(scenarioRuleSetAction);
 
             var scenarioKey = this.AddScenario(
                 hasDefaultScenarioContext,
                 scenarioName,
                 scenarioType);
 
-            this.scenariosActionsCollection.AddValidAction(
+            this.scenarioRuleSetActionCollection.AddValidScenarioRuleSetAction(
                 scenarioKey.KeyValue,
-                action);
+                scenarioRuleSetAction);
 
             this.knownCombinationCollection.Add(
                 new KnownCombination(
@@ -201,14 +201,14 @@ namespace Akira.TestTools.Scenarios
         public ICompletedModelBuilder<T> GetModelBuilder(
             ScenarioBuilderType scenarioBuilderType,
             IDictionary<string, string> scenarioCombinationConfiguration,
-            Func<bool> validateBuilderConfiguration)
+            bool validateBuilderConfiguration = true)
         {
             if (scenarioCombinationConfiguration == null)
             {
                 scenarioCombinationConfiguration = new Dictionary<string, string>();
             }
 
-            if (validateBuilderConfiguration())
+            if (validateBuilderConfiguration)
             {
                 this.ValidateBuilderConfiguration(
                     scenarioBuilderType,
@@ -218,10 +218,10 @@ namespace Akira.TestTools.Scenarios
             var fullScenarioBuilderRules = this.GetFullScenarioBuilderRules(
                 scenarioCombinationConfiguration);
 
-            var scenarioFaker = this.scenariosActionsCollection.GetCompletedModelBuilderByKey(
+            var modelBuilder = this.scenarioRuleSetActionCollection.GetCompletedModelBuilderByKey(
                 fullScenarioBuilderRules.Select(b => b.KeyValue));
 
-            return scenarioFaker;
+            return modelBuilder;
         }
 
         #endregion Public Methods

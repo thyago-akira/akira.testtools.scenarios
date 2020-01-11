@@ -5,22 +5,22 @@ using Akira.Contracts.TestTools.Scenarios;
 
 namespace Akira.TestTools.Scenarios.Collections
 {
-    public class CachedScenarioActionsCollection<T> : ScenarioActionsCollection<T>
+    public class CachedScenarioRuleSetActionCollection<T> : ScenarioRuleSetActionCollection<T>
         where T : class
     {
         private readonly ConcurrentDictionary<string, ICompletedModelBuilder<T>> cachedCompletedModelBuilder =
             new ConcurrentDictionary<string, ICompletedModelBuilder<T>>(StringComparer.OrdinalIgnoreCase);
 
         public override ICompletedModelBuilder<T> GetCompletedModelBuilderByKey(
-            IEnumerable<string> actionKeys)
+            IEnumerable<string> scenarioRuleSetActionKeys)
         {
-            var fullActionsKey = string.Concat(actionKeys);
+            var fullActionsKey = string.Concat(scenarioRuleSetActionKeys);
 
             if (!this.cachedCompletedModelBuilder.TryGetValue(
                 fullActionsKey,
                 out var completedModelBuilder))
             {
-                completedModelBuilder = base.GetCompletedModelBuilderByKey(actionKeys);
+                completedModelBuilder = base.GetCompletedModelBuilderByKey(scenarioRuleSetActionKeys);
 
                 _ = this.cachedCompletedModelBuilder.TryAdd(
                     completedModelBuilder.Key,

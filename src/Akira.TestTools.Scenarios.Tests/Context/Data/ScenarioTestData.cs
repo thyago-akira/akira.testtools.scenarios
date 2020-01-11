@@ -482,7 +482,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 CaseDescription = "Default Scenario Context - Valid Scenario Null",
                 TestedAction = () => new ScenariosFaker<SimpleModel>()
                     .DefaultContextValidScenario(null),
-                ExpectedExceptionMessage = Errors.ScenarioActionIsnotSet
+                ExpectedExceptionMessage = Errors.ScenarioRuleSetActionIsnotSet
             };
 
             yield return new TestContext
@@ -491,7 +491,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 CaseDescription = "Default Scenario Context - Invalid Scenario Null",
                 TestedAction = () => new ScenariosFaker<SimpleModel>()
                     .DefaultContextInvalidScenario(null),
-                ExpectedExceptionMessage = Errors.ScenarioActionIsnotSet
+                ExpectedExceptionMessage = Errors.ScenarioRuleSetActionIsnotSet
             };
 
             yield return new TestContext
@@ -501,7 +501,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 TestedAction = () => new ScenariosFaker<SimpleModel>()
                     .DefaultContextInvalidScenario(scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id))
                     .DefaultContextValidScenario(null),
-                ExpectedExceptionMessage = Errors.ScenarioActionIsnotSet
+                ExpectedExceptionMessage = Errors.ScenarioRuleSetActionIsnotSet
             };
 
             yield return new TestContext
@@ -511,7 +511,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 TestedAction = () => new ScenariosFaker<SimpleModel>()
                     .DefaultContextValidScenario(scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id))
                     .DefaultContextInvalidScenario(null),
-                ExpectedExceptionMessage = Errors.ScenarioActionIsnotSet
+                ExpectedExceptionMessage = Errors.ScenarioRuleSetActionIsnotSet
             };
 
             yield return new TestContext
@@ -525,7 +525,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .Scenario(
                         ScenarioTestName,
                         null),
-                ExpectedExceptionMessage = Errors.ScenarioActionIsnotSet
+                ExpectedExceptionMessage = Errors.ScenarioRuleSetActionIsnotSet
             };
 
             yield return new TestContext
@@ -542,7 +542,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .Scenario(
                         ScenarioTestNameAlternative,
                         null),
-                ExpectedExceptionMessage = Errors.ScenarioActionIsnotSet
+                ExpectedExceptionMessage = Errors.ScenarioRuleSetActionIsnotSet
             };
         }
 

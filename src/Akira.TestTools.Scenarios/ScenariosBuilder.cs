@@ -128,7 +128,7 @@ namespace Akira.TestTools.Scenarios
             var scenarioFaker = this.BuilderRepository.GetModelBuilder(
                 scenarioBuilderType,
                 scenarioCombinationConfiguration,
-                () => validateBuilderConfiguration);
+                validateBuilderConfiguration);
 
             return scenarioFaker.Generate();
         }

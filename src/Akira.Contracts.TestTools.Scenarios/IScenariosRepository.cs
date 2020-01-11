@@ -22,14 +22,16 @@ namespace Akira.Contracts.TestTools.Scenarios
         /// Add a new Scenario to the current Scenario Context
         /// </summary>
         /// <param name="scenarioName">Indicates the name of the Scenario</param>
-        /// <param name="action">The actions that will be executed to the current Scenario</param>
+        /// <param name="scenarioRuleSetAction">
+        /// The action that will be executed on the model <see cref="{T}"/> to set the current Scenario
+        /// </param>
         /// <param name="scenarioType">
         /// Indicates if the Current Scenario will be <see cref="ScenarioCombinationType.Unknown"/>, <see cref="ScenarioCombinationType.AlwaysValid"/> or <see cref="ScenarioCombinationType.AlwaysInvalid"/>
         /// </param>
         void AddScenario(
             bool hasDefaultScenarioContext,
             string scenarioName,
-            Action<IScenarioRuleSet<T>> action,
+            Action<IScenarioRuleSet<T>> scenarioRuleSetAction,
             ScenarioCombinationType scenarioType = ScenarioCombinationType.Unknown);
 
         /// <summary>
@@ -52,7 +54,7 @@ namespace Akira.Contracts.TestTools.Scenarios
         ICompletedModelBuilder<T> GetModelBuilder(
             ScenarioBuilderType scenarioBuilderType,
             IDictionary<string, string> scenarioBuilderConfiguration,
-            Func<bool> validateBuilderConfiguration);
+            bool validateBuilderConfiguration = true);
 
         IEnumerable<IDictionary<string, string>> GetMinimumTestingScenarioCombinations(
             ScenarioBuilderType scenarioBuilderType);

@@ -25,7 +25,7 @@ namespace Akira.TestTools.Scenarios
 
         #region Properties
 
-        public string Key { get; private set; }
+        public string Key { get; }
 
         #endregion Properties
 
