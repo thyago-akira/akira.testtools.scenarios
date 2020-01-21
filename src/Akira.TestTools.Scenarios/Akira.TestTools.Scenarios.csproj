@@ -19,6 +19,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="InternalModels\Scenario.cs" />
+    <Compile Remove="InternalModels\ScenarioContext.cs" />
+    <Compile Remove="InternalModels\ScenarioContextSet.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Bogus" Version="29.0.1" />
   </ItemGroup>
 

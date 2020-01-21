@@ -8,7 +8,7 @@ using Akira.TestTools.Scenarios.InternalModels;
 
 namespace Akira.TestTools.Scenarios
 {
-    internal class ScenarioContext
+    public class ScenarioContext
     {
         private const int MinimumScenariosByScenarioContext = 2;
 
@@ -27,7 +27,7 @@ namespace Akira.TestTools.Scenarios
 
         internal int ScenariosCount => this.scenarios.Count;
 
-        internal bool IsCurrentScenarioContextDefaultContext => this.Index == 1;
+        internal bool CurrentScenarioContextIsDefault => this.Index == 1;
 
         internal string Name { get; private set; }
 
@@ -81,7 +81,7 @@ namespace Akira.TestTools.Scenarios
                 return;
             }
 
-            if (!this.IsCurrentScenarioContextDefaultContext)
+            if (!this.CurrentScenarioContextIsDefault)
             {
                 throw new InvalidOperationException(
                     string.Format(
@@ -179,7 +179,7 @@ namespace Akira.TestTools.Scenarios
             // Check the add Scenario calls done for the Default Scenario Context
             // when the Current Scenario Context is a Custom Scenario Context
             if (useDefaultScenarioContext &&
-                !this.IsCurrentScenarioContextDefaultContext)
+                !this.CurrentScenarioContextIsDefault)
             {
                 throw new InvalidOperationException(
                     Errors.ScenariosForDefaultScenarioContextMustBeCalledFirst);
@@ -188,7 +188,7 @@ namespace Akira.TestTools.Scenarios
             // Check the add Scenario calls done for the Custom Scenario Context
             // when the Current Scenario Context is the Default Scenario Context
             if (!useDefaultScenarioContext &&
-                this.IsCurrentScenarioContextDefaultContext)
+                this.CurrentScenarioContextIsDefault)
             {
                 throw new InvalidOperationException(
                     Errors.ScenariosForDefaultScenarioContextMustBeSetInOtherMethods);

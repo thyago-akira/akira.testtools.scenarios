@@ -20,10 +20,8 @@ namespace Akira.TestTools.Scenarios
         private readonly IScenarioRuleSetActionCollection<T> scenarioRuleSetActionCollection =
             new CachedScenarioRuleSetActionCollection<T>();
 
-        private readonly Dictionary<string, ScenarioContext> contexts =
-            new Dictionary<string, ScenarioContext>(StringComparer.OrdinalIgnoreCase);
-
-        private int currentScenarioContextIndex;
+        private readonly ScenarioContextSet contexts =
+            new ScenarioContextSet();
 
         private Random random;
 
@@ -33,7 +31,7 @@ namespace Akira.TestTools.Scenarios
 
         internal ScenariosRepository(string defaultScenarioContextName)
         {
-            this.Add(defaultScenarioContextName, false);
+            this.contexts.AddScenarioContext(defaultScenarioContextName);
         }
 
         #endregion Constructors
@@ -43,20 +41,7 @@ namespace Akira.TestTools.Scenarios
         /// <summary>
         /// Gets the number of distinct possible <see cref="ICompletedModelBuilder<T>"/> for the current <see cref="ScenariosRepository{T}" />
         /// </summary>
-        public ulong CountCompletedModelBuilders { get; private set; } = 1;
-
-        internal ScenarioContext CurrentScenarioContext { get; private set; }
-
-        internal IEnumerable<ScenarioContext> Contexts
-        {
-            get
-            {
-                foreach (var context in this.contexts.Values)
-                {
-                    yield return context;
-                }
-            }
-        }
+        public ulong CountCompletedModelBuilders => this.contexts.CountCompletedModelBuilders;
 
         private Random Random
         {
@@ -81,10 +66,8 @@ namespace Akira.TestTools.Scenarios
         /// Add a new Scenario Context, initializing all the information related to it
         /// </summary>
         /// <param name="scenarioContextName">The name of new scenario context</param>
-        public void AddScenarioContext(string scenarioContextName)
-        {
-            this.Add(scenarioContextName, true);
-        }
+        public void AddScenarioContext(string scenarioContextName) =>
+            this.contexts.AddScenarioContext(scenarioContextName);
 
         /// <summary>
         /// Add a new Scenario to the current Scenario Context
@@ -103,7 +86,7 @@ namespace Akira.TestTools.Scenarios
         {
             this.scenarioRuleSetActionCollection.ValidateScenarioRuleSetAction(scenarioRuleSetAction);
 
-            var scenarioKey = this.AddScenario(
+            var scenarioKey = this.contexts.AddScenario(
                 hasDefaultScenarioContext,
                 scenarioName,
                 scenarioType);
@@ -139,7 +122,8 @@ namespace Akira.TestTools.Scenarios
         {
             var knownCombination = this.ValidateKnownCombinationConfiguration(
                 scenarioCombinationType,
-                knownScenarioCombinationConfiguration);
+                knownScenarioCombinationConfiguration,
+                this.contexts.CurrentScenarioContextIsDefault);
 
             this.knownCombinationCollection.Add(
                 knownCombination);
@@ -228,49 +212,14 @@ namespace Akira.TestTools.Scenarios
 
         #region Internal Methods
 
-        /// <summary>
-        /// Validate the Scenario and returns the Scenario Key
-        /// </summary>
-        /// <param name="hasDefaultScenarioContext">
-        /// Flag that indicates if the method was called by a Default Scenario Context method (true)
-        /// or a Custom Scenario Context method (false)
-        /// </param>
-        /// <param name="scenarioName">Indicates the name of the Scenario</param>
-        /// <param name="scenarioType">
-        /// Indicates if the Current Scenario will be <see cref="ScenarioCombinationType.Unknown"/>, <see cref="ScenarioCombinationType.AlwaysValid"/> or <see cref="ScenarioCombinationType.AlwaysInvalid"/>
-        /// </param>
-        /// <returns>The Scenario Key</returns>
-        private ScenarioKey AddScenario(
-            bool hasDefaultScenarioContext,
-            string scenarioName,
-            ScenarioCombinationType scenarioType)
-        {
-            var scenarioKey = this.CurrentScenarioContext.AddScenario(
-                hasDefaultScenarioContext,
-                scenarioName,
-                scenarioType);
-
-            if (this.CurrentScenarioContext.ScenariosCount > 1)
-            {
-                if (this.CurrentScenarioContext.ScenariosCount > 2)
-                {
-                    this.CountCompletedModelBuilders /= (ulong)(this.CurrentScenarioContext.ScenariosCount - 1);
-                }
-
-                this.CountCompletedModelBuilders *= (ulong)this.CurrentScenarioContext.ScenariosCount;
-            }
-
-            return scenarioKey;
-        }
-
         internal IEnumerable<ScenarioKey> GetFullScenarioBuilderRules(
             IDictionary<string, string> scenarioCombinationConfiguration)
         {
-            this.CurrentScenarioContext.ValidateContextCompleted();
+            this.contexts.ValidateCurrentContextCompleted();
 
             var buildRules = new List<ScenarioKey>();
 
-            foreach (var scenarioContext in this.Contexts)
+            foreach (var scenarioContext in this.contexts)
             {
                 if (scenarioCombinationConfiguration.TryGetValue(
                     scenarioContext.Name,
@@ -309,81 +258,19 @@ namespace Akira.TestTools.Scenarios
         #region Private Methods
 
         /// <summary>
-        /// Check if the current set has the given scenario context name
-        /// </summary>
-        /// <param name="scenarioContextName">The scenario name that will be checked</param>
-        /// <returns>Returns true if the context name exists</returns>
-        private bool ContainsName(string scenarioContextName)
-        {
-            return this.contexts.ContainsKey(scenarioContextName);
-        }
-
-        /// <summary>
-        /// Add a new Scenario Context, initializing all the information related to it
-        /// </summary>
-        /// <param name="scenarioContextName">The name of new scenario context</param>
-        /// <param name="validateName">Indicates if the name will be validated</param>
-        private void Add(
-            string scenarioContextName,
-            bool validateName)
-        {
-            if (validateName)
-            {
-                this.CurrentScenarioContext.ValidateContextCompleted();
-
-                this.ValidateContextName(scenarioContextName);
-            }
-
-            this.CurrentScenarioContext = new ScenarioContext(
-                scenarioContextName,
-                ++this.currentScenarioContextIndex);
-
-            this.contexts.Add(scenarioContextName, this.CurrentScenarioContext);
-        }
-
-        /// <summary>
-        /// Validate the new Scenario Context Name
-        /// </summary>
-        /// <param name="scenarioContextName">The name of new scenario context</param>
-        private void ValidateContextName(string scenarioContextName)
-        {
-            if (string.IsNullOrWhiteSpace(scenarioContextName))
-            {
-                throw new ArgumentException(
-                    Errors.ScenarioContextNameIsnotSet);
-            }
-
-            if (string.Equals(
-                scenarioContextName,
-                Defaults.ScenarioContextName,
-                StringComparison.OrdinalIgnoreCase))
-            {
-                throw new ArgumentException(
-                    string.Format(
-                        Errors.ScenarioContextNameAsDefaultIsnotAllowed,
-                        Defaults.ScenarioContextName));
-            }
-
-            if (this.ContainsName(scenarioContextName))
-            {
-                throw new ArgumentException(
-                    string.Format(
-                        Errors.ScenarioContextNameAlreadyExists,
-                        scenarioContextName));
-            }
-        }
-
         private KnownCombination ValidateKnownCombinationConfiguration(
             ScenarioCombinationType combinationType,
-            IDictionary<string, string> scenarioCombinationConfiguration)
+            IDictionary<string, string> scenarioCombinationConfiguration,
+            bool currentIsDefaultContext)
         {
             this.ValidateKnownCombinationConfigurationBuilder(
+                currentIsDefaultContext,
                 scenarioCombinationConfiguration);
 
             this.ValidateScenarioCombinationConfigurationKeys(
                 scenarioCombinationConfiguration);
 
-            this.CurrentScenarioContext.ValidateContextCompleted();
+            this.contexts.ValidateCurrentContextCompleted();
 
             return this.ValidateKnownCombinationConfigurationBuilderValues(
                 combinationType,
@@ -391,9 +278,10 @@ namespace Akira.TestTools.Scenarios
         }
 
         private void ValidateKnownCombinationConfigurationBuilder(
+            bool currentIsDefaultContext,
             IDictionary<string, string> scenarioCombinationConfiguration)
         {
-            if (this.CurrentScenarioContext.IsCurrentScenarioContextDefaultContext)
+            if (currentIsDefaultContext)
             {
                 throw new ArgumentException(
                     Errors.ScenarioFakerWithNoAdditionalScenariosForKnownScenarioCombinationConfig);
@@ -419,7 +307,7 @@ namespace Akira.TestTools.Scenarios
             foreach (var builderContextName in scenarioCombinationConfiguration.Keys)
             {
                 if (string.IsNullOrEmpty(builderContextName) ||
-                    !this.ContainsName(builderContextName))
+                    !this.contexts.ContainsScenarioContext(builderContextName))
                 {
                     throw new ArgumentException(
                         string.Format(
@@ -438,7 +326,7 @@ namespace Akira.TestTools.Scenarios
                 scenarioCombinationConfiguration,
                 StringComparer.OrdinalIgnoreCase);
 
-            foreach (var scenarioContext in this.Contexts)
+            foreach (var scenarioContext in this.contexts)
             {
                 if (localDictionary.TryGetValue(
                     scenarioContext.Name,
