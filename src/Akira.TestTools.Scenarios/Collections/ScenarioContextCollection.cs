@@ -1,20 +1,20 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using Akira.Contracts.TestTools.Scenarios;
+using Akira.Contracts.TestTools.Scenarios.Collections;
+using Akira.Contracts.TestTools.Scenarios.Enums;
+using Akira.Contracts.TestTools.Scenarios.Models;
 using Akira.TestTools.Scenarios.Constants;
-using Akira.TestTools.Scenarios.InternalModels;
+using Akira.TestTools.Scenarios.Models;
 
 namespace Akira.TestTools.Scenarios.Collections
 {
-    public class ScenarioContextSet : IEnumerable<ScenarioContext>
+    public class ScenarioContextCollection : IScenarioContextCollection
     {
         #region Fields
 
-        private readonly Dictionary<string, ScenarioContext> contexts =
-            new Dictionary<string, ScenarioContext>(StringComparer.OrdinalIgnoreCase);
-
-        private int currentScenarioContextIndex;
+        private readonly Dictionary<string, IScenarioContext> scenarioContexts =
+            new Dictionary<string, IScenarioContext>(StringComparer.OrdinalIgnoreCase);
 
         private string currentScenarioContextName;
 
@@ -30,21 +30,18 @@ namespace Akira.TestTools.Scenarios.Collections
         public bool CurrentScenarioContextIsDefault =>
             this.CurrentScenarioContext.CurrentScenarioContextIsDefault;
 
-        private ScenarioContext CurrentScenarioContext
+        private IScenarioContext CurrentScenarioContext
         {
             get
             {
                 if (!string.IsNullOrWhiteSpace(this.currentScenarioContextName))
                 {
-                    return this.contexts[this.currentScenarioContextName];
+                    return this.scenarioContexts[this.currentScenarioContextName];
                 }
 
                 return null;
             }
         }
-
-        private bool HasScenarioContext =>
-            this.currentScenarioContextIndex > 0;
 
         #endregion Properties
 
@@ -52,11 +49,11 @@ namespace Akira.TestTools.Scenarios.Collections
 
         #region Public Methods
 
-        public IEnumerator<ScenarioContext> GetEnumerator() =>
-            this.contexts.Values.GetEnumerator();
+        public IEnumerator<IScenarioContext> GetEnumerator() =>
+            this.scenarioContexts.Values.GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator() =>
-            this.contexts.Values.GetEnumerator();
+            this.scenarioContexts.Values.GetEnumerator();
 
         public void AddScenarioContext(
             string scenarioContextName)
@@ -68,10 +65,8 @@ namespace Akira.TestTools.Scenarios.Collections
             this.AddContext(cleanedContextName);
         }
 
-        public bool ContainsScenarioContext(string scenarioContextName)
-        {
-            return this.contexts.ContainsKey(scenarioContextName);
-        }
+        public bool ContainsScenarioContext(string scenarioContextName) =>
+            this.scenarioContexts.ContainsKey(scenarioContextName);
 
         /// <summary>
         /// Validate the Scenario and returns the Scenario Key
@@ -85,12 +80,12 @@ namespace Akira.TestTools.Scenarios.Collections
         /// Indicates if the Current Scenario will be <see cref="ScenarioCombinationType.Unknown"/>, <see cref="ScenarioCombinationType.AlwaysValid"/> or <see cref="ScenarioCombinationType.AlwaysInvalid"/>
         /// </param>
         /// <returns>The Scenario Key</returns>
-        public ScenarioKey AddScenario(
+        public IScenario AddScenario(
             bool hasDefaultScenarioContext,
             string scenarioName,
             ScenarioCombinationType scenarioType)
         {
-            var scenarioKey = this.CurrentScenarioContext.AddScenario(
+            var scenario = this.CurrentScenarioContext.AddScenario(
                 hasDefaultScenarioContext,
                 scenarioName,
                 scenarioType);
@@ -105,7 +100,7 @@ namespace Akira.TestTools.Scenarios.Collections
                 this.CountCompletedModelBuilders *= (ulong)this.CurrentScenarioContext.ScenariosCount;
             }
 
-            return scenarioKey;
+            return scenario;
         }
 
         public void ValidateCurrentContextCompleted() =>
@@ -132,7 +127,7 @@ namespace Akira.TestTools.Scenarios.Collections
 
             var cleanedScenarioContextName = scenarioContextName.Trim();
 
-            if (this.HasScenarioContext &&
+            if (this.scenarioContexts.Count > 0 &&
                 string.Equals(
                 Defaults.ScenarioContextName,
                 cleanedScenarioContextName,
@@ -165,11 +160,11 @@ namespace Akira.TestTools.Scenarios.Collections
         {
             this.currentScenarioContextName = scenarioContextName;
 
-            this.contexts.Add(
+            this.scenarioContexts.Add(
                 this.currentScenarioContextName,
                 new ScenarioContext(
                     this.currentScenarioContextName,
-                    ++this.currentScenarioContextIndex));
+                    this.scenarioContexts.Count + 1));
         }
 
         #endregion Private Methods

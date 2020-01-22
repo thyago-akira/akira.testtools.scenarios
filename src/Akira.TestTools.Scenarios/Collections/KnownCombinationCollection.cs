@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using Akira.Contracts.TestTools.Scenarios;
+using Akira.Contracts.TestTools.Scenarios.Collections;
+using Akira.Contracts.TestTools.Scenarios.Enums;
+using Akira.Contracts.TestTools.Scenarios.Models;
 
 namespace Akira.TestTools.Scenarios.Collections
 {

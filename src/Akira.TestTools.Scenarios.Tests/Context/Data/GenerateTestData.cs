@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Akira.Contracts.TestTools.Scenarios;
+using Akira.Contracts.TestTools.Scenarios.Enums;
 using Akira.TestTools.Scenarios.Constants;
 using Akira.TestTools.Scenarios.Extensions;
 using Akira.TestTools.Scenarios.Tests.Stubs;

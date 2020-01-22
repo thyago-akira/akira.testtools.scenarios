@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Akira.Contracts.TestTools.Scenarios
+namespace Akira.Contracts.TestTools.Scenarios.Collections
 {
     public interface IScenarioRuleSetActionCollection<T>
         where T : class

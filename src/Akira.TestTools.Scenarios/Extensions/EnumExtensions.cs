@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Akira.Contracts.TestTools.Scenarios;
+using Akira.Contracts.TestTools.Scenarios.Enums;
 
 namespace Akira.TestTools.Scenarios.Extensions
 {

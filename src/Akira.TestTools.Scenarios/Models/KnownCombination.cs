@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
-using Akira.Contracts.TestTools.Scenarios;
+using Akira.Contracts.TestTools.Scenarios.Enums;
+using Akira.Contracts.TestTools.Scenarios.Models;
 
-namespace Akira.TestTools.Scenarios
+namespace Akira.TestTools.Scenarios.Models
 {
     public class KnownCombination : IKnownCombination
     {

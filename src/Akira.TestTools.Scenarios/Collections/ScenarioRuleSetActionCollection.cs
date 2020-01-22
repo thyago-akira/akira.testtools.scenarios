@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Akira.Contracts.TestTools.Scenarios;
+using Akira.Contracts.TestTools.Scenarios.Collections;
 using Akira.TestTools.Scenarios.Constants;
 
 namespace Akira.TestTools.Scenarios.Collections

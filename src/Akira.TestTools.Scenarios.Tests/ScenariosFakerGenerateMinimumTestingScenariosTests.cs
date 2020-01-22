@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Akira.Contracts.TestTools.Scenarios;
+using Akira.Contracts.TestTools.Scenarios.Enums;
 using Akira.TestTools.Scenarios.Tests.Context;
 using Akira.TestTools.Scenarios.Tests.Context.Data;
 using Akira.TestTools.Scenarios.Tests.Extensions;

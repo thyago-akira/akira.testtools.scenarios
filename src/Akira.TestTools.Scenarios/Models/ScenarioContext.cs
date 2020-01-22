@@ -1,37 +1,49 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Akira.Contracts.TestTools.Scenarios;
+using Akira.Contracts.TestTools.Scenarios.Enums;
+using Akira.Contracts.TestTools.Scenarios.Models;
 using Akira.TestTools.Scenarios.Constants;
 using Akira.TestTools.Scenarios.Extensions;
-using Akira.TestTools.Scenarios.InternalModels;
 
-namespace Akira.TestTools.Scenarios
+namespace Akira.TestTools.Scenarios.Models
 {
-    public class ScenarioContext
+    public class ScenarioContext : IScenarioContext
     {
-        private const int MinimumScenariosByScenarioContext = 2;
+        #region Fields
 
-        private readonly HashSet<string> scenarios;
+        private readonly Dictionary<string, Scenario> scenarios =
+            new Dictionary<string, Scenario>(StringComparer.OrdinalIgnoreCase);
 
         private Random random;
 
+        #endregion Fields
+
+        #region Constructors
+
         internal ScenarioContext(
             string name,
-            int index)
+            int index,
+            int minimumScenariosByScenarioContext = 2)
         {
             this.Name = name?.Trim();
             this.Index = index;
-            this.scenarios = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            this.MinimumScenariosByScenarioContext = minimumScenariosByScenarioContext;
         }
 
-        internal int ScenariosCount => this.scenarios.Count;
+        #endregion Constructors
 
-        internal bool CurrentScenarioContextIsDefault => this.Index == 1;
+        #region Properties
 
-        internal string Name { get; private set; }
+        public int MinimumScenariosByScenarioContext { get; private set; }
 
-        internal int Index { get; private set; }
+        public int Index { get; private set; }
+
+        public string Name { get; private set; }
+
+        public int ScenariosCount => this.scenarios.Count;
+
+        public bool CurrentScenarioContextIsDefault => this.Index == 1;
 
         private Random Random
         {
@@ -46,58 +58,38 @@ namespace Akira.TestTools.Scenarios
             }
         }
 
-        internal ScenarioKey GetScenarioKey(
-            string scenarioName,
-            bool findRandomScenario = false)
+        #endregion Properties
+
+        #region Methods
+
+        public IScenario GetScenario(string scenarioName)
         {
-            if (this.scenarios.Contains(scenarioName.Trim()))
+            if (this.scenarios.ContainsKey(scenarioName.Trim()))
             {
-                return new ScenarioKey(
-                    this.Name,
-                    this.Index,
-                    scenarioName.Trim());
-            }
-
-            if (findRandomScenario)
-            {
-                var randomIndex = this.Random.Next(this.scenarios.Count);
-
-                return new ScenarioKey(
-                    this.Name,
-                    this.Index,
-                    this.scenarios.ToArray()[randomIndex]);
+                return this.scenarios[scenarioName.Trim()];
             }
 
             return default;
         }
 
-        /// <summary>
-        /// Validate the Current Scenario Context, checking if it has the minimum required scenarios
-        /// </summary>
-        internal void ValidateContextCompleted()
+        public IScenario GetScenarioOrRandom(
+            string scenarioName)
         {
-            if (this.scenarios.Count >= MinimumScenariosByScenarioContext)
+            var scenario = this.GetScenario(scenarioName);
+
+            if (scenario != default)
             {
-                return;
+                return scenario;
             }
 
-            if (!this.CurrentScenarioContextIsDefault)
+            if (this.scenarios.Count == 1)
             {
-                throw new InvalidOperationException(
-                    string.Format(
-                        Errors.ScenarioContextIncomplete,
-                        this.Name));
+                return this.scenarios.First().Value;
             }
 
-            if (!this.scenarios.Contains(
-                Defaults.ScenarioValidName))
-            {
-                throw new InvalidOperationException(
-                    Errors.DefaultScenarioContextWithoutValidScenario);
-            }
+            var randomIndex = this.Random.Next(this.ScenariosCount);
 
-            throw new InvalidOperationException(
-                Errors.DefaultScenarioContextWithoutInvalidScenario);
+            return this.scenarios.ToArray()[randomIndex].Value;
         }
 
         /// <summary>
@@ -112,7 +104,7 @@ namespace Akira.TestTools.Scenarios
         /// Indicates if the Current Scenario will be <see cref="ScenarioCombinationType.Unknown"/>, <see cref="ScenarioCombinationType.AlwaysValid"/> or <see cref="ScenarioCombinationType.AlwaysInvalid"/>
         /// </param>
         /// <returns>The Scenario Key</returns>
-        internal ScenarioKey AddScenario(
+        public IScenario AddScenario(
             bool hasDefaultScenarioContext,
             string scenarioName,
             ScenarioCombinationType scenarioType)
@@ -126,6 +118,35 @@ namespace Akira.TestTools.Scenarios
                 scenarioType);
 
             return this.AddScenario(scenarioName);
+        }
+
+        /// <summary>
+        /// Validate the Current Scenario Context, checking if it has the minimum required scenarios
+        /// </summary>
+        public void ValidateContextCompleted()
+        {
+            if (this.scenarios.Count >= this.MinimumScenariosByScenarioContext)
+            {
+                return;
+            }
+
+            if (!this.CurrentScenarioContextIsDefault)
+            {
+                throw new InvalidOperationException(
+                    string.Format(
+                        Errors.ScenarioContextIncomplete,
+                        this.Name));
+            }
+
+            if (!this.scenarios.ContainsKey(
+                Defaults.ScenarioValidName))
+            {
+                throw new InvalidOperationException(
+                    Errors.DefaultScenarioContextWithoutValidScenario);
+            }
+
+            throw new InvalidOperationException(
+                Errors.DefaultScenarioContextWithoutInvalidScenario);
         }
 
         /// <summary>
@@ -200,7 +221,7 @@ namespace Akira.TestTools.Scenarios
         /// </summary>
         /// <param name="scenarioName">Indicates the name of the Scenario</param>
         /// <returns>The Scenario Key</returns>
-        private ScenarioKey AddScenario(string scenarioName)
+        private IScenario AddScenario(string scenarioName)
         {
             if (string.IsNullOrWhiteSpace(scenarioName))
             {
@@ -209,7 +230,7 @@ namespace Akira.TestTools.Scenarios
 
             var cleanedScenarioName = scenarioName.Trim();
 
-            if (!this.scenarios.Add(cleanedScenarioName))
+            if (this.scenarios.ContainsKey(cleanedScenarioName))
             {
                 throw new ArgumentException(
                     string.Format(
@@ -218,10 +239,17 @@ namespace Akira.TestTools.Scenarios
                         this.Name));
             }
 
-            return new ScenarioKey(
-                this.Name,
-                this.Index,
+            var scenario = new Scenario(
+                this,
                 cleanedScenarioName);
+
+            this.scenarios.Add(
+                scenario.Name,
+                scenario);
+
+            return scenario;
         }
+
+        #endregion Methods
     }
 }

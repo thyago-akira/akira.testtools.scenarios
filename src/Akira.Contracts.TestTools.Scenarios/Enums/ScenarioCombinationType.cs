@@ -1,4 +1,4 @@
-﻿namespace Akira.Contracts.TestTools.Scenarios
+﻿namespace Akira.Contracts.TestTools.Scenarios.Enums
 {
     public enum ScenarioCombinationType
     {

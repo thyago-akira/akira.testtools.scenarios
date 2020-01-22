@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using Akira.Contracts.TestTools.Scenarios.Models;
 
-namespace Akira.Contracts.TestTools.Scenarios
+namespace Akira.Contracts.TestTools.Scenarios.Collections
 {
     public interface IKnownCombinationCollection : IEnumerable<IKnownCombination>
     {
