@@ -4,20 +4,35 @@ namespace Akira.TestTools.Scenarios.Constants
 {
     public static class Errors
     {
+        public static class ScenariosBuilder
+        {
+            //public const string BuilderRepositoryIsnotSet =
+            //    "Scenarios Repository is not set";
+
+            //public const string BuilderRepositoryIsAlreadySet =
+            //    "Scenarios Repository is not set";
+
+            public const string InvalidNumberOfRows =
+                "Invalid number of rows to generate";
+        }
+
+        public static class Context
+        {
+            public const string NameIsnotSet =
+                "Context name is not set";
+
+            public const string NameAsDefaultIsnotAllowed =
+                "Context name as '{0}' is only allowed in the first Scenario Context";
+
+            public const string NameAlreadyExists =
+                "Context '{0}' already exists";
+        }
+
         public const string DefaultScenarioContextWithoutValidScenario =
             "Default Scenario Context doesn't have a " + DefaultContextValidScenario;
 
         public const string DefaultScenarioContextWithoutInvalidScenario =
             "Default Scenario Context doesn't have a " + DefaultContextInvalidScenario;
-
-        public const string ScenarioContextNameIsnotSet =
-            "Scenario Context name is not set";
-
-        public const string ScenarioContextNameAsDefaultIsnotAllowed =
-            "Scenario Context name as '{0}' is only allowed as first Scenario Context";
-
-        public const string ScenarioContextNameAlreadyExists =
-            "Scenario Context '{0}' already exists";
 
         public const string ScenarioContextIncomplete =
             "Scenario Context '{0}' incomplete. You must have at least 2 Scenarios for each Scenario Context.";
@@ -86,9 +101,6 @@ namespace Akira.TestTools.Scenarios.Constants
         public const string ScenarioCombinationConfigHasNoCompatibleKnownScenarioCombinationConfig =
             "Scenario Combination Configuration of type '{0}' has no compatible " +
             "Known Scenario Combination Configuration";
-
-        public const string InvalidNumberOfRows =
-            "Invalid number of rows to generate";
 
         private const string DefaultContextValidScenario = nameof(IScenarioBuilderExtensions.DefaultContextValidScenario);
 

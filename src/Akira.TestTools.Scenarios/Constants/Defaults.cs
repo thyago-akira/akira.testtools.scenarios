@@ -2,7 +2,7 @@
 {
     public static class Defaults
     {
-        public const string ScenarioContextName = "default";
+        public const string ContextName = "default";
 
         public const string ScenarioValidName = "valid";
 

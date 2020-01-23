@@ -105,7 +105,7 @@ var minimumListToTest = scenariosFaker.GenerateMinimumTestingScenarios();
 ```
 ### Full Example:
 ```csharp
-var scenariosFaker = new ScenariosFaker<Customer>()
+var scenariosFaker = new ScenariosBuilder<Customer>()
     .DefaultContextValidScenario(scenarioRuleset => scenarioRuleset
         .RuleFor(x => x.Id, (f) => f.Random.Int(1))
         .RuleFor(x => x.FirstName, (f) => f.Name.FirstName())

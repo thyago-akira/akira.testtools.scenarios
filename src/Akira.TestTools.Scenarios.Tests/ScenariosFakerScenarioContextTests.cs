@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Akira.TestTools.Scenarios.Tests
 {
     [TestClass]
-    public class ScenariosFakerScenarioContextTests : BaseScenariosFakerTests
+    public class ScenariosBuilderScenarioContextTests : BaseScenariosBuilderTests
     {
         public static IEnumerable<object[]> GetScenarioValidDataForCompleteFaker()
             => ScenarioContextTestData
@@ -26,7 +26,7 @@ namespace Akira.TestTools.Scenarios.Tests
 
         [DataTestMethod]
         [DynamicData(nameof(GetScenarioValidDataForCompleteFaker), DynamicDataSourceType.Method)]
-        public void ScenariosFaker_Scenario_CompleteFaker_ReturnsScenariosFaker(
+        public void ScenariosBuilder_Scenario_CompleteFaker_ReturnsScenariosBuilder(
             Context.TestContext addScenarioContext)
         {
             // Action
@@ -38,7 +38,7 @@ namespace Akira.TestTools.Scenarios.Tests
 
         [DataTestMethod]
         [DynamicData(nameof(GetScenarioInvalidDataForIncompleteFaker), DynamicDataSourceType.Method)]
-        public void ScenariosFaker_Scenario_IncompleteFaker_ThrowsException(
+        public void ScenariosBuilder_Scenario_IncompleteFaker_ThrowsException(
             Context.TestContext addScenarioContext)
         {
             // Action && Assert
@@ -47,7 +47,7 @@ namespace Akira.TestTools.Scenarios.Tests
 
         [DataTestMethod]
         [DynamicData(nameof(GetScenarioInvalidDataForCompleteFaker), DynamicDataSourceType.Method)]
-        public void ScenariosFaker_Scenario_CompleteFaker_ThrowsException(
+        public void ScenariosBuilder_Scenario_CompleteFaker_ThrowsException(
             Context.TestContext addScenarioContext)
         {
             // Action && Assert

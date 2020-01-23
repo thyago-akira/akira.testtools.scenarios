@@ -60,14 +60,14 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             yield return new TestFakerContext
             {
                 FakerDescription = "Empty Faker",
-                GetFaker = () => new ScenariosFaker<SimpleModel>(),
+                GetFaker = () => new ScenariosBuilder<SimpleModel>(),
                 OverrideMessage = Errors.DefaultScenarioContextWithoutValidScenario
             };
 
             yield return new TestFakerContext
             {
                 FakerDescription = "Default Context Valid Only",
-                GetFaker = () => new ScenariosFaker<SimpleModel>()
+                GetFaker = () => new ScenariosBuilder<SimpleModel>()
                     .DefaultContextValidScenario(scenarioRuleSet =>
                         scenarioRuleSet.Ignore(m => m.Id)),
                 OverrideMessage = Errors.DefaultScenarioContextWithoutInvalidScenario
@@ -76,7 +76,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             yield return new TestFakerContext
             {
                 FakerDescription = "Default Context Invalid Only",
-                GetFaker = () => new ScenariosFaker<SimpleModel>()
+                GetFaker = () => new ScenariosBuilder<SimpleModel>()
                     .DefaultContextInvalidScenario(scenarioRuleSet =>
                         scenarioRuleSet.Ignore(m => m.Id)),
                 OverrideMessage = Errors.DefaultScenarioContextWithoutValidScenario
@@ -85,7 +85,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             yield return new TestFakerContext
             {
                 FakerDescription = "Empty Custom Scenario Context",
-                GetFaker = () => new ScenariosFaker<SimpleModel>()
+                GetFaker = () => new ScenariosBuilder<SimpleModel>()
                     .DefaultContextValidScenario(scenarioRuleSet =>
                         scenarioRuleSet.Ignore(m => m.Id))
                     .DefaultContextInvalidScenario(scenarioRuleSet =>
@@ -99,7 +99,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             yield return new TestFakerContext
             {
                 FakerDescription = "Incomplete Custom Scenario Context",
-                GetFaker = () => new ScenariosFaker<SimpleModel>()
+                GetFaker = () => new ScenariosBuilder<SimpleModel>()
                     .DefaultContextValidScenario(scenarioRuleSet =>
                         scenarioRuleSet.Ignore(m => m.Id))
                     .DefaultContextInvalidScenario(scenarioRuleSet =>
@@ -119,7 +119,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             yield return new TestFakerContext
             {
                 FakerDescription = "Completed Default Scenario Context",
-                GetFaker = () => new ScenariosFaker<SimpleModel>()
+                GetFaker = () => new ScenariosBuilder<SimpleModel>()
                     .DefaultContextValidScenario(scenarioRuleSet =>
                         scenarioRuleSet.Ignore(m => m.Id))
                     .DefaultContextInvalidScenario(scenarioRuleSet =>
@@ -129,7 +129,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             yield return new TestFakerContext
             {
                 FakerDescription = "Completed Custom Scenario Context",
-                GetFaker = () => new ScenariosFaker<SimpleModel>()
+                GetFaker = () => new ScenariosBuilder<SimpleModel>()
                     .DefaultContextValidScenario(scenarioRuleSet =>
                         scenarioRuleSet.Ignore(m => m.Id))
                     .DefaultContextInvalidScenario(scenarioRuleSet =>
@@ -151,23 +151,22 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             {
                 CaseDescription = "Null Scenario Context Name",
                 TestedAction = () => getScenarioFaker().ScenarioContext(null),
-                ExpectedExceptionMessage = Errors.ScenarioContextNameIsnotSet
+                ExpectedExceptionMessage = Errors.Context.NameIsnotSet
             };
 
             yield return new TestContext
             {
                 CaseDescription = "Empty Scenario Context Name",
                 TestedAction = () => getScenarioFaker().ScenarioContext(string.Empty),
-                ExpectedExceptionMessage = Errors.ScenarioContextNameIsnotSet
+                ExpectedExceptionMessage = Errors.Context.NameIsnotSet
             };
 
             yield return new TestContext
             {
                 CaseDescription = "Scenario Context Name as default",
-                TestedAction = () => getScenarioFaker().ScenarioContext(Defaults.ScenarioContextName),
-                ExpectedExceptionMessage = string.Format(
-                    Errors.ScenarioContextNameAsDefaultIsnotAllowed,
-                    Defaults.ScenarioContextName)
+                TestedAction = () => getScenarioFaker().ScenarioContext(Defaults.ContextName),
+                ExpectedExceptionMessage = Errors.Context.NameAsDefaultIsnotAllowed.Format(
+                    Defaults.ContextName)
             };
 
             yield return new TestContext
@@ -182,8 +181,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                         ScenarioContextTestScenarioName4,
                         scenarioRuleSet => scenarioRuleSet.Ignore(m => m.Name))
                     .ScenarioContext(ScenarioContextTestName),
-                ExpectedExceptionMessage = string.Format(
-                    Errors.ScenarioContextNameAlreadyExists,
+                ExpectedExceptionMessage = Errors.Context.NameAlreadyExists.Format(
                     ScenarioContextTestName)
             };
 
@@ -199,8 +197,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                         ScenarioContextTestScenarioName4,
                         scenarioRuleSet => scenarioRuleSet.Ignore(m => m.Name))
                     .ScenarioContext(ScenarioContextTestName),
-                ExpectedExceptionMessage = string.Format(
-                    Errors.ScenarioContextNameAlreadyExists,
+                ExpectedExceptionMessage = Errors.Context.NameAlreadyExists.Format(
                     ScenarioContextTestName)
             };
         }

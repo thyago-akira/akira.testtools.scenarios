@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Akira.TestTools.Scenarios.Tests
 {
     [TestClass]
-    public class ScenariosFakerCountPossibleScenariosCombinationsTests
+    public class ScenariosBuilderCountPossibleScenariosCombinationsTests
     {
         public static IEnumerable<object[]> GetValidData()
             => GenerateMinimumTestingScenariosTestData
@@ -16,7 +16,7 @@ namespace Akira.TestTools.Scenarios.Tests
 
         [DataTestMethod]
         [DynamicData(nameof(GetValidData), DynamicDataSourceType.Method)]
-        public void ScenariosFaker_CountPossibleScenariosCombinations_ReturnsCount(
+        public void ScenariosBuilder_CountPossibleScenariosCombinations_ReturnsCount(
             TestBuilderContext getTestBuildersTestContext)
         {
             // Act
@@ -26,7 +26,7 @@ namespace Akira.TestTools.Scenarios.Tests
             Assert.IsNotNull(faker);
             Assert.AreEqual(
                 getTestBuildersTestContext.ExpectedCountPossibleScenariosCombinations,
-                faker.BuilderRepository.CountCompletedModelBuilders);
+                faker.BuilderRepository.CountModelBuilders);
         }
     }
 }

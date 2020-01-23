@@ -6,19 +6,21 @@ using Akira.TestTools.Scenarios.Constants;
 
 namespace Akira.TestTools.Scenarios.Collections
 {
-    public class ScenarioRuleSetActionCollection<T> : IScenarioRuleSetActionCollection<T>
+    public class ScenarioActionSet<T, B> : IScenarioActionSet<T>
         where T : class
+        where B : IModelBuilder<T>, new()
     {
         #region Fields
 
         private readonly Dictionary<string, Action<IScenarioRuleSet<T>>> scenariosRuleSetActions =
-            new Dictionary<string, Action<IScenarioRuleSet<T>>>(StringComparer.OrdinalIgnoreCase);
+            new Dictionary<string, Action<IScenarioRuleSet<T>>>(
+                StringComparer.OrdinalIgnoreCase);
 
         #endregion Fields
 
         #region Methods
 
-        public void AddValidScenarioRuleSetAction(
+        public void AddValidScenarioAction(
             string scenarioRuleSetActionKey,
             Action<IScenarioRuleSet<T>> scenarioRuleSetAction)
         {
@@ -27,24 +29,27 @@ namespace Akira.TestTools.Scenarios.Collections
                 scenarioRuleSetAction);
         }
 
-        public virtual ICompletedModelBuilder<T> GetCompletedModelBuilderByKey(
-            IEnumerable<string> scenarioRuleSetActionKeys)
+        public virtual IModelBuilder<T> GetModelBuilder(
+            IEnumerable<string> scenarioActionKeys)
         {
-            var completedModelBuilderKey = string.Concat(scenarioRuleSetActionKeys);
+            var completedModelBuilder = new B();
 
-            var completedModelBuilder = new InternalFaker<T>(completedModelBuilderKey);
-
-            foreach (var scenarioRuleSetActionKey in scenarioRuleSetActionKeys)
+            foreach (var scenarioRuleSetActionKey in scenarioActionKeys)
             {
-                var scenarioRuleSetAction = this.scenariosRuleSetActions[scenarioRuleSetActionKey];
-
-                scenarioRuleSetAction(completedModelBuilder);
+                if (this.scenariosRuleSetActions.TryGetValue(
+                    scenarioRuleSetActionKey,
+                    out var scenarioRuleSetAction))
+                {
+                    completedModelBuilder.ExecuteAction(
+                        scenarioRuleSetActionKey,
+                        scenarioRuleSetAction);
+                }
             }
 
             return completedModelBuilder;
         }
 
-        public void ValidateScenarioRuleSetAction(
+        public void ValidateScenarioAction(
             Action<IScenarioRuleSet<T>> scenarioRuleSetAction)
         {
             if (scenarioRuleSetAction == null)

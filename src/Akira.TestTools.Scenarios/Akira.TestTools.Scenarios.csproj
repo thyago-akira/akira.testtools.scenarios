@@ -19,7 +19,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Models\Context.cs" />
     <Compile Remove="Models\ScenarioContextSet.cs" />
   </ItemGroup>
 

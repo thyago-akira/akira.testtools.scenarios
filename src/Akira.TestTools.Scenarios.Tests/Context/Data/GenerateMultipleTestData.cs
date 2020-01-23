@@ -40,7 +40,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             {
                 CaseNumber = 1,
                 CaseDescription = "Generate 1 Valid Model",
-                TestedAction = () => new ScenariosFaker<SimpleModel>()
+                TestedAction = () => new ScenariosBuilder<SimpleModel>()
                     .DefaultContextValidScenario(
                         scenarioRuleSet => scenarioRuleSet
                             .Ignore(f => f.Id)
@@ -59,7 +59,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             {
                 CaseNumber = 2,
                 CaseDescription = "Generate 5 Valid Models",
-                TestedAction = () => new ScenariosFaker<SimpleModel>()
+                TestedAction = () => new ScenariosBuilder<SimpleModel>()
                     .DefaultContextValidScenario(
                         scenarioRuleSet => scenarioRuleSet
                             .Ignore(f => f.Id)
@@ -78,7 +78,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             {
                 CaseNumber = 3,
                 CaseDescription = "Generate 10 Valid Models",
-                TestedAction = () => new ScenariosFaker<SimpleModel>()
+                TestedAction = () => new ScenariosBuilder<SimpleModel>()
                     .DefaultContextValidScenario(
                         scenarioRuleSet => scenarioRuleSet
                             .Ignore(f => f.Id)
@@ -100,7 +100,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             {
                 CaseNumber = 1,
                 CaseDescription = "Invalid Number of Rows - Zero",
-                TestedAction = () => new ScenariosFaker<SimpleModel>()
+                TestedAction = () => new ScenariosBuilder<SimpleModel>()
                     .DefaultContextValidScenario(
                         scenarioRuleSet => scenarioRuleSet
                             .Ignore(f => f.Id)
@@ -112,14 +112,14 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                             .Ignore(f => f.Name)
                             .Ignore(f => f.Total))
                     .Generate(0),
-                ExpectedExceptionMessage = Errors.InvalidNumberOfRows
+                ExpectedExceptionMessage = Errors.ScenariosBuilder.InvalidNumberOfRows
             };
 
             yield return new GenerateMultipleTestContext
             {
                 CaseNumber = 2,
                 CaseDescription = "Invalid Number of Rows - Negative",
-                TestedAction = () => new ScenariosFaker<SimpleModel>()
+                TestedAction = () => new ScenariosBuilder<SimpleModel>()
                     .DefaultContextValidScenario(
                         scenarioRuleSet => scenarioRuleSet
                             .Ignore(f => f.Id)
@@ -131,7 +131,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                             .Ignore(f => f.Name)
                             .Ignore(f => f.Total))
                     .Generate(-1),
-                ExpectedExceptionMessage = Errors.InvalidNumberOfRows
+                ExpectedExceptionMessage = Errors.ScenariosBuilder.InvalidNumberOfRows
             };
         }
     }

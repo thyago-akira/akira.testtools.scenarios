@@ -8,7 +8,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Akira.TestTools.Scenarios.Tests
 {
     [TestClass]
-    public class ScenariosFakerScenarioTests : BaseScenariosFakerTests
+    public class ScenariosBuilderScenarioTests : BaseScenariosBuilderTests
     {
         public static IEnumerable<object[]> GetDefaultScenarioContextScenarioAfterCustomScenarioContext()
             => ScenarioTestData
@@ -47,7 +47,7 @@ namespace Akira.TestTools.Scenarios.Tests
 
         [DataTestMethod]
         [DynamicData(nameof(GetValidData), DynamicDataSourceType.Method)]
-        public void ScenariosFaker_Scenario_ValidScenario_ReturnsScenariosFaker(
+        public void ScenariosBuilder_Scenario_ValidScenario_ReturnsScenariosBuilder(
             Context.TestContext scenarioContext)
         {
             // Action
@@ -55,12 +55,12 @@ namespace Akira.TestTools.Scenarios.Tests
 
             // Assert
             Assert.IsNotNull(scenariosFaker);
-            Assert.IsInstanceOfType(scenariosFaker, typeof(ScenariosFaker<SimpleModel>));
+            Assert.IsInstanceOfType(scenariosFaker, typeof(ScenariosBuilder<SimpleModel>));
         }
 
         [DataTestMethod]
         [DynamicData(nameof(GetDefaultScenarioContextScenarioAfterCustomScenarioContext), DynamicDataSourceType.Method)]
-        public void ScenariosFaker_DefaultScenarioContext_SetScenarioAfterCustomScenarioContext_ThrowsException(
+        public void ScenariosBuilder_DefaultScenarioContext_SetScenarioAfterCustomScenarioContext_ThrowsException(
             Context.TestContext scenarioContext)
         {
             // Action && Assert
@@ -69,7 +69,7 @@ namespace Akira.TestTools.Scenarios.Tests
 
         [DataTestMethod]
         [DynamicData(nameof(GetDefaultScenarioContextScenarioUsingCustomScenarioContextScenario), DynamicDataSourceType.Method)]
-        public void ScenariosFaker_DefaultScenarioContext_SetScenarioUsingCustomScenarioContextScenario_ThrowsException(
+        public void ScenariosBuilder_DefaultScenarioContext_SetScenarioUsingCustomScenarioContextScenario_ThrowsException(
             Context.TestContext scenarioContext)
         {
             // Action && Assert
@@ -78,7 +78,7 @@ namespace Akira.TestTools.Scenarios.Tests
 
         [DataTestMethod]
         [DynamicData(nameof(GetScenarioWithNullAction), DynamicDataSourceType.Method)]
-        public void ScenariosFaker_ScenarioWithNullAction_ThrowsException(
+        public void ScenariosBuilder_ScenarioWithNullAction_ThrowsException(
             Context.TestContext scenarioContext)
         {
             // Action && Assert
@@ -87,7 +87,7 @@ namespace Akira.TestTools.Scenarios.Tests
 
         [DataTestMethod]
         [DynamicData(nameof(GetScenarioWithInvalidScenarioType), DynamicDataSourceType.Method)]
-        public void ScenariosFaker_ScenarioWithInvalidScenarioType_ThrowsException(
+        public void ScenariosBuilder_ScenarioWithInvalidScenarioType_ThrowsException(
             Context.TestContext scenarioContext)
         {
             // Action && Assert
@@ -96,7 +96,7 @@ namespace Akira.TestTools.Scenarios.Tests
 
         [DataTestMethod]
         [DynamicData(nameof(GetScenarioWithEmptyScenarioName), DynamicDataSourceType.Method)]
-        public void ScenariosFaker_ScenarioWithEmptyScenarioName_ThrowsException(
+        public void ScenariosBuilder_ScenarioWithEmptyScenarioName_ThrowsException(
             Context.TestContext scenarioContext)
         {
             // Action && Assert
@@ -105,7 +105,7 @@ namespace Akira.TestTools.Scenarios.Tests
 
         [DataTestMethod]
         [DynamicData(nameof(GetScenarioWithExistingScenarioName), DynamicDataSourceType.Method)]
-        public void ScenariosFaker_ScenarioWithExistingScenarioName_ThrowsException(
+        public void ScenariosBuilder_ScenarioWithExistingScenarioName_ThrowsException(
             Context.TestContext scenarioContext)
         {
             // Action && Assert

@@ -6,18 +6,18 @@ namespace Akira.TestTools.Scenarios.Models
     public class Scenario : IScenario
     {
         public Scenario(
-            IScenarioContext scenarioContext,
+            IContext scenarioContext,
             string scenarioName)
         {
-            this.ScenarioContext = scenarioContext;
+            this.Context = scenarioContext;
             this.Name = scenarioName;
         }
 
-        public IScenarioContext ScenarioContext { get; private set; }
+        public IContext Context { get; private set; }
 
         public string Name { get; private set; }
 
         public string Key =>
-            GetScenarioContextKeyValue(this.ScenarioContext.Index, this.Name);
+            GetScenarioContextKeyValue(this.Context.Index, this.Name);
     }
 }

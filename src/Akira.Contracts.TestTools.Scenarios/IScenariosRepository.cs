@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Akira.Contracts.TestTools.Scenarios.Collections;
 using Akira.Contracts.TestTools.Scenarios.Enums;
 
 namespace Akira.Contracts.TestTools.Scenarios
@@ -8,56 +9,59 @@ namespace Akira.Contracts.TestTools.Scenarios
         where T : class
     {
         /// <summary>
-        /// Gets the number of distinct possible <see cref="ICompletedModelBuilder<T>"/> for the current <see cref="IScenariosRepository{T}" />
+        /// Gets the number of distinct possible <see cref="IModelBuilder<T>"/> for the
+        /// current <see cref="IScenariosRepository{T}" />
         /// </summary>
-        ulong CountCompletedModelBuilders { get; }
+        ulong CountModelBuilders { get; }
 
         /// <summary>
         /// Add a new Scenario Context to the <see cref="IScenariosRepository{T}" />
         /// </summary>
-        /// <param name="scenarioContextName">The name of new scenario context. Must be unique.</param>
-        void AddScenarioContext(
-            string scenarioContextName);
+        /// <param name="contextName">The name of new scenario context. Must be unique.</param>
+        void AddContext(
+            string contextName);
 
         /// <summary>
         /// Add a new Scenario to the current Scenario Context
         /// </summary>
+        /// <param name="onlyForDefaultContext">
+        /// This flag indicates if this scenario applies to the default context or not
+        /// </param>
         /// <param name="scenarioName">Indicates the name of the Scenario</param>
-        /// <param name="scenarioRuleSetAction">
-        /// The action that will be executed on the model <see cref="{T}"/> to set the current Scenario
+        /// <param name="scenarioAction">
+        /// The action that will be executed on the model <see cref="{T}"/> to set the scenario
         /// </param>
         /// <param name="scenarioType">
-        /// Indicates if the Current Scenario will be <see cref="ScenarioCombinationType.Unknown"/>, <see cref="ScenarioCombinationType.AlwaysValid"/> or <see cref="ScenarioCombinationType.AlwaysInvalid"/>
+        /// Indicates if the Current Scenario will be <see cref="ScenarioType.Unknown"/>, <see cref="ScenarioType.AlwaysValid"/> or <see cref="ScenarioType.AlwaysInvalid"/>
         /// </param>
         void AddScenario(
-            bool hasDefaultScenarioContext,
+            bool onlyForDefaultContext,
             string scenarioName,
-            Action<IScenarioRuleSet<T>> scenarioRuleSetAction,
-            ScenarioCombinationType scenarioType = ScenarioCombinationType.Unknown);
+            Action<IScenarioRuleSet<T>> scenarioAction,
+            ScenarioType scenarioType = ScenarioType.Unknown);
 
         /// <summary>
-        /// Add a Known Valid Scenario Combination to the <see cref="IScenariosRepository{T}" />
+        /// Add a Known Scenario Combination to the <see cref="IScenariosRepository{T}" />
         /// </summary>
-        /// <param name="knownScenarioCombinationConfiguration">
-        /// A dictionary with the Known Scenario Combination Configuration that can used to build a model.
-        /// Key: Scenario Context Name
+        /// <param name="combination">
+        /// A dictionary with the Known Scenario Combination that can be used to build a model.
+        /// Key: Context Name
         /// Value: Scenario Name
         /// </param>
-        /// <param name="scenarioCombinationType">
-        /// Indicates if the current Known Scenario Combination Configuration will be
-        /// <see cref="ScenarioCombinationType.Unknown"/>, <see cref="ScenarioCombinationType.AlwaysValid"/> or
-        /// <see cref="ScenarioCombinationType.AlwaysInvalid"/>
+        /// <param name="combinationType">
+        /// Indicates if the current Known Scenario Combination will be
+        /// <see cref="ScenarioType.Unknown"/>, <see cref="ScenarioType.AlwaysValid"/> or
+        /// <see cref="ScenarioType.AlwaysInvalid"/>
         /// </param>
-        void AddKnownScenarioCombination(
-            IDictionary<string, string> knownScenarioCombinationConfiguration,
-            ScenarioCombinationType scenarioCombinatioType = ScenarioCombinationType.Unknown);
+        void AddKnownCombination(
+            IDictionary<string, string> combination,
+            ScenarioType combinationType = ScenarioType.Unknown);
 
-        ICompletedModelBuilder<T> GetModelBuilder(
-            ScenarioBuilderType scenarioBuilderType,
-            IDictionary<string, string> scenarioBuilderConfiguration,
-            bool validateBuilderConfiguration = true);
+        IModelBuilder<T> GetModelBuilder(
+            BuilderType builderType,
+            IDictionary<string, string> builderCombination);
 
-        IEnumerable<IDictionary<string, string>> GetMinimumTestingScenarioCombinations(
-            ScenarioBuilderType scenarioBuilderType);
+        IEnumerable<IModelBuilder<T>> GetMinimumTestingModelBuilders(
+            BuilderType builderType);
     }
 }

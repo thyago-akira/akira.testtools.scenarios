@@ -8,7 +8,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Akira.TestTools.Scenarios.Tests
 {
     [TestClass]
-    public class ScenariosFakerKnownScenarioCombinationTests : BaseScenariosFakerTests
+    public class ScenariosBuilderKnownScenarioCombinationTests : BaseScenariosBuilderTests
     {
         public static IEnumerable<object[]> GetValidData()
             => KnownScenarioCombinationTestData
@@ -27,7 +27,7 @@ namespace Akira.TestTools.Scenarios.Tests
 
         [DataTestMethod]
         [DynamicData(nameof(GetValidData), DynamicDataSourceType.Method)]
-        public void ScenariosFaker_KnownScenarioCombination_(
+        public void ScenariosBuilder_KnownScenarioCombination_(
             Context.TestContext scenarioContext)
         {
             // Action
@@ -35,12 +35,12 @@ namespace Akira.TestTools.Scenarios.Tests
 
             // Assert
             Assert.IsNotNull(scenariosFaker);
-            Assert.IsInstanceOfType(scenariosFaker, typeof(ScenariosFaker<SimpleModel>));
+            Assert.IsInstanceOfType(scenariosFaker, typeof(ScenariosBuilder<SimpleModel>));
         }
 
         [DataTestMethod]
         [DynamicData(nameof(GetInvalidData), DynamicDataSourceType.Method)]
-        public void ScenariosFaker_KnownScenarioCombination_ThrowsException(
+        public void ScenariosBuilder_KnownScenarioCombination_ThrowsException(
             Context.TestContext scenarioContext)
         {
             // Action && Assert
@@ -49,7 +49,7 @@ namespace Akira.TestTools.Scenarios.Tests
 
         [DataTestMethod]
         [DynamicData(nameof(GetScenariosColisionInvalidData), DynamicDataSourceType.Method)]
-        public void ScenariosFaker_KnownScenarioCombination_Colision_ThrowsException(
+        public void ScenariosBuilder_KnownScenarioCombination_Colision_ThrowsException(
             Context.TestContext scenarioContext)
         {
             // Action && Assert

@@ -8,7 +8,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Akira.TestTools.Scenarios.Tests
 {
     [TestClass]
-    public class ScenariosFakerGenerateTests : BaseScenariosFakerTests
+    public class ScenariosBuilderGenerateTests : BaseScenariosBuilderTests
     {
         private const string TestScenarioContextName = nameof(TestScenarioContextName);
 
@@ -53,7 +53,7 @@ namespace Akira.TestTools.Scenarios.Tests
 
         [DataTestMethod]
         [DynamicData(nameof(GetValidData), DynamicDataSourceType.Method)]
-        public void ScenariosFaker_Generate_ReturnsValidModel(
+        public void ScenariosBuilder_Generate_ReturnsValidModel(
             Context.GenerateTestContext testContext)
         {
             // Action
@@ -67,7 +67,7 @@ namespace Akira.TestTools.Scenarios.Tests
 
         [DataTestMethod]
         [DynamicData(nameof(GetMultipleValidData), DynamicDataSourceType.Method)]
-        public void ScenariosFaker_Generate_ReturnsValidModel(
+        public void ScenariosBuilder_Generate_ReturnsValidModel(
             Context.GenerateMultipleTestContext testContext)
         {
             // Action
@@ -80,7 +80,7 @@ namespace Akira.TestTools.Scenarios.Tests
 
         [DataTestMethod]
         [DynamicData(nameof(GetInvalidArgumentExceptionData), DynamicDataSourceType.Method)]
-        public void ScenariosFaker_Generate_ThrowsArgumentException(
+        public void ScenariosBuilder_Generate_ThrowsArgumentException(
             Context.GenerateTestContext testContext)
         {
             // Action && Assert
@@ -89,7 +89,7 @@ namespace Akira.TestTools.Scenarios.Tests
 
         [DataTestMethod]
         [DynamicData(nameof(GetInvalidOperationExceptionData), DynamicDataSourceType.Method)]
-        public void ScenariosFaker_Generate_ThrowsInvalidOperationException(
+        public void ScenariosBuilder_Generate_ThrowsInvalidOperationException(
             Context.GenerateTestContext testContext)
         {
             // Action && Assert
@@ -98,7 +98,7 @@ namespace Akira.TestTools.Scenarios.Tests
 
         [DataTestMethod]
         [DynamicData(nameof(GetInvalidIncompleteModelData), DynamicDataSourceType.Method)]
-        public void ScenariosFaker_Generate_ThrowsValidationException(
+        public void ScenariosBuilder_Generate_ThrowsValidationException(
             Context.GenerateTestContext testContext)
         {
             // Action && Assert
@@ -107,7 +107,7 @@ namespace Akira.TestTools.Scenarios.Tests
 
         [DataTestMethod]
         [DynamicData(nameof(GetInvalidArgumentExceptionCollisionData), DynamicDataSourceType.Method)]
-        public void ScenariosFaker_Generate_Collision_ThrowsArgumentException(
+        public void ScenariosBuilder_Generate_Collision_ThrowsArgumentException(
             Context.GenerateTestContext testContext)
         {
             // Action && Assert
@@ -116,7 +116,7 @@ namespace Akira.TestTools.Scenarios.Tests
 
         [DataTestMethod]
         [DynamicData(nameof(GetMultipleInvalidArgumentExceptionData), DynamicDataSourceType.Method)]
-        public void ScenariosFaker_Generate_Multiple_ThrowsArgumentException(
+        public void ScenariosBuilder_Generate_Multiple_ThrowsArgumentException(
             Context.GenerateMultipleTestContext testContext)
         {
             // Action && Assert

@@ -5,13 +5,14 @@ using Akira.Contracts.TestTools.Scenarios;
 
 namespace Akira.TestTools.Scenarios.Collections
 {
-    public class CachedScenarioRuleSetActionCollection<T> : ScenarioRuleSetActionCollection<T>
+    public class CachedScenarioActionSet<T, B> : ScenarioActionSet<T, B>
         where T : class
+        where B : IModelBuilder<T>, new()
     {
-        private readonly ConcurrentDictionary<string, ICompletedModelBuilder<T>> cachedCompletedModelBuilder =
-            new ConcurrentDictionary<string, ICompletedModelBuilder<T>>(StringComparer.OrdinalIgnoreCase);
+        private readonly ConcurrentDictionary<string, IModelBuilder<T>> cachedCompletedModelBuilder =
+            new ConcurrentDictionary<string, IModelBuilder<T>>(StringComparer.OrdinalIgnoreCase);
 
-        public override ICompletedModelBuilder<T> GetCompletedModelBuilderByKey(
+        public override IModelBuilder<T> GetModelBuilder(
             IEnumerable<string> scenarioRuleSetActionKeys)
         {
             var fullActionsKey = string.Concat(scenarioRuleSetActionKeys);
@@ -20,7 +21,7 @@ namespace Akira.TestTools.Scenarios.Collections
                 fullActionsKey,
                 out var completedModelBuilder))
             {
-                completedModelBuilder = base.GetCompletedModelBuilderByKey(scenarioRuleSetActionKeys);
+                completedModelBuilder = base.GetModelBuilder(scenarioRuleSetActionKeys);
 
                 _ = this.cachedCompletedModelBuilder.TryAdd(
                     completedModelBuilder.Key,

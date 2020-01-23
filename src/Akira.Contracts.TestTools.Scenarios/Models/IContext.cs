@@ -2,13 +2,13 @@
 
 namespace Akira.Contracts.TestTools.Scenarios.Models
 {
-    public interface IScenarioContext
+    public interface IContext
     {
         string Name { get; }
 
         int Index { get; }
 
-        bool CurrentScenarioContextIsDefault { get; }
+        bool ContextIsDefault { get; }
 
         int ScenariosCount { get; }
 
@@ -19,7 +19,7 @@ namespace Akira.Contracts.TestTools.Scenarios.Models
         IScenario AddScenario(
             bool hasDefaultScenarioContext,
             string scenarioName,
-            ScenarioCombinationType scenarioType);
+            ScenarioType scenarioType);
 
         void ValidateContextCompleted();
     }

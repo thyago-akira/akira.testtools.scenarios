@@ -78,7 +78,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameInvalid }
                         })
             };
@@ -91,7 +91,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameInvalid },
                             { ScenarioContextTestName2, ScenarioContextTestScenarioNameValid }
                         })
@@ -105,7 +105,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameInvalid },
                             { ScenarioContextTestName2, ScenarioContextTestScenarioNameValid },
                             { ScenarioContextTestName3, ScenarioContextTestScenarioNameAlternative }
@@ -120,7 +120,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameInvalid },
                             { ScenarioContextTestName2, ScenarioContextTestScenarioNameValid },
                             { ScenarioContextTestName3, ScenarioContextTestScenarioNameAlternative },
@@ -136,7 +136,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameInvalid },
                             { ScenarioContextTestName2, ScenarioContextTestScenarioNameValid },
                             { ScenarioContextTestName3, ScenarioContextTestScenarioNameAlternative },
@@ -153,20 +153,20 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameInvalid }
                         })
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameInvalid },
                             { ScenarioContextTestName2, ScenarioContextTestScenarioNameValid }
                         })
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameInvalid },
                             { ScenarioContextTestName2, ScenarioContextTestScenarioNameValid },
                             { ScenarioContextTestName3, ScenarioContextTestScenarioNameAlternative }
@@ -174,7 +174,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameInvalid },
                             { ScenarioContextTestName2, ScenarioContextTestScenarioNameValid },
                             { ScenarioContextTestName3, ScenarioContextTestScenarioNameAlternative },
@@ -183,7 +183,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameInvalid },
                             { ScenarioContextTestName2, ScenarioContextTestScenarioNameValid },
                             { ScenarioContextTestName3, ScenarioContextTestScenarioNameAlternative },
@@ -200,7 +200,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameInvalid },
                             { ScenarioContextTestName2, ScenarioContextTestScenarioNameValid },
                             { ScenarioContextTestName3, ScenarioContextTestScenarioNameAlternative },
@@ -210,7 +210,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameInvalid },
                             { ScenarioContextTestName2, ScenarioContextTestScenarioNameValid },
                             { ScenarioContextTestName3, ScenarioContextTestScenarioNameAlternative },
@@ -219,7 +219,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameInvalid },
                             { ScenarioContextTestName2, ScenarioContextTestScenarioNameValid },
                             { ScenarioContextTestName3, ScenarioContextTestScenarioNameAlternative }
@@ -227,14 +227,14 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameInvalid },
                             { ScenarioContextTestName2, ScenarioContextTestScenarioNameValid }
                         })
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameInvalid }
                         })
             };
@@ -247,7 +247,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameInvalid },
                             { ScenarioContextTestName2, ScenarioContextTestScenarioNameValid },
                             { ScenarioContextTestName3, ScenarioContextTestScenarioNameAlternative },
@@ -256,14 +256,14 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameInvalid },
                             { ScenarioContextTestName2, ScenarioContextTestScenarioNameValid }
                         })
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameInvalid },
                             { ScenarioContextTestName2, ScenarioContextTestScenarioNameValid },
                             { ScenarioContextTestName3, ScenarioContextTestScenarioNameAlternative }
@@ -271,7 +271,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameInvalid },
                             { ScenarioContextTestName2, ScenarioContextTestScenarioNameValid },
                             { ScenarioContextTestName3, ScenarioContextTestScenarioNameAlternative },
@@ -281,7 +281,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameInvalid }
                         })
             };
@@ -294,7 +294,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioInvalidName },
+                            { Defaults.ContextName, Defaults.ScenarioInvalidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameInvalid },
                             { ScenarioContextTestName2, ScenarioContextTestScenarioNameInvalid },
                             { ScenarioContextTestName3, ScenarioContextTestScenarioNameAlternative },
@@ -303,14 +303,14 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioInvalidName },
+                            { Defaults.ContextName, Defaults.ScenarioInvalidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameInvalid },
                             { ScenarioContextTestName2, ScenarioContextTestScenarioNameInvalid }
                         })
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioInvalidName },
+                            { Defaults.ContextName, Defaults.ScenarioInvalidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameInvalid },
                             { ScenarioContextTestName2, ScenarioContextTestScenarioNameInvalid },
                             { ScenarioContextTestName3, ScenarioContextTestScenarioNameAlternative }
@@ -318,7 +318,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioInvalidName },
+                            { Defaults.ContextName, Defaults.ScenarioInvalidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameInvalid },
                             { ScenarioContextTestName2, ScenarioContextTestScenarioNameInvalid },
                             { ScenarioContextTestName3, ScenarioContextTestScenarioNameAlternative },
@@ -328,7 +328,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioInvalidName },
+                            { Defaults.ContextName, Defaults.ScenarioInvalidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameInvalid }
                         })
             };
@@ -341,7 +341,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameValid },
                             { ScenarioContextTestName2, ScenarioContextTestScenarioNameValid },
                             { ScenarioContextTestName3, ScenarioContextTestScenarioNameAlternative },
@@ -350,14 +350,14 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameValid },
                             { ScenarioContextTestName2, ScenarioContextTestScenarioNameValid }
                         })
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameValid },
                             { ScenarioContextTestName2, ScenarioContextTestScenarioNameValid },
                             { ScenarioContextTestName3, ScenarioContextTestScenarioNameAlternative }
@@ -365,7 +365,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameValid },
                             { ScenarioContextTestName2, ScenarioContextTestScenarioNameValid },
                             { ScenarioContextTestName3, ScenarioContextTestScenarioNameAlternative },
@@ -375,7 +375,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameValid }
                         })
             };
@@ -388,19 +388,19 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName3, ScenarioContextTestScenarioNameAlternative }
                         })
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioInvalidName },
+                            { Defaults.ContextName, Defaults.ScenarioInvalidName },
                             { ScenarioContextTestName4, ScenarioContextTestScenarioNameAlternative }
                         })
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName5, ScenarioContextTestScenarioNameAlternative }
                         })
                     .KnownScenarioCombination(
@@ -409,7 +409,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                             { ScenarioContextTestName5, ScenarioContextTestScenarioNameAlternative },
                             { ScenarioContextTestName4, ScenarioContextTestScenarioNameAlternative },
                             { ScenarioContextTestName3, ScenarioContextTestScenarioNameAlternative },
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName }
+                            { Defaults.ContextName, Defaults.ScenarioValidName }
                         })
             };
         }
@@ -420,7 +420,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             {
                 CaseNumber = 1,
                 CaseDescription = "Add Known Scenario Combination for a Faker with only Default Scenario Context",
-                TestedAction = () => new ScenariosFaker<SimpleModel>()
+                TestedAction = () => new ScenariosBuilder<SimpleModel>()
                     .KnownScenarioCombination(null),
                 ExpectedExceptionMessage = Errors.ScenarioFakerWithNoAdditionalScenariosForKnownScenarioCombinationConfig
             };
@@ -429,7 +429,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             {
                 CaseNumber = 2,
                 CaseDescription = "Add Null Known Scenario Combination",
-                TestedAction = () => new ScenariosFaker<SimpleModel>()
+                TestedAction = () => new ScenariosBuilder<SimpleModel>()
                     .DefaultContextValidScenario(
                         scenarioRuleSet => scenarioRuleSet.Ignore(m => m.Id))
                     .DefaultContextInvalidScenario(
@@ -446,7 +446,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             {
                 CaseNumber = 3,
                 CaseDescription = "Add Empty Known Scenario Combination",
-                TestedAction = () => new ScenariosFaker<SimpleModel>()
+                TestedAction = () => new ScenariosBuilder<SimpleModel>()
                     .DefaultContextValidScenario(scenarioRuleSet =>
                         scenarioRuleSet.Ignore(m => m.Id))
                     .DefaultContextInvalidScenario(scenarioRuleSet =>
@@ -463,7 +463,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             {
                 CaseNumber = 4,
                 CaseDescription = "Add Known Scenario Combination with Only One Condition",
-                TestedAction = () => new ScenariosFaker<SimpleModel>()
+                TestedAction = () => new ScenariosBuilder<SimpleModel>()
                     .DefaultContextValidScenario(
                         scenarioRuleSet => scenarioRuleSet.Ignore(m => m.Id))
                     .DefaultContextInvalidScenario(
@@ -484,7 +484,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             {
                 CaseNumber = 5,
                 CaseDescription = "Add Known Scenario Combination with Invalid Scenario Context Name",
-                TestedAction = () => new ScenariosFaker<SimpleModel>()
+                TestedAction = () => new ScenariosBuilder<SimpleModel>()
                     .DefaultContextValidScenario(
                         scenarioRuleSet => scenarioRuleSet.Ignore(m => m.Id))
                     .DefaultContextInvalidScenario(
@@ -508,7 +508,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             {
                 CaseNumber = 6,
                 CaseDescription = "Add Known Scenario Combination with Invalid Scenario Context Name - ignore case",
-                TestedAction = () => new ScenariosFaker<SimpleModel>()
+                TestedAction = () => new ScenariosBuilder<SimpleModel>()
                     .DefaultContextValidScenario(
                         scenarioRuleSet => scenarioRuleSet.Ignore(m => m.Id))
                     .DefaultContextInvalidScenario(
@@ -532,7 +532,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             {
                 CaseNumber = 7,
                 CaseDescription = "Add Known Scenario Combination with Invalid Scenario Context Scenario",
-                TestedAction = () => new ScenariosFaker<SimpleModel>()
+                TestedAction = () => new ScenariosBuilder<SimpleModel>()
                     .DefaultContextValidScenario(
                         scenarioRuleSet => scenarioRuleSet.Ignore(m => m.Id))
                     .DefaultContextInvalidScenario(
@@ -547,12 +547,12 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, ScenarioContextTestUnknownScenarioName },
+                            { Defaults.ContextName, ScenarioContextTestUnknownScenarioName },
                             { ScenarioContextTestName2, ScenarioContextTestUnknownScenarioName }
                         }),
                 ExpectedExceptionMessage = string.Format(
                     Errors.ScenarioCombinationConfigWithInvalidScenario,
-                    Defaults.ScenarioContextName,
+                    Defaults.ContextName,
                     ScenarioContextTestUnknownScenarioName)
             };
 
@@ -560,7 +560,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             {
                 CaseNumber = 8,
                 CaseDescription = "Add Known Scenario Combination with Invalid Scenario Context Scenario - ignore case",
-                TestedAction = () => new ScenariosFaker<SimpleModel>()
+                TestedAction = () => new ScenariosBuilder<SimpleModel>()
                     .DefaultContextValidScenario(
                         scenarioRuleSet => scenarioRuleSet.Ignore(m => m.Id))
                     .DefaultContextInvalidScenario(
@@ -575,7 +575,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName2, Scenariocontexttestunknownscenarioname }
                         }),
                 ExpectedExceptionMessage = string.Format(
@@ -599,19 +599,19 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameInvalid }
                         })
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameInvalid }
                         }),
                 ExpectedExceptionMessage = string.Format(
                     Errors.KnownScenarioCombinationConfigContainsParentConfigurationCollision,
                     exceptionKey,
-                    ScenarioCombinationType.Unknown)
+                    ScenarioType.Unknown)
             };
 
             exceptionKey =
@@ -626,19 +626,19 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameInvalid }
                         })
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, Scenariocontexttestscenarionameinvalid }
                         }),
                 ExpectedExceptionMessage = string.Format(
                     Errors.KnownScenarioCombinationConfigContainsParentConfigurationCollision,
                     exceptionKey,
-                    ScenarioCombinationType.Unknown)
+                    ScenarioType.Unknown)
             };
 
             exceptionKey =
@@ -654,21 +654,21 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameInvalid },
                             { ScenarioContextTestName2, ScenarioContextTestScenarioNameValid }
                         })
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameInvalid },
                             { ScenarioContextTestName2, ScenarioContextTestScenarioNameValid }
                         }),
                 ExpectedExceptionMessage = string.Format(
                     Errors.KnownScenarioCombinationConfigContainsParentConfigurationCollision,
                     exceptionKey,
-                    ScenarioCombinationType.Unknown)
+                    ScenarioType.Unknown)
             };
 
             exceptionKey =
@@ -685,7 +685,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameInvalid },
                             { ScenarioContextTestName2, ScenarioContextTestScenarioNameValid },
                             { ScenarioContextTestName3, ScenarioContextTestScenarioNameAlternative }
@@ -693,7 +693,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameInvalid },
                             { ScenarioContextTestName2, ScenarioContextTestScenarioNameValid },
                             { ScenarioContextTestName3, ScenarioContextTestScenarioNameAlternative }
@@ -701,7 +701,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 ExpectedExceptionMessage = string.Format(
                     Errors.KnownScenarioCombinationConfigContainsParentConfigurationCollision,
                     exceptionKey,
-                    ScenarioCombinationType.Unknown)
+                    ScenarioType.Unknown)
             };
 
             exceptionKey =
@@ -719,7 +719,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameInvalid },
                             { ScenarioContextTestName2, ScenarioContextTestScenarioNameValid },
                             { ScenarioContextTestName3, ScenarioContextTestScenarioNameAlternative },
@@ -728,7 +728,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameInvalid },
                             { ScenarioContextTestName2, ScenarioContextTestScenarioNameValid },
                             { ScenarioContextTestName3, ScenarioContextTestScenarioNameAlternative },
@@ -737,7 +737,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 ExpectedExceptionMessage = string.Format(
                     Errors.KnownScenarioCombinationConfigContainsParentConfigurationCollision,
                     exceptionKey,
-                    ScenarioCombinationType.Unknown)
+                    ScenarioType.Unknown)
             };
 
             exceptionKey =
@@ -756,7 +756,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameInvalid },
                             { ScenarioContextTestName2, ScenarioContextTestScenarioNameValid },
                             { ScenarioContextTestName3, ScenarioContextTestScenarioNameAlternative },
@@ -766,7 +766,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameInvalid },
                             { ScenarioContextTestName2, ScenarioContextTestScenarioNameValid },
                             { ScenarioContextTestName3, ScenarioContextTestScenarioNameAlternative },
@@ -776,7 +776,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 ExpectedExceptionMessage = string.Format(
                     Errors.KnownScenarioCombinationConfigContainsParentConfigurationCollision,
                     exceptionKey,
-                    ScenarioCombinationType.Unknown)
+                    ScenarioType.Unknown)
             };
 
             exceptionKey =
@@ -791,20 +791,20 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameInvalid }
                         })
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameInvalid }
                         },
-                        ScenarioCombinationType.AlwaysValid),
+                        ScenarioType.AlwaysValid),
                 ExpectedExceptionMessage = string.Format(
                     Errors.KnownScenarioCombinationConfigContainsParentConfigurationCollision,
                     exceptionKey,
-                    ScenarioCombinationType.Unknown)
+                    ScenarioType.Unknown)
             };
 
             exceptionKey =
@@ -819,20 +819,20 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameValid }
                         })
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameValid }
                         },
-                        ScenarioCombinationType.AlwaysInvalid),
+                        ScenarioType.AlwaysInvalid),
                 ExpectedExceptionMessage = string.Format(
                     Errors.KnownScenarioCombinationConfigContainsParentConfigurationCollision,
                     exceptionKey,
-                    ScenarioCombinationType.Unknown)
+                    ScenarioType.Unknown)
             };
 
             exceptionKey =
@@ -847,21 +847,21 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameInvalid }
                         },
-                        ScenarioCombinationType.AlwaysValid)
+                        ScenarioType.AlwaysValid)
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameInvalid }
                         },
-                        ScenarioCombinationType.AlwaysValid),
+                        ScenarioType.AlwaysValid),
                 ExpectedExceptionMessage = string.Format(
                     Errors.KnownScenarioCombinationConfigContainsParentConfigurationCollision,
                     exceptionKey,
-                    ScenarioCombinationType.AlwaysValid)
+                    ScenarioType.AlwaysValid)
             };
 
             exceptionKey =
@@ -876,21 +876,21 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameValid }
                         },
-                        ScenarioCombinationType.AlwaysInvalid)
+                        ScenarioType.AlwaysInvalid)
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameValid }
                         },
-                        ScenarioCombinationType.AlwaysInvalid),
+                        ScenarioType.AlwaysInvalid),
                 ExpectedExceptionMessage = string.Format(
                     Errors.KnownScenarioCombinationConfigContainsParentConfigurationCollision,
                     exceptionKey,
-                    ScenarioCombinationType.AlwaysInvalid)
+                    ScenarioType.AlwaysInvalid)
             };
 
             yield return new TestContext
@@ -901,13 +901,13 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameValid }
                         }),
                 ExpectedExceptionMessage = string.Format(
                     Errors.KnownScenarioCombinationConfigContainsParentConfigurationCollision,
                     Keys.GetScenarioContextKeyValue(2, ScenarioContextTestScenarioNameValid),
-                    ScenarioCombinationType.AlwaysValid)
+                    ScenarioType.AlwaysValid)
             };
 
             yield return new TestContext
@@ -918,15 +918,15 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameInvalid },
                             { ScenarioContextTestName2, ScenarioContextTestScenarioNameValid }
                         },
-                        ScenarioCombinationType.AlwaysValid),
+                        ScenarioType.AlwaysValid),
                 ExpectedExceptionMessage = string.Format(
                     Errors.KnownScenarioCombinationConfigContainsParentConfigurationCollision,
                     Keys.GetScenarioContextKeyValue(3, ScenarioContextTestScenarioNameValid),
-                    ScenarioCombinationType.AlwaysValid)
+                    ScenarioType.AlwaysValid)
             };
 
             yield return new TestContext
@@ -937,7 +937,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameInvalid },
                             { ScenarioContextTestName2, ScenarioContextTestScenarioNameInvalid },
                             { ScenarioContextTestName3, ScenarioContextTestScenarioNameValid }
@@ -945,7 +945,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 ExpectedExceptionMessage = string.Format(
                     Errors.KnownScenarioCombinationConfigContainsParentConfigurationCollision,
                     Keys.GetScenarioContextKeyValue(4, ScenarioContextTestScenarioNameValid),
-                    ScenarioCombinationType.AlwaysValid)
+                    ScenarioType.AlwaysValid)
             };
 
             yield return new TestContext
@@ -956,17 +956,17 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameInvalid },
                             { ScenarioContextTestName2, ScenarioContextTestScenarioNameInvalid },
                             { ScenarioContextTestName3, ScenarioContextTestScenarioNameAlternative },
                             { ScenarioContextTestName4, ScenarioContextTestScenarioNameValid }
                         },
-                        ScenarioCombinationType.AlwaysValid),
+                        ScenarioType.AlwaysValid),
                 ExpectedExceptionMessage = string.Format(
                     Errors.KnownScenarioCombinationConfigContainsParentConfigurationCollision,
                     Keys.GetScenarioContextKeyValue(5, ScenarioContextTestScenarioNameValid),
-                    ScenarioCombinationType.AlwaysValid)
+                    ScenarioType.AlwaysValid)
             };
 
             yield return new TestContext
@@ -977,18 +977,18 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameInvalid },
                             { ScenarioContextTestName2, ScenarioContextTestScenarioNameInvalid },
                             { ScenarioContextTestName3, ScenarioContextTestScenarioNameAlternative },
                             { ScenarioContextTestName4, ScenarioContextTestScenarioNameAlternative },
                             { ScenarioContextTestName5, ScenarioContextTestScenarioNameValid }
                         },
-                        ScenarioCombinationType.AlwaysInvalid),
+                        ScenarioType.AlwaysInvalid),
                 ExpectedExceptionMessage = string.Format(
                     Errors.KnownScenarioCombinationConfigContainsParentConfigurationCollision,
                     Keys.GetScenarioContextKeyValue(6, ScenarioContextTestScenarioNameValid),
-                    ScenarioCombinationType.AlwaysValid)
+                    ScenarioType.AlwaysValid)
             };
 
             yield return new TestContext
@@ -999,13 +999,13 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameInvalid }
                         }),
                 ExpectedExceptionMessage = string.Format(
                   Errors.KnownScenarioCombinationConfigContainsParentConfigurationCollision,
                   Keys.GetScenarioContextKeyValue(2, ScenarioContextTestScenarioNameInvalid),
-                  ScenarioCombinationType.AlwaysInvalid)
+                  ScenarioType.AlwaysInvalid)
             };
 
             yield return new TestContext
@@ -1016,15 +1016,15 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameValid },
                             { ScenarioContextTestName2, ScenarioContextTestScenarioNameInvalid }
                         },
-                        ScenarioCombinationType.AlwaysValid),
+                        ScenarioType.AlwaysValid),
                 ExpectedExceptionMessage = string.Format(
                     Errors.KnownScenarioCombinationConfigContainsParentConfigurationCollision,
                     Keys.GetScenarioContextKeyValue(3, ScenarioContextTestScenarioNameInvalid),
-                    ScenarioCombinationType.AlwaysInvalid)
+                    ScenarioType.AlwaysInvalid)
             };
 
             yield return new TestContext
@@ -1035,7 +1035,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameValid },
                             { ScenarioContextTestName2, ScenarioContextTestScenarioNameValid },
                             { ScenarioContextTestName3, ScenarioContextTestScenarioNameInvalid }
@@ -1043,7 +1043,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 ExpectedExceptionMessage = string.Format(
                     Errors.KnownScenarioCombinationConfigContainsParentConfigurationCollision,
                     Keys.GetScenarioContextKeyValue(4, ScenarioContextTestScenarioNameInvalid),
-                    ScenarioCombinationType.AlwaysInvalid)
+                    ScenarioType.AlwaysInvalid)
             };
 
             yield return new TestContext
@@ -1054,17 +1054,17 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameValid },
                             { ScenarioContextTestName2, ScenarioContextTestScenarioNameValid },
                             { ScenarioContextTestName3, ScenarioContextTestScenarioNameAlternative },
                             { ScenarioContextTestName4, ScenarioContextTestScenarioNameInvalid }
                         },
-                        ScenarioCombinationType.AlwaysValid),
+                        ScenarioType.AlwaysValid),
                 ExpectedExceptionMessage = string.Format(
                     Errors.KnownScenarioCombinationConfigContainsParentConfigurationCollision,
                     Keys.GetScenarioContextKeyValue(5, ScenarioContextTestScenarioNameInvalid),
-                    ScenarioCombinationType.AlwaysInvalid)
+                    ScenarioType.AlwaysInvalid)
             };
 
             yield return new TestContext
@@ -1075,18 +1075,18 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameValid },
                             { ScenarioContextTestName2, ScenarioContextTestScenarioNameValid },
                             { ScenarioContextTestName3, ScenarioContextTestScenarioNameAlternative },
                             { ScenarioContextTestName4, ScenarioContextTestScenarioNameAlternative },
                             { ScenarioContextTestName5, ScenarioContextTestScenarioNameInvalid }
                         },
-                        ScenarioCombinationType.AlwaysInvalid),
+                        ScenarioType.AlwaysInvalid),
                 ExpectedExceptionMessage = string.Format(
                     Errors.KnownScenarioCombinationConfigContainsParentConfigurationCollision,
                     Keys.GetScenarioContextKeyValue(6, ScenarioContextTestScenarioNameInvalid),
-                    ScenarioCombinationType.AlwaysInvalid)
+                    ScenarioType.AlwaysInvalid)
             };
 
             yield return new TestContext
@@ -1097,13 +1097,13 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameInvalid }
                         }),
                 ExpectedExceptionMessage = string.Format(
                   Errors.KnownScenarioCombinationConfigContainsParentConfigurationCollision,
                   Keys.GetScenarioContextKeyValue(2, ScenarioContextTestScenarioNameInvalid),
-                  ScenarioCombinationType.AlwaysInvalid)
+                  ScenarioType.AlwaysInvalid)
             };
 
             yield return new TestContext
@@ -1114,15 +1114,15 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameAlternative },
                             { ScenarioContextTestName2, ScenarioContextTestScenarioNameValid }
                         },
-                        ScenarioCombinationType.AlwaysValid),
+                        ScenarioType.AlwaysValid),
                 ExpectedExceptionMessage = string.Format(
                     Errors.KnownScenarioCombinationConfigContainsParentConfigurationCollision,
                     Keys.GetScenarioContextKeyValue(3, ScenarioContextTestScenarioNameValid),
-                    ScenarioCombinationType.AlwaysValid)
+                    ScenarioType.AlwaysValid)
             };
 
             yield return new TestContext
@@ -1133,7 +1133,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameAlternative },
                             { ScenarioContextTestName2, ScenarioContextTestScenarioNameAlternative },
                             { ScenarioContextTestName3, ScenarioContextTestScenarioNameInvalid }
@@ -1141,7 +1141,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 ExpectedExceptionMessage = string.Format(
                     Errors.KnownScenarioCombinationConfigContainsParentConfigurationCollision,
                     Keys.GetScenarioContextKeyValue(4, ScenarioContextTestScenarioNameInvalid),
-                    ScenarioCombinationType.AlwaysInvalid)
+                    ScenarioType.AlwaysInvalid)
             };
 
             yield return new TestContext
@@ -1152,17 +1152,17 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameAlternative },
                             { ScenarioContextTestName2, ScenarioContextTestScenarioNameAlternative },
                             { ScenarioContextTestName3, ScenarioContextTestScenarioNameAlternative },
                             { ScenarioContextTestName4, ScenarioContextTestScenarioNameValid }
                         },
-                        ScenarioCombinationType.AlwaysValid),
+                        ScenarioType.AlwaysValid),
                 ExpectedExceptionMessage = string.Format(
                     Errors.KnownScenarioCombinationConfigContainsParentConfigurationCollision,
                     Keys.GetScenarioContextKeyValue(5, ScenarioContextTestScenarioNameValid),
-                    ScenarioCombinationType.AlwaysValid)
+                    ScenarioType.AlwaysValid)
             };
 
             yield return new TestContext
@@ -1173,18 +1173,18 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameAlternative },
                             { ScenarioContextTestName2, ScenarioContextTestScenarioNameAlternative },
                             { ScenarioContextTestName3, ScenarioContextTestScenarioNameAlternative },
                             { ScenarioContextTestName4, ScenarioContextTestScenarioNameAlternative },
                             { ScenarioContextTestName5, ScenarioContextTestScenarioNameInvalid }
                         },
-                        ScenarioCombinationType.AlwaysInvalid),
+                        ScenarioType.AlwaysInvalid),
                 ExpectedExceptionMessage = string.Format(
                     Errors.KnownScenarioCombinationConfigContainsParentConfigurationCollision,
                     Keys.GetScenarioContextKeyValue(6, ScenarioContextTestScenarioNameInvalid),
-                    ScenarioCombinationType.AlwaysInvalid)
+                    ScenarioType.AlwaysInvalid)
             };
 
             exceptionKey =
@@ -1202,7 +1202,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                             { ScenarioContextTestName2, ScenarioContextTestScenarioNameAlternative },
                             { ScenarioContextTestName5, ScenarioContextTestScenarioNameAlternative }
                         },
-                        ScenarioCombinationType.AlwaysValid)
+                        ScenarioType.AlwaysValid)
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
@@ -1211,11 +1211,11 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                             { ScenarioContextTestName4, ScenarioContextTestScenarioNameAlternative },
                             { ScenarioContextTestName5, ScenarioContextTestScenarioNameAlternative }
                         },
-                        ScenarioCombinationType.AlwaysInvalid),
+                        ScenarioType.AlwaysInvalid),
                 ExpectedExceptionMessage = string.Format(
                     Errors.KnownScenarioCombinationConfigContainsParentConfigurationCollision,
                     exceptionKey,
-                    ScenarioCombinationType.AlwaysValid)
+                    ScenarioType.AlwaysValid)
             };
 
             exceptionKey =
@@ -1237,18 +1237,18 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                             { ScenarioContextTestName4, ScenarioContextTestScenarioNameAlternative },
                             { ScenarioContextTestName5, ScenarioContextTestScenarioNameAlternative }
                         },
-                        ScenarioCombinationType.AlwaysValid)
+                        ScenarioType.AlwaysValid)
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
                             { ScenarioContextTestName2, ScenarioContextTestScenarioNameAlternative },
                             { ScenarioContextTestName5, ScenarioContextTestScenarioNameAlternative }
                         },
-                        ScenarioCombinationType.AlwaysInvalid),
+                        ScenarioType.AlwaysInvalid),
                 ExpectedExceptionMessage = string.Format(
                     Errors.KnownScenarioCombinationConfigContainsChildConfigurationCollision,
                     exceptionKey,
-                    ScenarioCombinationType.AlwaysValid)
+                    ScenarioType.AlwaysValid)
             };
 
             exceptionKey =
@@ -1268,7 +1268,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                             { ScenarioContextTestName3, ScenarioContextTestScenarioNameAlternative },
                             { ScenarioContextTestName5, ScenarioContextTestScenarioNameAlternative }
                         },
-                        ScenarioCombinationType.AlwaysInvalid)
+                        ScenarioType.AlwaysInvalid)
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
@@ -1278,11 +1278,11 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                             { ScenarioContextTestName4, ScenarioContextTestScenarioNameAlternative },
                             { ScenarioContextTestName5, ScenarioContextTestScenarioNameAlternative }
                         },
-                        ScenarioCombinationType.AlwaysValid),
+                        ScenarioType.AlwaysValid),
                 ExpectedExceptionMessage = string.Format(
                     Errors.KnownScenarioCombinationConfigContainsParentConfigurationCollision,
                     exceptionKey,
-                    ScenarioCombinationType.AlwaysInvalid)
+                    ScenarioType.AlwaysInvalid)
             };
 
             exceptionKey =
@@ -1313,11 +1313,11 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                             { ScenarioContextTestName3, ScenarioContextTestScenarioNameAlternative },
                             { ScenarioContextTestName5, ScenarioContextTestScenarioNameAlternative }
                         },
-                        ScenarioCombinationType.AlwaysInvalid),
+                        ScenarioType.AlwaysInvalid),
                 ExpectedExceptionMessage = string.Format(
                     Errors.KnownScenarioCombinationConfigContainsChildConfigurationCollision,
                     exceptionKey,
-                    ScenarioCombinationType.Unknown)
+                    ScenarioType.Unknown)
             };
 
             exceptionKey =
@@ -1337,7 +1337,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                             { ScenarioContextTestName3, ScenarioContextTestScenarioNameAlternative },
                             { ScenarioContextTestName5, ScenarioContextTestScenarioNameAlternative }
                         },
-                        ScenarioCombinationType.AlwaysInvalid)
+                        ScenarioType.AlwaysInvalid)
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
@@ -1349,7 +1349,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 ExpectedExceptionMessage = string.Format(
                     Errors.KnownScenarioCombinationConfigContainsParentConfigurationCollision,
                     exceptionKey,
-                    ScenarioCombinationType.AlwaysInvalid)
+                    ScenarioType.AlwaysInvalid)
             };
 
             exceptionKey =
@@ -1371,7 +1371,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                             { ScenarioContextTestName4, ScenarioContextTestScenarioNameAlternative },
                             { ScenarioContextTestName5, ScenarioContextTestScenarioNameAlternative }
                         },
-                        ScenarioCombinationType.AlwaysInvalid)
+                        ScenarioType.AlwaysInvalid)
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
@@ -1379,11 +1379,11 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                             { ScenarioContextTestName3, ScenarioContextTestScenarioNameAlternative },
                             { ScenarioContextTestName5, ScenarioContextTestScenarioNameAlternative }
                         },
-                        ScenarioCombinationType.AlwaysInvalid),
+                        ScenarioType.AlwaysInvalid),
                 ExpectedExceptionMessage = string.Format(
                     Errors.KnownScenarioCombinationConfigContainsChildConfigurationCollision,
                     exceptionKey,
-                    ScenarioCombinationType.AlwaysInvalid)
+                    ScenarioType.AlwaysInvalid)
             };
 
             exceptionKey =
@@ -1398,14 +1398,14 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName5, ScenarioContextTestScenarioNameAlternative }
                         },
-                        ScenarioCombinationType.AlwaysValid)
+                        ScenarioType.AlwaysValid)
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameAlternative },
                             { ScenarioContextTestName2, ScenarioContextTestScenarioNameAlternative },
                             { ScenarioContextTestName3, ScenarioContextTestScenarioNameAlternative },
@@ -1415,7 +1415,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 ExpectedExceptionMessage = string.Format(
                     Errors.KnownScenarioCombinationConfigContainsParentConfigurationCollision,
                     exceptionKey,
-                    ScenarioCombinationType.AlwaysValid)
+                    ScenarioType.AlwaysValid)
             };
 
             exceptionKey =
@@ -1434,25 +1434,25 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName, ScenarioContextTestScenarioNameAlternative },
                             { ScenarioContextTestName2, ScenarioContextTestScenarioNameAlternative },
                             { ScenarioContextTestName3, ScenarioContextTestScenarioNameAlternative },
                             { ScenarioContextTestName4, ScenarioContextTestScenarioNameAlternative },
                             { ScenarioContextTestName5, ScenarioContextTestScenarioNameAlternative }
                         },
-                        ScenarioCombinationType.Unknown)
+                        ScenarioType.Unknown)
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextTestName5, ScenarioContextTestScenarioNameAlternative }
                         },
-                        ScenarioCombinationType.AlwaysValid),
+                        ScenarioType.AlwaysValid),
                 ExpectedExceptionMessage = string.Format(
                     Errors.KnownScenarioCombinationConfigContainsChildConfigurationCollision,
                     exceptionKey,
-                    ScenarioCombinationType.Unknown)
+                    ScenarioType.Unknown)
             };
         }
 
@@ -1460,7 +1460,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             bool useAlwaysValidScenarios = false,
             bool useAlwaysInvalidScenarios = false)
         {
-            return new ScenariosFaker<SimpleModel>()
+            return new ScenariosBuilder<SimpleModel>()
                 .DefaultContextValidScenario(
                     scenarioRuleSet => scenarioRuleSet.Ignore(m => m.Id))
                 .DefaultContextInvalidScenario(
@@ -1469,11 +1469,11 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 .Scenario(
                     ScenarioContextTestScenarioNameValid,
                     scenarioRuleSet => scenarioRuleSet.Ignore(m => m.Name),
-                    useAlwaysValidScenarios ? ScenarioCombinationType.AlwaysValid : ScenarioCombinationType.Unknown)
+                    useAlwaysValidScenarios ? ScenarioType.AlwaysValid : ScenarioType.Unknown)
                 .Scenario(
                     ScenarioContextTestScenarioNameInvalid,
                     scenarioRuleSet => scenarioRuleSet.Ignore(m => m.Name),
-                    useAlwaysInvalidScenarios ? ScenarioCombinationType.AlwaysInvalid : ScenarioCombinationType.Unknown)
+                    useAlwaysInvalidScenarios ? ScenarioType.AlwaysInvalid : ScenarioType.Unknown)
                 .Scenario(
                     ScenarioContextTestScenarioNameAlternative,
                     scenarioRuleSet => scenarioRuleSet.Ignore(m => m.Id))
@@ -1481,11 +1481,11 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 .Scenario(
                     ScenarioContextTestScenarioNameValid,
                     scenarioRuleSet => scenarioRuleSet.Ignore(m => m.Total),
-                    useAlwaysValidScenarios ? ScenarioCombinationType.AlwaysValid : ScenarioCombinationType.Unknown)
+                    useAlwaysValidScenarios ? ScenarioType.AlwaysValid : ScenarioType.Unknown)
                 .Scenario(
                     ScenarioContextTestScenarioNameInvalid,
                     scenarioRuleSet => scenarioRuleSet.Ignore(m => m.Total),
-                    useAlwaysInvalidScenarios ? ScenarioCombinationType.AlwaysInvalid : ScenarioCombinationType.Unknown)
+                    useAlwaysInvalidScenarios ? ScenarioType.AlwaysInvalid : ScenarioType.Unknown)
                 .Scenario(
                     ScenarioContextTestScenarioNameAlternative,
                     scenarioRuleSet => scenarioRuleSet.Ignore(m => m.Id))
@@ -1493,11 +1493,11 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 .Scenario(
                     ScenarioContextTestScenarioNameValid,
                     scenarioRuleSet => scenarioRuleSet.Ignore(m => m.Id),
-                    useAlwaysValidScenarios ? ScenarioCombinationType.AlwaysValid : ScenarioCombinationType.Unknown)
+                    useAlwaysValidScenarios ? ScenarioType.AlwaysValid : ScenarioType.Unknown)
                 .Scenario(
                     ScenarioContextTestScenarioNameInvalid,
                     scenarioRuleSet => scenarioRuleSet.Ignore(m => m.Id),
-                    useAlwaysInvalidScenarios ? ScenarioCombinationType.AlwaysInvalid : ScenarioCombinationType.Unknown)
+                    useAlwaysInvalidScenarios ? ScenarioType.AlwaysInvalid : ScenarioType.Unknown)
                 .Scenario(
                     ScenarioContextTestScenarioNameAlternative,
                     scenarioRuleSet => scenarioRuleSet.Ignore(m => m.Id))
@@ -1505,11 +1505,11 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 .Scenario(
                     ScenarioContextTestScenarioNameValid,
                     scenarioRuleSet => scenarioRuleSet.Ignore(m => m.Total),
-                    useAlwaysValidScenarios ? ScenarioCombinationType.AlwaysValid : ScenarioCombinationType.Unknown)
+                    useAlwaysValidScenarios ? ScenarioType.AlwaysValid : ScenarioType.Unknown)
                 .Scenario(
                     ScenarioContextTestScenarioNameInvalid,
                     scenarioRuleSet => scenarioRuleSet.Ignore(m => m.Total),
-                    useAlwaysInvalidScenarios ? ScenarioCombinationType.AlwaysInvalid : ScenarioCombinationType.Unknown)
+                    useAlwaysInvalidScenarios ? ScenarioType.AlwaysInvalid : ScenarioType.Unknown)
                 .Scenario(
                     ScenarioContextTestScenarioNameAlternative,
                     scenarioRuleSet => scenarioRuleSet.Ignore(m => m.Id))
@@ -1517,11 +1517,11 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                 .Scenario(
                     ScenarioContextTestScenarioNameValid,
                     scenarioRuleSet => scenarioRuleSet.Ignore(m => m.Id),
-                    useAlwaysValidScenarios ? ScenarioCombinationType.AlwaysValid : ScenarioCombinationType.Unknown)
+                    useAlwaysValidScenarios ? ScenarioType.AlwaysValid : ScenarioType.Unknown)
                 .Scenario(
                     ScenarioContextTestScenarioNameInvalid,
                     scenarioRuleSet => scenarioRuleSet.Ignore(m => m.Id),
-                    useAlwaysInvalidScenarios ? ScenarioCombinationType.AlwaysInvalid : ScenarioCombinationType.Unknown)
+                    useAlwaysInvalidScenarios ? ScenarioType.AlwaysInvalid : ScenarioType.Unknown)
                 .Scenario(
                     ScenarioContextTestScenarioNameAlternative,
                     scenarioRuleSet => scenarioRuleSet.Ignore(m => m.Id));

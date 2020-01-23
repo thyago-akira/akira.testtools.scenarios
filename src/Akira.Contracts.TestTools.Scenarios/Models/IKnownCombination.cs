@@ -7,9 +7,9 @@ namespace Akira.Contracts.TestTools.Scenarios.Models
     {
         string Key { get; }
 
-        IDictionary<string, string> CombinationConfiguration { get; }
+        IDictionary<string, string> Combination { get; }
 
-        ScenarioCombinationType CombinationType { get; }
+        ScenarioType CombinationType { get; }
 
         bool SingleConfiguration { get; }
     }

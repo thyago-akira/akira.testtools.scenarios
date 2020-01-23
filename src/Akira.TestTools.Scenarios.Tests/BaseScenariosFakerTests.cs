@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Akira.TestTools.Scenarios.Tests
 {
-    public abstract class BaseScenariosFakerTests
+    public abstract class BaseScenariosBuilderTests
     {
         protected void AssertThrowsException<T>(
             Context.BaseTestContext testContext)

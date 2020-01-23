@@ -2,7 +2,7 @@
 {
     public interface IScenario
     {
-        IScenarioContext ScenarioContext { get; }
+        IContext Context { get; }
 
         string Name { get; }
 

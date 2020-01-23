@@ -31,7 +31,7 @@ namespace Akira.TestTools.Scenarios.Benchmark.Configs
             .RuleFor(x => x.Email, (f) => f.Internet.Email())
             .RuleFor(x => x.CreditLimit, (f) => f.Random.Int(0, 200000));
 
-        private readonly IScenariosBuilder<Customer> simpleFaker = new ScenariosFaker<Customer>()
+        private readonly IScenariosBuilder<Customer> simpleFaker = new ScenariosBuilder<Customer>()
             .DefaultContextValidScenario(scenarioRuleset => scenarioRuleset
                 .RuleFor(x => x.Id, (f) => f.Random.Int(1))
                 .RuleFor(x => x.FirstName, (f) => f.Name.FirstName())
@@ -51,7 +51,7 @@ namespace Akira.TestTools.Scenarios.Benchmark.Configs
                 .Ignore(x => x.Email)
                 .Ignore(x => x.CreditLimit));
 
-        private readonly IScenariosBuilder<Customer> customScenarioFaker = new ScenariosFaker<Customer>()
+        private readonly IScenariosBuilder<Customer> customScenarioFaker = new ScenariosBuilder<Customer>()
             .DefaultContextValidScenario(scenarioRuleset => scenarioRuleset
                 .RuleFor(x => x.Id, (f) => f.Random.Int(1))
                 .RuleFor(x => x.FirstName, (f) => f.Name.FirstName())
@@ -90,7 +90,7 @@ namespace Akira.TestTools.Scenarios.Benchmark.Configs
                 scenarioRuleset => scenarioRuleset
                     .RuleFor(x => x.CreditLimit, (f) => f.Random.Int(int.MinValue, -1)));
 
-        private readonly IScenariosBuilder<Customer> complexScenarioFaker = new ScenariosFaker<Customer>()
+        private readonly IScenariosBuilder<Customer> complexScenarioFaker = new ScenariosBuilder<Customer>()
             .DefaultContextValidScenario(scenarioRuleset => scenarioRuleset
                 .RuleFor(x => x.Id, (f) => f.Random.Int(1))
                 .RuleFor(x => x.Email, (f) => f.Internet.Email()))

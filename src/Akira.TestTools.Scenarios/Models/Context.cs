@@ -8,7 +8,7 @@ using Akira.TestTools.Scenarios.Extensions;
 
 namespace Akira.TestTools.Scenarios.Models
 {
-    public class ScenarioContext : IScenarioContext
+    public class Context : IContext
     {
         #region Fields
 
@@ -21,29 +21,33 @@ namespace Akira.TestTools.Scenarios.Models
 
         #region Constructors
 
-        internal ScenarioContext(
+        internal Context(
             string name,
             int index,
             int minimumScenariosByScenarioContext = 2)
         {
-            this.Name = name?.Trim();
+            this.Name = name.Trim();
             this.Index = index;
             this.MinimumScenariosByScenarioContext = minimumScenariosByScenarioContext;
+            this.ContextIsDefault = string.Equals(
+                Defaults.ContextName,
+                this.Name,
+                StringComparison.OrdinalIgnoreCase);
         }
 
         #endregion Constructors
 
         #region Properties
 
-        public int MinimumScenariosByScenarioContext { get; private set; }
+        public int MinimumScenariosByScenarioContext { get; }
 
-        public int Index { get; private set; }
+        public int Index { get; }
 
-        public string Name { get; private set; }
+        public string Name { get; }
 
         public int ScenariosCount => this.scenarios.Count;
 
-        public bool CurrentScenarioContextIsDefault => this.Index == 1;
+        public bool ContextIsDefault { get; }
 
         private Random Random
         {
@@ -101,13 +105,13 @@ namespace Akira.TestTools.Scenarios.Models
         /// </param>
         /// <param name="scenarioName">Indicates the name of the Scenario</param>
         /// <param name="scenarioType">
-        /// Indicates if the Current Scenario will be <see cref="ScenarioCombinationType.Unknown"/>, <see cref="ScenarioCombinationType.AlwaysValid"/> or <see cref="ScenarioCombinationType.AlwaysInvalid"/>
+        /// Indicates if the Current Scenario will be <see cref="ScenarioType.Unknown"/>, <see cref="ScenarioType.AlwaysValid"/> or <see cref="ScenarioType.AlwaysInvalid"/>
         /// </param>
         /// <returns>The Scenario Key</returns>
         public IScenario AddScenario(
             bool hasDefaultScenarioContext,
             string scenarioName,
-            ScenarioCombinationType scenarioType)
+            ScenarioType scenarioType)
         {
             this.ValidateDefaultScenarioContext(
                 hasDefaultScenarioContext);
@@ -117,7 +121,9 @@ namespace Akira.TestTools.Scenarios.Models
                 scenarioName,
                 scenarioType);
 
-            return this.AddScenario(scenarioName);
+            var cleanedScenarioName = this.ValidateScenarioName(scenarioName);
+
+            return this.AddScenario(cleanedScenarioName);
         }
 
         /// <summary>
@@ -130,7 +136,7 @@ namespace Akira.TestTools.Scenarios.Models
                 return;
             }
 
-            if (!this.CurrentScenarioContextIsDefault)
+            if (!this.ContextIsDefault)
             {
                 throw new InvalidOperationException(
                     string.Format(
@@ -149,6 +155,27 @@ namespace Akira.TestTools.Scenarios.Models
                 Errors.DefaultScenarioContextWithoutInvalidScenario);
         }
 
+        private string ValidateScenarioName(string scenarioName)
+        {
+            if (string.IsNullOrWhiteSpace(scenarioName))
+            {
+                throw new ArgumentException(Errors.ScenarioNameIsnotSet);
+            }
+
+            var cleanedScenarioName = scenarioName.Trim();
+
+            if (this.scenarios.ContainsKey(cleanedScenarioName))
+            {
+                throw new ArgumentException(
+                    string.Format(
+                        Errors.ScenarioNameAlreadyExists,
+                        cleanedScenarioName,
+                        this.Name));
+            }
+
+            return cleanedScenarioName;
+        }
+
         /// <summary>
         /// Validate the Scenario Type
         /// </summary>
@@ -158,12 +185,12 @@ namespace Akira.TestTools.Scenarios.Models
         /// </param>
         /// <param name="scenarioName">Indicates the name of the Scenario</param>
         /// <param name="scenarioType">
-        /// Indicates if the Current Scenario will be <see cref="ScenarioCombinationType.Unknown"/>, <see cref="ScenarioCombinationType.AlwaysValid"/> or <see cref="ScenarioCombinationType.AlwaysInvalid"/>
+        /// Indicates if the Current Scenario will be <see cref="ScenarioType.Unknown"/>, <see cref="ScenarioType.AlwaysValid"/> or <see cref="ScenarioType.AlwaysInvalid"/>
         /// </param>
         private void ValidateScenarioType(
             bool hasDefaultScenarioContext,
             string scenarioName,
-            ScenarioCombinationType scenarioType)
+            ScenarioType scenarioType)
         {
             if (!EnumExtensions.AllowedScenarioTypes.Contains((int)scenarioType))
             {
@@ -172,14 +199,14 @@ namespace Akira.TestTools.Scenarios.Models
 
             if (hasDefaultScenarioContext)
             {
-                if (scenarioType == ScenarioCombinationType.AlwaysInvalid &&
+                if (scenarioType == ScenarioType.AlwaysInvalid &&
                     scenarioName == Defaults.ScenarioValidName)
                 {
                     throw new ArgumentException(
                         Errors.ScenarioTypeInvalidForValidDefaultContextScenario);
                 }
 
-                if (scenarioType == ScenarioCombinationType.AlwaysValid &&
+                if (scenarioType == ScenarioType.AlwaysValid &&
                     scenarioName == Defaults.ScenarioInvalidName)
                 {
                     throw new ArgumentException(
@@ -200,7 +227,7 @@ namespace Akira.TestTools.Scenarios.Models
             // Check the add Scenario calls done for the Default Scenario Context
             // when the Current Scenario Context is a Custom Scenario Context
             if (useDefaultScenarioContext &&
-                !this.CurrentScenarioContextIsDefault)
+                !this.ContextIsDefault)
             {
                 throw new InvalidOperationException(
                     Errors.ScenariosForDefaultScenarioContextMustBeCalledFirst);
@@ -209,7 +236,7 @@ namespace Akira.TestTools.Scenarios.Models
             // Check the add Scenario calls done for the Custom Scenario Context
             // when the Current Scenario Context is the Default Scenario Context
             if (!useDefaultScenarioContext &&
-                this.CurrentScenarioContextIsDefault)
+                this.ContextIsDefault)
             {
                 throw new InvalidOperationException(
                     Errors.ScenariosForDefaultScenarioContextMustBeSetInOtherMethods);
@@ -223,25 +250,9 @@ namespace Akira.TestTools.Scenarios.Models
         /// <returns>The Scenario Key</returns>
         private IScenario AddScenario(string scenarioName)
         {
-            if (string.IsNullOrWhiteSpace(scenarioName))
-            {
-                throw new ArgumentException(Errors.ScenarioNameIsnotSet);
-            }
-
-            var cleanedScenarioName = scenarioName.Trim();
-
-            if (this.scenarios.ContainsKey(cleanedScenarioName))
-            {
-                throw new ArgumentException(
-                    string.Format(
-                        Errors.ScenarioNameAlreadyExists,
-                        cleanedScenarioName,
-                        this.Name));
-            }
-
             var scenario = new Scenario(
                 this,
-                cleanedScenarioName);
+                scenarioName);
 
             this.scenarios.Add(
                 scenario.Name,

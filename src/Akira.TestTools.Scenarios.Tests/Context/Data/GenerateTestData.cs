@@ -78,7 +78,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             {
                 CaseNumber = 1,
                 CaseDescription = "Default Scenario Context - All Ignored",
-                TestedAction = () => new ScenariosFaker<SimpleModel>()
+                TestedAction = () => new ScenariosBuilder<SimpleModel>()
                     .DefaultContextValidScenario(
                         scenarioRuleSet => scenarioRuleSet
                             .Ignore(f => f.Id)
@@ -102,7 +102,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             {
                 CaseNumber = 2,
                 CaseDescription = "Custom Scenario Context - All Ignored",
-                TestedAction = () => new ScenariosFaker<SimpleModel>()
+                TestedAction = () => new ScenariosBuilder<SimpleModel>()
                     .DefaultContextValidScenario(
                         scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id))
                     .DefaultContextInvalidScenario(
@@ -135,19 +135,19 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             {
                 CaseNumber = 3,
                 CaseDescription = "Default Scenario Context - Valid Only Set",
-                TestedAction = () => new ScenariosFaker<SimpleModel>()
+                TestedAction = () => new ScenariosBuilder<SimpleModel>()
                     .DefaultContextValidScenario(
                         scenarioRuleSet => scenarioRuleSet
                             .RuleFor(f => f.Id, id)
                             .RuleFor(f => f.Name, name)
                             .RuleFor(f => f.Total, total),
-                        ScenarioCombinationType.AlwaysValid)
+                        ScenarioType.AlwaysValid)
                     .DefaultContextInvalidScenario(
                         scenarioRuleSet => scenarioRuleSet
                             .Ignore(f => f.Id)
                             .Ignore(f => f.Name)
                             .Ignore(f => f.Total))
-                    .Generate(ScenarioBuilderType.ValidOnly),
+                    .Generate(BuilderType.ValidOnly),
                 AdditionalAsserts = (model) =>
                 {
                     Assert.AreEqual(id, model.Id);
@@ -164,7 +164,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             {
                 CaseNumber = 4,
                 CaseDescription = "Default Scenario Context - Invalid Only Set",
-                TestedAction = () => new ScenariosFaker<SimpleModel>()
+                TestedAction = () => new ScenariosBuilder<SimpleModel>()
                     .DefaultContextValidScenario(
                         scenarioRuleSet => scenarioRuleSet
                             .Ignore(f => f.Id)
@@ -175,8 +175,8 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                             .RuleFor(f => f.Id, id)
                             .RuleFor(f => f.Name, name)
                             .RuleFor(f => f.Total, total),
-                        ScenarioCombinationType.AlwaysInvalid)
-                    .Generate(ScenarioBuilderType.InvalidOnly),
+                        ScenarioType.AlwaysInvalid)
+                    .Generate(BuilderType.InvalidOnly),
                 AdditionalAsserts = (model) =>
                 {
                     Assert.AreEqual(id, model.Id);
@@ -193,20 +193,20 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             {
                 CaseNumber = 5,
                 CaseDescription = "Default Scenario Context - Get Valid Only by Type",
-                TestedAction = () => new ScenariosFaker<SimpleModel>()
+                TestedAction = () => new ScenariosBuilder<SimpleModel>()
                     .DefaultContextValidScenario(
                         scenarioRuleSet => scenarioRuleSet
                             .RuleFor(f => f.Id, id)
                             .RuleFor(f => f.Name, name)
                             .RuleFor(f => f.Total, total),
-                        ScenarioCombinationType.AlwaysValid)
+                        ScenarioType.AlwaysValid)
                     .DefaultContextInvalidScenario(
                         scenarioRuleSet => scenarioRuleSet
                             .RuleFor(f => f.Id, 10)
                             .RuleFor(f => f.Name, "CC")
                             .RuleFor(f => f.Total, 951m),
-                        ScenarioCombinationType.AlwaysInvalid)
-                    .Generate(ScenarioBuilderType.ValidOnly),
+                        ScenarioType.AlwaysInvalid)
+                    .Generate(BuilderType.ValidOnly),
                 AdditionalAsserts = (model) =>
                 {
                     Assert.AreEqual(id, model.Id);
@@ -223,20 +223,20 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             {
                 CaseNumber = 6,
                 CaseDescription = "Default Scenario Context - Get Invalid Only by Type",
-                TestedAction = () => new ScenariosFaker<SimpleModel>()
+                TestedAction = () => new ScenariosBuilder<SimpleModel>()
                     .DefaultContextValidScenario(
                         scenarioRuleSet => scenarioRuleSet
                             .RuleFor(f => f.Id, 10)
                             .RuleFor(f => f.Name, "CC")
                             .RuleFor(f => f.Total, 951m),
-                        ScenarioCombinationType.AlwaysValid)
+                        ScenarioType.AlwaysValid)
                     .DefaultContextInvalidScenario(
                         scenarioRuleSet => scenarioRuleSet
                             .RuleFor(f => f.Id, id)
                             .RuleFor(f => f.Name, name)
                             .RuleFor(f => f.Total, total),
-                        ScenarioCombinationType.AlwaysInvalid)
-                    .Generate(ScenarioBuilderType.InvalidOnly),
+                        ScenarioType.AlwaysInvalid)
+                    .Generate(BuilderType.InvalidOnly),
                 AdditionalAsserts = (model) =>
                 {
                     Assert.AreEqual(id, model.Id);
@@ -253,7 +253,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             {
                 CaseNumber = 7,
                 CaseDescription = "Default Scenario Context - Get Valid Only by Config",
-                TestedAction = () => new ScenariosFaker<SimpleModel>()
+                TestedAction = () => new ScenariosBuilder<SimpleModel>()
                     .DefaultContextValidScenario(
                         scenarioRuleSet => scenarioRuleSet
                             .RuleFor(f => f.Id, id)
@@ -265,10 +265,10 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                             .RuleFor(f => f.Name, "CC")
                             .RuleFor(f => f.Total, 951m))
                     .Generate(
-                        ScenarioBuilderType.All,
+                        BuilderType.All,
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName }
+                            { Defaults.ContextName, Defaults.ScenarioValidName }
                         }),
                 AdditionalAsserts = (model) =>
                 {
@@ -286,7 +286,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             {
                 CaseNumber = 8,
                 CaseDescription = "Default Scenario Context - Get Invalid Only by Config",
-                TestedAction = () => new ScenariosFaker<SimpleModel>()
+                TestedAction = () => new ScenariosBuilder<SimpleModel>()
                     .DefaultContextValidScenario(
                         scenarioRuleSet => scenarioRuleSet
                             .RuleFor(f => f.Id, 10)
@@ -298,10 +298,10 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                             .RuleFor(f => f.Name, name)
                             .RuleFor(f => f.Total, total))
                     .Generate(
-                        ScenarioBuilderType.All,
+                        BuilderType.All,
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioInvalidName }
+                            { Defaults.ContextName, Defaults.ScenarioInvalidName }
                         }),
                 AdditionalAsserts = (model) =>
                 {
@@ -315,19 +315,19 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             {
                 CaseNumber = 9,
                 CaseDescription = "Default Scenario Context - Using Faker",
-                TestedAction = () => new ScenariosFaker<SimpleModel>()
+                TestedAction = () => new ScenariosBuilder<SimpleModel>()
                     .DefaultContextValidScenario(
                         scenarioRuleSet => scenarioRuleSet
                             .RuleFor(f => f.Id, f => f.Random.Int(1))
                             .RuleFor(f => f.Name, f => f.Name.FullName())
                             .RuleFor(f => f.Total, f => f.Random.Decimal(1)),
-                        ScenarioCombinationType.AlwaysValid)
+                        ScenarioType.AlwaysValid)
                     .DefaultContextInvalidScenario(
                         scenarioRuleSet => scenarioRuleSet
                             .Ignore(f => f.Id)
                             .Ignore(f => f.Name)
                             .Ignore(f => f.Total))
-                    .Generate(ScenarioBuilderType.ValidOnly),
+                    .Generate(BuilderType.ValidOnly),
                 AdditionalAsserts = (model) =>
                 {
                     Assert.IsNotNull(model.Id);
@@ -342,7 +342,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             {
                 CaseNumber = 10,
                 CaseDescription = "Custom Scenario Context - Using Faker",
-                TestedAction = () => new ScenariosFaker<SimpleModel>()
+                TestedAction = () => new ScenariosBuilder<SimpleModel>()
                     .DefaultContextValidScenario(
                         scenarioRuleSet => scenarioRuleSet
                             .RuleFor(f => f.Id, f => f.Random.Int(1)))
@@ -361,10 +361,10 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                             .Ignore(f => f.Name)
                             .Ignore(f => f.Total))
                     .Generate(
-                        ScenarioBuilderType.All,
+                        BuilderType.All,
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextName, ScenarioTestName }
                         }),
                 AdditionalAsserts = (model) =>
@@ -384,7 +384,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             {
                 CaseNumber = 11,
                 CaseDescription = "Custom Scenario Context - Replacing Rules",
-                TestedAction = () => new ScenariosFaker<SimpleModel>()
+                TestedAction = () => new ScenariosBuilder<SimpleModel>()
                     .DefaultContextValidScenario(
                         scenarioRuleSet => scenarioRuleSet
                             .RuleFor(f => f.Id, 3)
@@ -421,8 +421,8 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             {
                 CaseNumber = 1,
                 CaseDescription = "Invalid Scenario Builder Type",
-                TestedAction = () => new ScenariosFaker<SimpleModel>()
-                    .Generate((ScenarioBuilderType)999),
+                TestedAction = () => new ScenariosBuilder<SimpleModel>()
+                    .Generate((BuilderType)999),
                 ExpectedExceptionMessage = Errors.ScenarioBuilderTypeInvalid
             };
 
@@ -430,8 +430,8 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             {
                 CaseNumber = 2,
                 CaseDescription = "Scenario Builder doesn't contain Always Valid Scenarios",
-                TestedAction = () => new ScenariosFaker<SimpleModel>()
-                    .Generate(ScenarioBuilderType.ValidOnly),
+                TestedAction = () => new ScenariosBuilder<SimpleModel>()
+                    .Generate(BuilderType.ValidOnly),
                 ExpectedExceptionMessage = Errors.ScenarioBuilderDoesnotContainAlwaysValidKnownScenario
             };
 
@@ -439,8 +439,8 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             {
                 CaseNumber = 3,
                 CaseDescription = "Scenario Builder doesn't contain Always Invalid Scenarios",
-                TestedAction = () => new ScenariosFaker<SimpleModel>()
-                    .Generate(ScenarioBuilderType.InvalidOnly),
+                TestedAction = () => new ScenariosBuilder<SimpleModel>()
+                    .Generate(BuilderType.InvalidOnly),
                 ExpectedExceptionMessage = Errors.ScenarioBuilderDoesnotContainAlwaysInvalidKnownScenario
             };
 
@@ -448,9 +448,9 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             {
                 CaseNumber = 4,
                 CaseDescription = "Scenario Builder with empty Context",
-                TestedAction = () => new ScenariosFaker<SimpleModel>()
+                TestedAction = () => new ScenariosBuilder<SimpleModel>()
                     .Generate(
-                        ScenarioBuilderType.All,
+                        BuilderType.All,
                         new Dictionary<string, string>
                         {
                             { string.Empty, string.Empty }
@@ -464,7 +464,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             {
                 CaseNumber = 5,
                 CaseDescription = "Scenario Builder with invalid context",
-                TestedAction = () => new ScenariosFaker<SimpleModel>()
+                TestedAction = () => new ScenariosBuilder<SimpleModel>()
                     .DefaultContextValidScenario(
                         scenarioRuleSet => scenarioRuleSet
                             .Ignore(f => f.Id)
@@ -476,7 +476,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                             .Ignore(f => f.Name)
                             .Ignore(f => f.Total))
                     .Generate(
-                        ScenarioBuilderType.All,
+                        BuilderType.All,
                         new Dictionary<string, string>
                         {
                             { ScenarioInvalidContextName, string.Empty }
@@ -490,7 +490,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             {
                 CaseNumber = 6,
                 CaseDescription = "Scenario Builder with invalid scenario",
-                TestedAction = () => new ScenariosFaker<SimpleModel>()
+                TestedAction = () => new ScenariosBuilder<SimpleModel>()
                     .DefaultContextValidScenario(
                         scenarioRuleSet => scenarioRuleSet
                             .Ignore(f => f.Id)
@@ -502,14 +502,14 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                             .Ignore(f => f.Name)
                             .Ignore(f => f.Total))
                     .Generate(
-                        ScenarioBuilderType.All,
+                        BuilderType.All,
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, ScenarioTestInvalidName }
+                            { Defaults.ContextName, ScenarioTestInvalidName }
                         }),
                 ExpectedExceptionMessage = string.Format(
                     Errors.ScenarioCombinationConfigWithInvalidScenario,
-                    Defaults.ScenarioContextName,
+                    Defaults.ContextName,
                     ScenarioTestInvalidName)
             };
         }
@@ -520,7 +520,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             {
                 CaseNumber = 1,
                 CaseDescription = "Empty Default Scenario Context",
-                TestedAction = () => new ScenariosFaker<SimpleModel>()
+                TestedAction = () => new ScenariosBuilder<SimpleModel>()
                     .Generate(),
                 ExpectedExceptionMessage = Errors.DefaultScenarioContextWithoutValidScenario
             };
@@ -529,7 +529,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             {
                 CaseNumber = 2,
                 CaseDescription = "Default Scenario Context with Valid Scenario Only",
-                TestedAction = () => new ScenariosFaker<SimpleModel>()
+                TestedAction = () => new ScenariosBuilder<SimpleModel>()
                     .DefaultContextValidScenario(
                         scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id))
                     .Generate(),
@@ -540,7 +540,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             {
                 CaseNumber = 3,
                 CaseDescription = "Default Scenario Context with Invalid Scenario Only",
-                TestedAction = () => new ScenariosFaker<SimpleModel>()
+                TestedAction = () => new ScenariosBuilder<SimpleModel>()
                     .DefaultContextInvalidScenario(
                         scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id))
                     .Generate(),
@@ -551,7 +551,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             {
                 CaseNumber = 4,
                 CaseDescription = "Custom Scenario Context Empty",
-                TestedAction = () => new ScenariosFaker<SimpleModel>()
+                TestedAction = () => new ScenariosBuilder<SimpleModel>()
                     .DefaultContextValidScenario(
                         scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id))
                     .DefaultContextInvalidScenario(
@@ -567,7 +567,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             {
                 CaseNumber = 5,
                 CaseDescription = "Custom Scenario with Only One Scenario",
-                TestedAction = () => new ScenariosFaker<SimpleModel>()
+                TestedAction = () => new ScenariosBuilder<SimpleModel>()
                     .DefaultContextValidScenario(
                         scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id))
                     .DefaultContextInvalidScenario(
@@ -589,7 +589,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             {
                 CaseNumber = 1,
                 CaseDescription = "Default Scenario Context Only",
-                TestedAction = () => new ScenariosFaker<SimpleModel>()
+                TestedAction = () => new ScenariosBuilder<SimpleModel>()
                     .DefaultContextValidScenario(
                         scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id))
                     .DefaultContextInvalidScenario(
@@ -601,7 +601,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             {
                 CaseNumber = 2,
                 CaseDescription = "Custom Scenario Context",
-                TestedAction = () => new ScenariosFaker<SimpleModel>()
+                TestedAction = () => new ScenariosBuilder<SimpleModel>()
                     .DefaultContextValidScenario(
                         scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id))
                     .DefaultContextInvalidScenario(
@@ -626,30 +626,30 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             {
                 CaseNumber = 1,
                 CaseDescription = "Default Scenario Context - Exact Default Valid as Invalid Only",
-                TestedAction = () => new ScenariosFaker<SimpleModel>()
+                TestedAction = () => new ScenariosBuilder<SimpleModel>()
                     .DefaultContextValidScenario(
                         scenarioRuleSet => scenarioRuleSet
                             .Ignore(f => f.Id)
                             .Ignore(f => f.Name)
                             .Ignore(f => f.Total),
-                        ScenarioCombinationType.AlwaysValid)
+                        ScenarioType.AlwaysValid)
                     .DefaultContextInvalidScenario(
                         scenarioRuleSet => scenarioRuleSet
                             .Ignore(f => f.Id)
                             .Ignore(f => f.Name)
                             .Ignore(f => f.Total),
-                        ScenarioCombinationType.AlwaysInvalid)
+                        ScenarioType.AlwaysInvalid)
                     .Generate(
-                        ScenarioBuilderType.InvalidOnly,
+                        BuilderType.InvalidOnly,
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName }
+                            { Defaults.ContextName, Defaults.ScenarioValidName }
                         }),
                 ExpectedExceptionMessage = string.Format(
                     Errors.ScenarioCombinationConfigHasConflictWithKnownScenarioCombinationConfig,
-                    ScenarioBuilderType.InvalidOnly,
+                    BuilderType.InvalidOnly,
                     exceptionKey,
-                    ScenarioCombinationType.AlwaysValid)
+                    ScenarioType.AlwaysValid)
             };
 
             exceptionKey =
@@ -659,30 +659,30 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             {
                 CaseNumber = 2,
                 CaseDescription = "Default Scenario Context - Exact Default Invalid as Valid Only",
-                TestedAction = () => new ScenariosFaker<SimpleModel>()
+                TestedAction = () => new ScenariosBuilder<SimpleModel>()
                     .DefaultContextValidScenario(
                         scenarioRuleSet => scenarioRuleSet
                             .Ignore(f => f.Id)
                             .Ignore(f => f.Name)
                             .Ignore(f => f.Total),
-                        ScenarioCombinationType.AlwaysValid)
+                        ScenarioType.AlwaysValid)
                     .DefaultContextInvalidScenario(
                         scenarioRuleSet => scenarioRuleSet
                             .Ignore(f => f.Id)
                             .Ignore(f => f.Name)
                             .Ignore(f => f.Total),
-                        ScenarioCombinationType.AlwaysInvalid)
+                        ScenarioType.AlwaysInvalid)
                     .Generate(
-                        ScenarioBuilderType.ValidOnly,
+                        BuilderType.ValidOnly,
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioInvalidName }
+                            { Defaults.ContextName, Defaults.ScenarioInvalidName }
                         }),
                 ExpectedExceptionMessage = string.Format(
                     Errors.ScenarioCombinationConfigHasConflictWithKnownScenarioCombinationConfig,
-                    ScenarioBuilderType.ValidOnly,
+                    BuilderType.ValidOnly,
                     exceptionKey,
-                    ScenarioCombinationType.AlwaysInvalid)
+                    ScenarioType.AlwaysInvalid)
             };
 
             exceptionKey =
@@ -692,10 +692,10 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             {
                 CaseNumber = 3,
                 CaseDescription = "Custom Scenario Context - Exact Custom Invalid as Valid Only",
-                TestedAction = () => new ScenariosFaker<SimpleModel>()
+                TestedAction = () => new ScenariosBuilder<SimpleModel>()
                     .DefaultContextValidScenario(
                         scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id),
-                        ScenarioCombinationType.AlwaysValid)
+                        ScenarioType.AlwaysValid)
                     .DefaultContextInvalidScenario(
                         scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id))
                     .ScenarioContext(ScenarioContextName)
@@ -704,23 +704,23 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                         scenarioRuleSet => scenarioRuleSet
                             .Ignore(f => f.Name)
                             .Ignore(f => f.Total),
-                        ScenarioCombinationType.AlwaysInvalid)
+                        ScenarioType.AlwaysInvalid)
                     .Scenario(
                         ScenarioTestNameAlternative,
                         scenarioRuleSet => scenarioRuleSet
                             .Ignore(f => f.Name)
                             .Ignore(f => f.Total))
                     .Generate(
-                        ScenarioBuilderType.ValidOnly,
+                        BuilderType.ValidOnly,
                         new Dictionary<string, string>
                         {
                             { ScenarioContextName, ScenarioTestName }
                         }),
                 ExpectedExceptionMessage = string.Format(
                     Errors.ScenarioCombinationConfigHasConflictWithKnownScenarioCombinationConfig,
-                    ScenarioBuilderType.ValidOnly,
+                    BuilderType.ValidOnly,
                     exceptionKey,
-                    ScenarioCombinationType.AlwaysInvalid)
+                    ScenarioType.AlwaysInvalid)
             };
 
             exceptionKey =
@@ -730,12 +730,12 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             {
                 CaseNumber = 4,
                 CaseDescription = "Custom Scenario Context - Exact Custom Valid as Invalid Only",
-                TestedAction = () => new ScenariosFaker<SimpleModel>()
+                TestedAction = () => new ScenariosBuilder<SimpleModel>()
                     .DefaultContextValidScenario(
                         scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id))
                     .DefaultContextInvalidScenario(
                         scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id),
-                        ScenarioCombinationType.AlwaysInvalid)
+                        ScenarioType.AlwaysInvalid)
                     .ScenarioContext(ScenarioContextName)
                     .Scenario(
                         ScenarioTestName,
@@ -747,18 +747,18 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                         scenarioRuleSet => scenarioRuleSet
                             .Ignore(f => f.Name)
                             .Ignore(f => f.Total),
-                        ScenarioCombinationType.AlwaysValid)
+                        ScenarioType.AlwaysValid)
                     .Generate(
-                        ScenarioBuilderType.InvalidOnly,
+                        BuilderType.InvalidOnly,
                         new Dictionary<string, string>
                         {
                             { ScenarioContextName, ScenarioTestNameAlternative }
                         }),
                 ExpectedExceptionMessage = string.Format(
                     Errors.ScenarioCombinationConfigHasConflictWithKnownScenarioCombinationConfig,
-                    ScenarioBuilderType.InvalidOnly,
+                    BuilderType.InvalidOnly,
                     exceptionKey,
-                    ScenarioCombinationType.AlwaysValid)
+                    ScenarioType.AlwaysValid)
             };
 
             exceptionKey =
@@ -768,13 +768,13 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             {
                 CaseNumber = 5,
                 CaseDescription = "Custom Scenario Context - Combination with existing default as Valid Only",
-                TestedAction = () => new ScenariosFaker<SimpleModel>()
+                TestedAction = () => new ScenariosBuilder<SimpleModel>()
                     .DefaultContextValidScenario(
                         scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id),
-                        ScenarioCombinationType.AlwaysValid)
+                        ScenarioType.AlwaysValid)
                     .DefaultContextInvalidScenario(
                         scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id),
-                        ScenarioCombinationType.AlwaysInvalid)
+                        ScenarioType.AlwaysInvalid)
                     .ScenarioContext(ScenarioContextName)
                     .Scenario(
                         ScenarioTestName,
@@ -787,17 +787,17 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                             .Ignore(f => f.Name)
                             .Ignore(f => f.Total))
                     .Generate(
-                        ScenarioBuilderType.InvalidOnly,
+                        BuilderType.InvalidOnly,
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextName, ScenarioTestNameAlternative }
                         }),
                 ExpectedExceptionMessage = string.Format(
                     Errors.ScenarioCombinationConfigHasConflictWithKnownScenarioCombinationConfig,
-                    ScenarioBuilderType.InvalidOnly,
+                    BuilderType.InvalidOnly,
                     exceptionKey,
-                    ScenarioCombinationType.AlwaysValid)
+                    ScenarioType.AlwaysValid)
             };
 
             exceptionKey =
@@ -807,13 +807,13 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             {
                 CaseNumber = 6,
                 CaseDescription = "Custom Scenario Context - Combination with existing default as Invalid Only",
-                TestedAction = () => new ScenariosFaker<SimpleModel>()
+                TestedAction = () => new ScenariosBuilder<SimpleModel>()
                     .DefaultContextValidScenario(
                         scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id),
-                        ScenarioCombinationType.AlwaysValid)
+                        ScenarioType.AlwaysValid)
                     .DefaultContextInvalidScenario(
                         scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id),
-                        ScenarioCombinationType.AlwaysInvalid)
+                        ScenarioType.AlwaysInvalid)
                     .ScenarioContext(ScenarioContextName)
                     .Scenario(
                         ScenarioTestName,
@@ -826,17 +826,17 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                             .Ignore(f => f.Name)
                             .Ignore(f => f.Total))
                     .Generate(
-                        ScenarioBuilderType.ValidOnly,
+                        BuilderType.ValidOnly,
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioInvalidName },
+                            { Defaults.ContextName, Defaults.ScenarioInvalidName },
                             { ScenarioContextName, ScenarioTestNameAlternative }
                         }),
                 ExpectedExceptionMessage = string.Format(
                     Errors.ScenarioCombinationConfigHasConflictWithKnownScenarioCombinationConfig,
-                    ScenarioBuilderType.ValidOnly,
+                    BuilderType.ValidOnly,
                     exceptionKey,
-                    ScenarioCombinationType.AlwaysInvalid)
+                    ScenarioType.AlwaysInvalid)
             };
 
             exceptionKey =
@@ -846,7 +846,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             {
                 CaseNumber = 7,
                 CaseDescription = "Custom Scenario Context - Combination with existing custom as Invalid Only",
-                TestedAction = () => new ScenariosFaker<SimpleModel>()
+                TestedAction = () => new ScenariosBuilder<SimpleModel>()
                     .DefaultContextValidScenario(
                         scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id))
                     .DefaultContextInvalidScenario(
@@ -857,25 +857,25 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                         scenarioRuleSet => scenarioRuleSet
                             .Ignore(f => f.Name)
                             .Ignore(f => f.Total),
-                        ScenarioCombinationType.AlwaysValid)
+                        ScenarioType.AlwaysValid)
                     .Scenario(
                         ScenarioTestNameAlternative,
                         scenarioRuleSet => scenarioRuleSet
                             .Ignore(f => f.Name)
                             .Ignore(f => f.Total),
-                        ScenarioCombinationType.AlwaysInvalid)
+                        ScenarioType.AlwaysInvalid)
                     .Generate(
-                        ScenarioBuilderType.ValidOnly,
+                        BuilderType.ValidOnly,
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextName, ScenarioTestNameAlternative }
                         }),
                 ExpectedExceptionMessage = string.Format(
                     Errors.ScenarioCombinationConfigHasConflictWithKnownScenarioCombinationConfig,
-                    ScenarioBuilderType.ValidOnly,
+                    BuilderType.ValidOnly,
                     exceptionKey,
-                    ScenarioCombinationType.AlwaysInvalid)
+                    ScenarioType.AlwaysInvalid)
             };
 
             exceptionKey =
@@ -885,7 +885,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             {
                 CaseNumber = 8,
                 CaseDescription = "Custom Scenario Context - Combination with existing custom as Invalid Only",
-                TestedAction = () => new ScenariosFaker<SimpleModel>()
+                TestedAction = () => new ScenariosBuilder<SimpleModel>()
                     .DefaultContextValidScenario(
                         scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id))
                     .DefaultContextInvalidScenario(
@@ -896,25 +896,25 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                         scenarioRuleSet => scenarioRuleSet
                             .Ignore(f => f.Name)
                             .Ignore(f => f.Total),
-                        ScenarioCombinationType.AlwaysValid)
+                        ScenarioType.AlwaysValid)
                     .Scenario(
                         ScenarioTestNameAlternative,
                         scenarioRuleSet => scenarioRuleSet
                             .Ignore(f => f.Name)
                             .Ignore(f => f.Total),
-                        ScenarioCombinationType.AlwaysInvalid)
+                        ScenarioType.AlwaysInvalid)
                     .Generate(
-                        ScenarioBuilderType.InvalidOnly,
+                        BuilderType.InvalidOnly,
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioInvalidName },
+                            { Defaults.ContextName, Defaults.ScenarioInvalidName },
                             { ScenarioContextName, ScenarioTestName }
                         }),
                 ExpectedExceptionMessage = string.Format(
                     Errors.ScenarioCombinationConfigHasConflictWithKnownScenarioCombinationConfig,
-                    ScenarioBuilderType.InvalidOnly,
+                    BuilderType.InvalidOnly,
                     exceptionKey,
-                    ScenarioCombinationType.AlwaysValid)
+                    ScenarioType.AlwaysValid)
             };
 
             exceptionKey =
@@ -925,7 +925,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             {
                 CaseNumber = 9,
                 CaseDescription = "Custom Scenario Context - Combination with existing Known Combination as Invalid Only",
-                TestedAction = () => new ScenariosFaker<SimpleModel>()
+                TestedAction = () => new ScenariosBuilder<SimpleModel>()
                     .DefaultContextValidScenario(
                         scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id))
                     .DefaultContextInvalidScenario(
@@ -944,29 +944,29 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioInvalidName },
+                            { Defaults.ContextName, Defaults.ScenarioInvalidName },
                             { ScenarioContextName, ScenarioTestName }
                         },
-                        ScenarioCombinationType.AlwaysInvalid)
+                        ScenarioType.AlwaysInvalid)
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextName, ScenarioTestName }
                         },
-                        ScenarioCombinationType.AlwaysValid)
+                        ScenarioType.AlwaysValid)
                     .Generate(
-                        ScenarioBuilderType.ValidOnly,
+                        BuilderType.ValidOnly,
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioInvalidName },
+                            { Defaults.ContextName, Defaults.ScenarioInvalidName },
                             { ScenarioContextName, ScenarioTestName }
                         }),
                 ExpectedExceptionMessage = string.Format(
                     Errors.ScenarioCombinationConfigHasConflictWithKnownScenarioCombinationConfig,
-                    ScenarioBuilderType.ValidOnly,
+                    BuilderType.ValidOnly,
                     exceptionKey,
-                    ScenarioCombinationType.AlwaysInvalid)
+                    ScenarioType.AlwaysInvalid)
             };
 
             exceptionKey =
@@ -977,7 +977,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             {
                 CaseNumber = 10,
                 CaseDescription = "Custom Scenario Context - Combination with existing Known Combination as Valid Only",
-                TestedAction = () => new ScenariosFaker<SimpleModel>()
+                TestedAction = () => new ScenariosBuilder<SimpleModel>()
                     .DefaultContextValidScenario(
                         scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id))
                     .DefaultContextInvalidScenario(
@@ -996,29 +996,29 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioInvalidName },
+                            { Defaults.ContextName, Defaults.ScenarioInvalidName },
                             { ScenarioContextName, ScenarioTestName }
                         },
-                        ScenarioCombinationType.AlwaysInvalid)
+                        ScenarioType.AlwaysInvalid)
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextName, ScenarioTestName }
                         },
-                        ScenarioCombinationType.AlwaysValid)
+                        ScenarioType.AlwaysValid)
                     .Generate(
-                        ScenarioBuilderType.InvalidOnly,
+                        BuilderType.InvalidOnly,
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextName, ScenarioTestName }
                         }),
                 ExpectedExceptionMessage = string.Format(
                     Errors.ScenarioCombinationConfigHasConflictWithKnownScenarioCombinationConfig,
-                    ScenarioBuilderType.InvalidOnly,
+                    BuilderType.InvalidOnly,
                     exceptionKey,
-                    ScenarioCombinationType.AlwaysValid)
+                    ScenarioType.AlwaysValid)
             };
 
             exceptionKey =
@@ -1029,7 +1029,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             {
                 CaseNumber = 11,
                 CaseDescription = "Custom Scenario Context - Combination with existing Known Combination as Valid Only",
-                TestedAction = () => new ScenariosFaker<SimpleModel>()
+                TestedAction = () => new ScenariosBuilder<SimpleModel>()
                     .DefaultContextValidScenario(
                         scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id))
                     .DefaultContextInvalidScenario(
@@ -1055,30 +1055,30 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioInvalidName },
+                            { Defaults.ContextName, Defaults.ScenarioInvalidName },
                             { ScenarioContextNameAlternative, ScenarioTestName }
                         },
-                        ScenarioCombinationType.AlwaysInvalid)
+                        ScenarioType.AlwaysInvalid)
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextNameAlternative, ScenarioTestName }
                         },
-                        ScenarioCombinationType.AlwaysValid)
+                        ScenarioType.AlwaysValid)
                     .Generate(
-                        ScenarioBuilderType.InvalidOnly,
+                        BuilderType.InvalidOnly,
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextName, ScenarioTestName },
                             { ScenarioContextNameAlternative, ScenarioTestName }
                         }),
                 ExpectedExceptionMessage = string.Format(
                     Errors.ScenarioCombinationConfigHasConflictWithKnownScenarioCombinationConfig,
-                    ScenarioBuilderType.InvalidOnly,
+                    BuilderType.InvalidOnly,
                     exceptionKey,
-                    ScenarioCombinationType.AlwaysValid)
+                    ScenarioType.AlwaysValid)
             };
 
             exceptionKey =
@@ -1089,7 +1089,7 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
             {
                 CaseNumber = 12,
                 CaseDescription = "Custom Scenario Context - Combination with existing Known Combination as Valid Only",
-                TestedAction = () => new ScenariosFaker<SimpleModel>()
+                TestedAction = () => new ScenariosBuilder<SimpleModel>()
                     .DefaultContextValidScenario(
                         scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id))
                     .DefaultContextInvalidScenario(
@@ -1115,37 +1115,37 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioInvalidName },
+                            { Defaults.ContextName, Defaults.ScenarioInvalidName },
                             { ScenarioContextNameAlternative, ScenarioTestName }
                         },
-                        ScenarioCombinationType.AlwaysInvalid)
+                        ScenarioType.AlwaysInvalid)
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextNameAlternative, ScenarioTestName }
                         },
-                        ScenarioCombinationType.AlwaysValid)
+                        ScenarioType.AlwaysValid)
                     .Generate(
-                        ScenarioBuilderType.ValidOnly,
+                        BuilderType.ValidOnly,
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioInvalidName },
+                            { Defaults.ContextName, Defaults.ScenarioInvalidName },
                             { ScenarioContextName, ScenarioTestName },
                             { ScenarioContextNameAlternative, ScenarioTestName }
                         }),
                 ExpectedExceptionMessage = string.Format(
                     Errors.ScenarioCombinationConfigHasConflictWithKnownScenarioCombinationConfig,
-                    ScenarioBuilderType.ValidOnly,
+                    BuilderType.ValidOnly,
                     exceptionKey,
-                    ScenarioCombinationType.AlwaysInvalid)
+                    ScenarioType.AlwaysInvalid)
             };
 
             yield return new GenerateTestContext
             {
                 CaseNumber = 13,
                 CaseDescription = "Custom Scenario Context - Combination without compatible known scenario",
-                TestedAction = () => new ScenariosFaker<SimpleModel>()
+                TestedAction = () => new ScenariosBuilder<SimpleModel>()
                     .DefaultContextValidScenario(
                         scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id))
                     .DefaultContextInvalidScenario(
@@ -1171,19 +1171,19 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioInvalidName },
+                            { Defaults.ContextName, Defaults.ScenarioInvalidName },
                             { ScenarioContextNameAlternative, ScenarioTestName }
                         },
-                        ScenarioCombinationType.AlwaysInvalid)
+                        ScenarioType.AlwaysInvalid)
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextNameAlternative, ScenarioTestName }
                         },
-                        ScenarioCombinationType.AlwaysValid)
+                        ScenarioType.AlwaysValid)
                     .Generate(
-                        ScenarioBuilderType.ValidOnly,
+                        BuilderType.ValidOnly,
                         new Dictionary<string, string>
                         {
                             { ScenarioContextName, ScenarioTestName },
@@ -1191,14 +1191,14 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                         }),
                 ExpectedExceptionMessage = string.Format(
                     Errors.ScenarioCombinationConfigHasNoCompatibleKnownScenarioCombinationConfig,
-                    ScenarioBuilderType.ValidOnly)
+                    BuilderType.ValidOnly)
             };
 
             yield return new GenerateTestContext
             {
                 CaseNumber = 14,
                 CaseDescription = "Custom Scenario Context - Combination without compatible known scenario",
-                TestedAction = () => new ScenariosFaker<SimpleModel>()
+                TestedAction = () => new ScenariosBuilder<SimpleModel>()
                     .DefaultContextValidScenario(
                         scenarioRuleSet => scenarioRuleSet.Ignore(f => f.Id))
                     .DefaultContextInvalidScenario(
@@ -1224,26 +1224,26 @@ namespace Akira.TestTools.Scenarios.Tests.Context.Data
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioInvalidName },
+                            { Defaults.ContextName, Defaults.ScenarioInvalidName },
                             { ScenarioContextNameAlternative, ScenarioTestName }
                         },
-                        ScenarioCombinationType.AlwaysInvalid)
+                        ScenarioType.AlwaysInvalid)
                     .KnownScenarioCombination(
                         new Dictionary<string, string>
                         {
-                            { Defaults.ScenarioContextName, Defaults.ScenarioValidName },
+                            { Defaults.ContextName, Defaults.ScenarioValidName },
                             { ScenarioContextNameAlternative, ScenarioTestName }
                         },
-                        ScenarioCombinationType.AlwaysValid)
+                        ScenarioType.AlwaysValid)
                     .Generate(
-                        ScenarioBuilderType.InvalidOnly,
+                        BuilderType.InvalidOnly,
                         new Dictionary<string, string>
                         {
                             { ScenarioContextName, ScenarioTestName }
                         }),
                 ExpectedExceptionMessage = string.Format(
                     Errors.ScenarioCombinationConfigHasNoCompatibleKnownScenarioCombinationConfig,
-                    ScenarioBuilderType.InvalidOnly)
+                    BuilderType.InvalidOnly)
             };
         }
     }

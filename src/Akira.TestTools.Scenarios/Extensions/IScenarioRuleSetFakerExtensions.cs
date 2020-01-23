@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 using Akira.Contracts.TestTools.Scenarios;
+using Akira.Contracts.TestTools.Scenarios.Collections;
 using Bogus;
 
 namespace Akira.TestTools.Scenarios.Extensions
@@ -23,7 +24,7 @@ namespace Akira.TestTools.Scenarios.Extensions
             }
             else
             {
-                _ = scenarioRuleSet.RuleFor(
+                scenarioRuleSet.RuleFor(
                     property,
                     t => getValue(Faker, t));
             }
@@ -45,7 +46,7 @@ namespace Akira.TestTools.Scenarios.Extensions
             }
             else
             {
-                _ = scenarioRuleSet.RuleFor(
+                scenarioRuleSet.RuleFor(
                     property,
                     () => getValue(Faker));
             }

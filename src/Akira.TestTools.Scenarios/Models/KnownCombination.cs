@@ -8,11 +8,11 @@ namespace Akira.TestTools.Scenarios.Models
     {
         public KnownCombination(
             string key,
-            IDictionary<string, string> combinationConfiguration,
-            ScenarioCombinationType combinationType)
+            IDictionary<string, string> combination,
+            ScenarioType combinationType)
         {
             this.Key = key;
-            this.CombinationConfiguration = combinationConfiguration;
+            this.Combination = combination;
             this.CombinationType = combinationType;
         }
 
@@ -20,7 +20,7 @@ namespace Akira.TestTools.Scenarios.Models
             string key,
             string contextName,
             string scenarioName,
-            ScenarioCombinationType combinationType) :
+            ScenarioType combinationType) :
             this(
                 key,
                 new Dictionary<string, string> { { contextName, scenarioName } },
@@ -31,9 +31,9 @@ namespace Akira.TestTools.Scenarios.Models
 
         public string Key { get; }
 
-        public IDictionary<string, string> CombinationConfiguration { get; }
+        public IDictionary<string, string> Combination { get; }
 
-        public ScenarioCombinationType CombinationType { get; }
+        public ScenarioType CombinationType { get; }
 
         public bool SingleConfiguration { get; }
     }

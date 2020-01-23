@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Akira.Contracts.TestTools.Scenarios;
 using Akira.Contracts.TestTools.Scenarios.Enums;
-using Akira.TestTools.Scenarios.Constants;
+using static Akira.TestTools.Scenarios.Constants.Errors.ScenariosBuilder;
 
 namespace Akira.TestTools.Scenarios
 {
@@ -17,9 +17,9 @@ namespace Akira.TestTools.Scenarios
     {
         #region Constructors
 
-        public ScenariosBuilder(IScenariosRepository<T> builderConfiguration)
+        public ScenariosBuilder()
         {
-            this.BuilderRepository = builderConfiguration;
+            this.BuilderRepository = new ScenariosRepository<T>();
         }
 
         #endregion Constructors
@@ -35,42 +35,41 @@ namespace Akira.TestTools.Scenarios
 
         #region Methods
 
-        #region Public Methods
-
         /// <summary>
         /// Generate a new instance of Model (<see cref="{T}" />)
         /// </summary>
-        /// <param name="scenarioBuilderType">
+        /// <param name="builderType">
         /// Indicates the kind of Model (<see cref="{T}" />) that will be created. Could be
-        /// <see cref="ScenarioBuilderType.All"/>, <see cref="ScenarioBuilderType.ValidOnly"/> or
-        /// <see cref="ScenarioBuilderType.InvalidOnly"/>
+        /// <see cref="BuilderType.All"/>, <see cref="BuilderType.ValidOnly"/> or
+        /// <see cref="BuilderType.InvalidOnly"/>
         /// </param>
-        /// <param name="scenarioBuilderCombinationConfiguration">
+        /// <param name="builderCombination">
         /// A dictionary with the builder combination configuration that will be used to build the new model.
         /// Key: Scenario Context Name
         /// Value: Scenario Name
         /// </param>
         /// <returns>A Model (<see cref="{T}" />) object based on the scenario builder configuration</returns>
         public T Generate(
-            ScenarioBuilderType scenarioBuilderType = ScenarioBuilderType.All,
-            IDictionary<string, string> scenarioBuilderCombinationConfiguration = null)
+            BuilderType builderType = BuilderType.All,
+            IDictionary<string, string> builderCombination = null)
         {
-            return this.Generate(
-                scenarioBuilderType,
-                scenarioBuilderCombinationConfiguration,
-                true);
+            var modelBuilder = this.BuilderRepository.GetModelBuilder(
+                builderType,
+                builderCombination);
+
+            return modelBuilder.Generate();
         }
 
         /// <summary>
         /// Generate multiple instances of Model (<see cref="{T}" />)
         /// </summary>
         /// <param name="count">Number of instances to be generated</param>
-        /// <param name="scenarioBuilderType">
+        /// <param name="builderType">
         /// Indicates the kind of Model (<see cref="{T}" />) that will be created. Could be
-        /// <see cref="ScenarioBuilderType.All"/>, <see cref="ScenarioBuilderType.ValidOnly"/> or
-        /// <see cref="ScenarioBuilderType.InvalidOnly"/>
+        /// <see cref="BuilderType.All"/>, <see cref="BuilderType.ValidOnly"/> or
+        /// <see cref="BuilderType.InvalidOnly"/>
         /// </param>
-        /// <param name="scenarioBuilderCombinationConfiguration">
+        /// <param name="builderCombination">
         /// A dictionary with the builder combination configuration that will be used to build the new model.
         /// Key: Scenario Context Name
         /// Value: Scenario Name
@@ -78,63 +77,40 @@ namespace Akira.TestTools.Scenarios
         /// <returns>A list of Model (<see cref="{T}" />) objects based on the scenario builder configuration</returns>
         public IEnumerable<T> Generate(
             int count,
-            ScenarioBuilderType scenarioBuilderType = ScenarioBuilderType.All,
-            IDictionary<string, string> scenarioBuilderCombinationConfiguration = null)
+            BuilderType builderType = BuilderType.All,
+            IDictionary<string, string> builderCombination = null)
         {
             if (count <= 0)
             {
-                throw new ArgumentException(
-                    Errors.InvalidNumberOfRows);
+                throw new ArgumentException(InvalidNumberOfRows);
             }
 
             return Enumerable
                 .Range(1, count)
                 .Select(_ => this.Generate(
-                    scenarioBuilderType,
-                    scenarioBuilderCombinationConfiguration));
+                    builderType,
+                    builderCombination));
         }
 
         /// <summary>
         /// Generate a list of Model (<see cref="{T}" />), containing the Minimum Testing Scenarios
         /// </summary>
-        /// <param name="scenarioBuilderType">
+        /// <param name="builderType">
         /// Indicates the kind of Model (<see cref="{T}" />) that will be returned. Could be
-        /// <see cref="ScenarioBuilderType.All"/>, <see cref="ScenarioBuilderType.ValidOnly"/> or
-        /// <see cref="ScenarioBuilderType.InvalidOnly"/>
+        /// <see cref="BuilderType.All"/>, <see cref="BuilderType.ValidOnly"/> or
+        /// <see cref="BuilderType.InvalidOnly"/>
         /// </param>
         /// <returns>A list of Model (<see cref="{T}" />) objects based on the scenario builder type filter</returns>
         public IEnumerable<T> GenerateMinimumTestingScenarios(
-            ScenarioBuilderType scenarioBuilderType = ScenarioBuilderType.All)
+            BuilderType builderType = BuilderType.All)
         {
-            foreach (var scenarioCombinationConfiguration in
-                this.BuilderRepository.GetMinimumTestingScenarioCombinations(
-                    scenarioBuilderType))
+            foreach (var modelBuilder in
+                this.BuilderRepository.GetMinimumTestingModelBuilders(
+                    builderType))
             {
-                yield return this.Generate(
-                    scenarioBuilderType,
-                    scenarioCombinationConfiguration,
-                    false);
+                yield return modelBuilder.Generate();
             }
         }
-
-        #endregion Public Methods
-
-        #region Private Methods
-
-        private T Generate(
-            ScenarioBuilderType scenarioBuilderType,
-            IDictionary<string, string> scenarioCombinationConfiguration,
-            bool validateBuilderConfiguration)
-        {
-            var scenarioFaker = this.BuilderRepository.GetModelBuilder(
-                scenarioBuilderType,
-                scenarioCombinationConfiguration,
-                validateBuilderConfiguration);
-
-            return scenarioFaker.Generate();
-        }
-
-        #endregion Private Methods
 
         #endregion Methods
     }

@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Linq.Expressions;
 using Akira.Contracts.TestTools.Scenarios;
+using Akira.Contracts.TestTools.Scenarios.Collections;
 using Bogus;
 
 namespace Akira.TestTools.Scenarios
 {
-    internal class InternalFaker<T> : IScenarioRuleSet<T>, ICompletedModelBuilder<T>
+    internal class InternalFaker<T> : IScenarioRuleSet<T>, IModelBuilder<T>
         where T : class
     {
         #region Fields
@@ -14,62 +15,45 @@ namespace Akira.TestTools.Scenarios
 
         #endregion Fields
 
-        #region Constructor
-
-        internal InternalFaker(string key)
-        {
-            this.Key = key;
-        }
-
-        #endregion Constructor
-
         #region Properties
 
-        public string Key { get; }
+        public string Key { get; private set; }
 
         #endregion Properties
 
         #region Methods
 
-        public IScenarioRuleSet<T> Ignore<TProperty>(
-            Expression<Func<T, TProperty>> propertyOrField)
-        {
-            _ = this.faker.Ignore(propertyOrField);
+        public void IgnoreProperty<TProperty>(
+            Expression<Func<T, TProperty>> property) =>
+            _ = this.faker.Ignore(property);
 
-            return this;
-        }
-
-        public IScenarioRuleSet<T> RuleFor<TProperty>(
+        public void RuleForProperty<TProperty>(
             Expression<Func<T, TProperty>> property,
-            Func<T, TProperty> getValue)
-        {
+            Func<T, TProperty> getValue) =>
             _ = this.faker.RuleFor(
                 property,
                 (f, t) => getValue(t));
 
-            return this;
-        }
-
-        public IScenarioRuleSet<T> RuleFor<TProperty>(
+        public void RuleForProperty<TProperty>(
             Expression<Func<T, TProperty>> property,
-            Func<TProperty> getValue)
-        {
+            Func<TProperty> getValue) =>
             _ = this.faker.RuleFor(
                 property,
                 getValue);
 
-            return this;
-        }
-
-        public IScenarioRuleSet<T> RuleFor<TProperty>(
+        public void RuleForProperty<TProperty>(
             Expression<Func<T, TProperty>> property,
-            TProperty value)
-        {
+            TProperty value) =>
             _ = this.faker.RuleFor(
                 property,
                 value);
 
-            return this;
+        public void ExecuteAction(
+            string scenarioRuleSetActionKey,
+            Action<IScenarioRuleSet<T>> action)
+        {
+            this.Key += scenarioRuleSetActionKey;
+            action(this);
         }
 
         public T Generate() => this.faker.Generate();

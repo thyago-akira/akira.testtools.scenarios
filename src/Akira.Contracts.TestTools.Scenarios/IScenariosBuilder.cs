@@ -19,51 +19,51 @@ namespace Akira.Contracts.TestTools.Scenarios
         /// <summary>
         /// Generate a new instance of Model (<see cref="{T}" />)
         /// </summary>
-        /// <param name="scenarioBuilderType">
-        /// Indicates the kind of Model (<see cref="{T}" />) that will be created. Could be
-        /// <see cref="ScenarioBuilderType.All"/>, <see cref="ScenarioBuilderType.ValidOnly"/> or
-        /// <see cref="ScenarioBuilderType.InvalidOnly"/>
+        /// <param name="builderType">
+        /// Indicates the kind of Model (<see cref="{T}" />) that will be created. It could be
+        /// <see cref="BuilderType.All"/>, <see cref="BuilderType.ValidOnly"/> or
+        /// <see cref="BuilderType.InvalidOnly"/>
         /// </param>
-        /// <param name="scenarioBuilderCombinationConfiguration">
-        /// A dictionary with the builder combination configuration that will be used to build the new model.
-        /// Key: Scenario Context Name
+        /// <param name="builderCombination">
+        /// A dictionary with the builder combination that will be used to build the new model.
+        /// Key: Context Name
         /// Value: Scenario Name
         /// </param>
-        /// <returns>A Model (<see cref="{T}" />) object based on the scenario builder configuration</returns>
+        /// <returns>A Model (<see cref="{T}" />) object based on the scenario builder parameters</returns>
         T Generate(
-            ScenarioBuilderType scenarioBuilderType = ScenarioBuilderType.All,
-            IDictionary<string, string> scenarioBuilderCombinationConfiguration = null);
+            BuilderType builderType = BuilderType.All,
+            IDictionary<string, string> builderCombination = null);
 
         /// <summary>
         /// Generate multiple instances of Model (<see cref="{T}" />)
         /// </summary>
         /// <param name="count">Number of instances to be generated</param>
-        /// <param name="scenarioBuilderType">
-        /// Indicates the kind of Model (<see cref="{T}" />) that will be created. Could be
-        /// <see cref="ScenarioBuilderType.All"/>, <see cref="ScenarioBuilderType.ValidOnly"/> or
-        /// <see cref="ScenarioBuilderType.InvalidOnly"/>
+        /// <param name="builderType">
+        /// Indicates the kind of Model (<see cref="{T}" />) that will be created. It could be
+        /// <see cref="BuilderType.All"/>, <see cref="BuilderType.ValidOnly"/> or
+        /// <see cref="BuilderType.InvalidOnly"/>
         /// </param>
-        /// <param name="scenarioBuilderCombinationConfiguration">
-        /// A dictionary with the builder combination configuration that will be used to build the new model.
-        /// Key: Scenario Context Name
+        /// <param name="builderCombination">
+        /// A dictionary with the builder combination that will be used to build the new model.
+        /// Key: Context Name
         /// Value: Scenario Name
         /// </param>
-        /// <returns>A list of Model (<see cref="{T}" />) objects based on the scenario builder configuration</returns>
+        /// <returns>A list of Model (<see cref="{T}" />) objects based on the scenario builder parameters</returns>
         IEnumerable<T> Generate(
             int count,
-            ScenarioBuilderType scenarioBuilderType = ScenarioBuilderType.All,
-            IDictionary<string, string> scenarioBuilderCombinationConfiguration = null);
+            BuilderType builderType = BuilderType.All,
+            IDictionary<string, string> builderCombination = null);
 
         /// <summary>
         /// Generate a list of Model (<see cref="{T}" />), containing the Minimum Testing Scenarios
         /// </summary>
-        /// <param name="scenarioBuilderType">
-        /// Indicates the kind of Model (<see cref="{T}" />) that will be returned. Could be
-        /// <see cref="ScenarioBuilderType.All"/>, <see cref="ScenarioBuilderType.ValidOnly"/> or
-        /// <see cref="ScenarioBuilderType.InvalidOnly"/>
+        /// <param name="builderType">
+        /// Indicates the kind of Model (<see cref="{T}" />) that will be returned. It could be
+        /// <see cref="BuilderType.All"/>, <see cref="BuilderType.ValidOnly"/> or
+        /// <see cref="BuilderType.InvalidOnly"/>
         /// </param>
-        /// <returns>A list of Model (<see cref="{T}" />) objects based on the scenario builder type filter</returns>
+        /// <returns>A list of Model (<see cref="{T}" />) objects based on the scenario builder type</returns>
         IEnumerable<T> GenerateMinimumTestingScenarios(
-            ScenarioBuilderType scenarioBuilderType = ScenarioBuilderType.All);
+            BuilderType builderType = BuilderType.All);
     }
 }
